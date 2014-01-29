@@ -496,6 +496,7 @@ class CLinkCreator {
 	}
 	
 	public function SearchBibleLinks($content) {
+		$content = str_replace(" ", "&nbsp;", $content); // замена неразрывных пробелов в виде символов
 		$contentLower = mb_strtolower($content);
 		$output = "";
 		while ($this->FindBook($contentLower, $posofbook, $bookname)) {
