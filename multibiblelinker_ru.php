@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Multipurpose Bible Linker (Russian and Ukrainian)
 	Description: This plugin is designed to help people referring to Russian Bible. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses. Russian only.
-	Version: 1.4
+	Version: 1.4.1
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
