@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Multipurpose Bible Linker (Russian and Ukrainian)
 	Description: This plugin is designed to help people referring to Russian Bible. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses. Russian only.
-	Version: 1.4.1
+	Version: 1.4.2
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -29,11 +29,11 @@ include 'bible_sources.php'; 		// сайты библейский текстов
 
 // Например в Мф. 1:2–4,6; 7:8
 
-define("SingleNode", 0); 	// цифра после запятой (6)
-define("EndNode", 1); 		// цифра после тире (4)
-define("RootNode", 2); 		// цифра после точки с запятой (7)
-define("SubNode", 3);		// цифра после двоеточия (2, 8)
 define("NamedNode", 4);		// самая первая цифра после названия книги (1)
+define("SubNode", 3);		// цифра после двоеточия (2, 8)
+define("EndNode", 1); 		// цифра после тире (4)
+define("SingleNode", 0); 	// цифра после запятой (6)
+define("RootNode", 2); 		// цифра после точки с запятой (7)
 
 class CNode {
     function __construct($type = SingleNode) {
@@ -109,13 +109,13 @@ class CNodeWrapper {
             $node1= new CNode();
             $res = $this->Parse_($node1, $pos);
 			
-           if ($res) {
+			
+			if ($res) {
                 if ($node1->GetType() == SubNode) {
                     $endList= $Nodes[count($Nodes)-1];
                     if(count($endList) > 1) {
 						array_pop($Nodes);
                         $endNode = $endList[count($endList)-1];
-						array_pop($endList);
 						array_pop($endList);
 						$endList[] = $endNode;
                         $Nodes[] = $endList;
@@ -343,46 +343,44 @@ class CNodeWrapper {
             return false;
         }
         switch ($this->m_str[$pos-1]) {
-        case '-':
-                $node->SetType(EndNode);
-                if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
-					$node->SetAdditionalSymbol($additionalSymbol);
-				}
-                break;
-        case $СhapterSeparatorVerseIn:
+			case $СhapterSeparatorVerseIn:
                 $node->SetType(SubNode);
 				if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);
 				}
                 break;
-        case $VerseSeparatorVerseIn:
-               $node->SetType(SingleNode);
-               if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
+			case '-':
+                $node->SetType(EndNode);
+                if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
+					$node->SetAdditionalSymbol($additionalSymbol);
+				}
+                break;
+			case $VerseSeparatorVerseIn:
+				$node->SetType(SingleNode);
+				if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);
                 }
                break;
-        case ';':
-               $node->SetType(RootNode);
-               break;
-        default:
-			// поиск среднего и длинного тире в UTF-8, &ndash; и &mdash;
-			if (ord($this->m_str[$pos-1]) == 226 && ord($this->m_str[$pos]) == 128 
-				&& (ord($this->m_str[$pos+1]) == 147 || ord($this->m_str[$pos+1]) == 148)) {
-				$pos = $pos+2;
-				//$pos++;
-				$node->SetType(EndNode);
-                break;
-			} elseif ($this->m_str[$pos-1] == '&' && ($this->m_str[$pos] == 'n' || $this->m_str[$pos] == 'm')
-				&& $this->m_str[$pos+1] == 'd' && $this->m_str[$pos+2] == 'a' && $this->m_str[$pos+3] == 's' 
-				&& $this->m_str[$pos+4] == 'h' && $this->m_str[$pos+5] == ';') {
-				$pos += 6;
-				$node->SetType(EndNode);
+			case ';':
+				$node->SetType(RootNode);
 				break;
-			} else {
-				//$pos--;
-				$pos = $oldPos;
-				return false;
-			}
+			default:
+				// поиск среднего и длинного тире в UTF-8, &ndash; и &mdash;
+				if (ord($this->m_str[$pos-1]) == 226 && ord($this->m_str[$pos]) == 128 
+					&& (ord($this->m_str[$pos+1]) == 147 || ord($this->m_str[$pos+1]) == 148)) {
+					$pos += 2;
+					$node->SetType(EndNode);
+					break;
+				} elseif ($this->m_str[$pos-1] == '&' && ($this->m_str[$pos] == 'n' || $this->m_str[$pos] == 'm')
+					&& $this->m_str[$pos+1] == 'd' && $this->m_str[$pos+2] == 'a' && $this->m_str[$pos+3] == 's' 
+					&& $this->m_str[$pos+4] == 'h' && $this->m_str[$pos+5] == ';') {
+					$pos += 6;
+					$node->SetType(EndNode);
+					break;
+				} else {
+					$pos = $oldPos;
+					return false;
+				}
         }
 			
 		if ($this->FillNode($node, $pos)) {
@@ -457,17 +455,17 @@ class CLinkCreator {
 
 	// $contentLower - readonly
 	private function GoToNextSymbolBack(&$contentLower, &$currentpos) {
-		$currentpos = $currentpos-1;
+		$currentpos -= 1;
 	}
 	
 	private function FindDigitRight(&$contentLower, &$currentpos) {
-		$digitArray = Array('1', '2', '3', '4', '5', '6', '7', '8', '9');
+		$digitArray = Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 		while($currentpos) {
 		    $symbol = mb_substr($contentLower, $currentpos - mb_strlen('1'), mb_strlen('1'));
 			if(in_array($symbol, $digitArray)) {
 				return true;
 			}
-			$currentpos = $currentpos-1;
+			$currentpos -= 1;
 		}
 		return false;
 	}
@@ -476,16 +474,21 @@ class CLinkCreator {
 	public function FindBook(&$contentLower, &$posofbook, &$bookname) {
 		$currentpos = mb_strlen($contentLower);
 		while($this->FindDigitRight($contentLower, $currentpos)) {
-			$maxSymbolsInlink = 30; // Максимальная длина ссылки
+			$maxSymbolsInlink = 60; // Максимальная длина ссылки
 			while ($currentpos && $maxSymbolsInlink) {
-				$maxSymbolsInlink = $maxSymbolsInlink-1;
+				$maxSymbolsInlink -= 1;
 				$bookname = $this->CheckForBook($contentLower, $currentpos); // проверка
-				$previouscharacter = mb_substr($contentLower, $currentpos - mb_strlen($bookname) - 1 , mb_strlen('1'));
-				if ($bookname && ($previouscharacter == '(' || $previouscharacter == '{' || $previouscharacter == '[' ||
+				if ($bookname ) {
+                    $previouscharacter_position = $currentpos - mb_strlen($bookname) - 1;
+                    $previouscharacter = mb_substr($contentLower, $previouscharacter_position , mb_strlen('1'));
+                    if( $previouscharacter_position < 0 || 
+                                 ($previouscharacter == '(' || $previouscharacter == '{' || $previouscharacter == '[' ||
 								  $previouscharacter == ' ' || $previouscharacter == '>' || $previouscharacter == ';' || 
-								  $previouscharacter == chr(10))) {
-					$posofbook = $currentpos - mb_strlen($bookname);
-					return true;
+								  $previouscharacter == chr(10) || $previouscharacter == chr(9))
+                      ) {
+                        $posofbook = $currentpos - mb_strlen($bookname);
+                        return true;
+                    }
 				}
 				$this->GoToNextSymbolBack($contentLower, $currentpos);
 			}
