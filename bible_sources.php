@@ -39,6 +39,9 @@ class AllbibleInfo extends BibleSource {
 	}
 
 	public function GetTranslationPrefix($translation) {
+		
+		global $languageIn;
+		
 		switch($translation) {
 			case RSTTranslation: return 'sinodal/';
 			case MDRTranslation: return 'modern/';
@@ -46,7 +49,11 @@ class AllbibleInfo extends BibleSource {
 			case UBIOTranslation: return 'ogienko/';
 			case KJVTranslation: return 'kingjames/';
 			case ASVTranslation: return 'standart/';
-			default: return 'sinodal/';
+			default: 
+				switch($languageIn) {
+					case ru: return 'sinodal/';
+					case ua: return 'ogienko/';
+				}
 		}
 	}
 	
@@ -155,7 +162,6 @@ class BibleComUa extends AllbibleInfo {
 };
 
 class BiblezoomRu extends AllbibleInfo {
-
 	public function getLink($translation = "") {
 		return 'http://biblezoom.ru/#' . $this->GetIndexName($this->m_bookIndex);
 	}
@@ -260,7 +266,11 @@ class BibleonlineRu extends AllbibleInfo {
 			case UBIOTranslation: return 'ukr/';
 			case KJVTranslation: return 'eng/';
 			case BBSTranslation: return 'bel/';
-			default: return 'rus/'; // Русский синодальный перевод (рус.)
+			default:
+				switch($languageIn) {
+					case ru: return 'rus/';
+					case ua: return 'ukr/';
+				}
 		}
 	}
 	public function getSingleChapterPart($chapter) {
@@ -357,6 +367,7 @@ class BibleonlineRu extends AllbibleInfo {
 		return $indexes[$bookIndex];
 	}
 };
+
 class BibleCenterRu extends AllbibleInfo {
 	
 	public function getLink($translation = "") {
@@ -375,7 +386,7 @@ class BibleCenterRu extends AllbibleInfo {
 			case NIVTranslation: return 'niv_eng/';
 			case NVTranslation: return 'nv_lat/';
 			case LXXTranslation: return 'sept_gr/';
-			default: return 'synnew_ru/'; // Русский синодальный перевод (рус.)
+			default: return 'synnew_ru/'; // Украинский отсутствует
 		}
 	}
 	
@@ -432,7 +443,7 @@ class BibleServerCom extends AllbibleInfo {
 			case LXXTranslation: return 'LXX/';
 			case OTTranslation: return 'OT/';
 			case VULTranslation: return 'VUL/';
-			default: return 'RSZ/'; // Новый перевод на русский язык (рус.)
+			default: return 'RSZ/'; // Новый перевод на русский язык (рус.), украинский отсутствует
 		}
 	}
 	
@@ -572,7 +583,11 @@ class BibleCom extends AllbibleInfo {
 			case NIVTranslation: return '111/';
 			case ESVTranslation: return '59/';
 			case NIRVTranslation: return '110/'; 
-			default: return '400/';
+			default: 
+				switch($languageIn) {
+					case ru: return '400/';
+					case ua: return '186/';
+				}
 		}
 	}
 	
@@ -596,7 +611,11 @@ class BibleCom extends AllbibleInfo {
 			case NIVTranslation: return '.niv';
 			case ESVTranslation: return '.esv';
 			case NIRVTranslation: return '.nirv'; 
-			default: return '.syno';
+			default:
+				switch($languageIn) {
+					case ru: return '.syno';
+					case ua: return '.ubio';
+				}
 		}
 	}
 	

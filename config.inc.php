@@ -1,16 +1,24 @@
 <?php
 
+// Дописать проверку на кол-во глав в книге
+// Дописать обработку
+// Ошибка с попаданием на середину названия книги
+// Ошибка дефиса (п. 6)
+// Ошибка пробелов (п. 10, третья ссылка)
+
 /* Настройки скрипта */
-$isRoman = true;			// Номера книг могут быть римскими цифрами
-$doCorrection = true;		// Исправлять названия книг на стандартные
-$languageIn = 'ru';			// Язык анализируемых ссылок (пока не работает)
-$languageOut = 'ru';		// Язык вывода (ru, ua)
+$isRoman = get_option('isRoman');			// Номера книг могут быть римскими цифрами
+$doCorrection = get_option('doCorrection');	// Исправлять названия книг на стандартные
+$doBookRepeat = get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
+$languageIn = get_option('language');		// Язык анализируемых ссылок (ru, ua)
+$languageOut = get_option('language');		// Язык вывода (ru, ua)
+
 
 // Проверка на правильность установки языка
-if ($languageIn != 'ru' || $languageIn != 'ua') {
+if ($languageIn == 'ru' && $languageIn == 'ua') {
 	$languageIn = 'ru';
 }
-if ($languageOut != 'ru' || $languageOut != 'ua') {
+if ($languageOut == 'ru' && $languageOut == 'ua') {
 	$languageOut = 'ru';
 }
 
@@ -32,23 +40,16 @@ if ($languageOut == 'ua') {
 
 // Выбор источника онлайн Библии:
 
-define("AllbibleInfoSource", 0);
-define("BibleComUaSource", 1);
-define("BiblezoomRuSource", 2);
-define("BibleonlineRuSource", 3);
-define("BibleCenterRuSource", 4);
-define("BibleserverComSource", 5);
-define("BibleComSource", 6);
-
-$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
+//$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
 //$g_BibleSource = BibleComUaSource;		// http://bible.com.ua/ 					(рус., укр. и англ. одновременно)
 //$g_BibleSource = BiblezoomRuSource;		// http://biblezoom.ru/ 					(греч. с подстрочником)
 //$g_BibleSource = BibleonlineRuSource;		// http://bibleonline.ru/ 					(рус., укр., бел. или англ.)
 //$g_BibleSource = BibleCenterRuSource;		// http://bible-center.ru/ 					(рус., англ., греч. и лат.)
 //$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 					(рус., болг., англ., греч., ивр. и лат.)
 //$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
+$g_BibleSource = get_option('g_BibleSource');
 
-if (!$g_BibleSource) $g_BibleSource = AllbibleInfoSource;
+//if (!$g_BibleSource) $g_BibleSource = AllbibleInfoSource;
 
 // Аббревиатуры переводов:
 
