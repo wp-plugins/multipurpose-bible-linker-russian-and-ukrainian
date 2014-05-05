@@ -11,6 +11,7 @@ define("SingleNode", 0); 	// цифра после запятой (6)
 define("RootNode", 2); 		// цифра после точки с запятой (7)
 
 class CNode {
+	
     function __construct($type = SingleNode) {
 		$this->SetType($type); 
 		$this->SetNumber(0); 
@@ -59,7 +60,12 @@ class CNodeWrapper {
 	    $pos = 0;
         $node = new CNode();
 		$pos = $this->TrimStr($pos, ".");
+		$pos = $this->TrimStr($pos, ",");
+		$pos = $this->TrimStr($pos);
+		$pos = $this->TrimStr($pos, "гл");
+		$pos = $this->TrimStr($pos, ".");
         $pos = $this->TrimStr($pos);
+		//echo $this->m_str.'|';
         $node->SetType(NamedNode);
         if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
             $node->SetAdditionalSymbol($additionalSymbol);
@@ -83,7 +89,6 @@ class CNodeWrapper {
             $node1= new CNode();
             $res = $this->Parse_($node1, $pos);
 			
-			
 			if ($res) {
                 if ($node1->GetType() == SubNode) {
                     $endList= $Nodes[count($Nodes)-1];
@@ -94,9 +99,9 @@ class CNodeWrapper {
 						$endList[] = $endNode;
                         $Nodes[] = $endList;
                     }
-                } else if ($node1->GetType() == EndNode || $node1->GetType() == SingleNode) {
+                } elseif ($node1->GetType() == EndNode || $node1->GetType() == SingleNode) {
 					array_pop($curList);
-                } else if ($node1->GetType() == RootNode) {
+                } elseif ($node1->GetType() == RootNode) {
 					$curList = array();
 				}
 				$curList[] = $node1;
@@ -141,9 +146,10 @@ class CNodeWrapper {
 	}
 		
 	public function constructLink($name, &$nodeList) {
-		
-		global $doCorrection;
-		global $g_BibleSource;
+
+		$bParams = new BibleParams;
+		$doCorrection = $bParams->doCorrection;
+		$g_BibleSource = $bParams->g_BibleSource;
 		
 		if ($nodeList[0][0]->GetType() == NamedNode) {
 			$txtLink = ($doCorrection) ? BibleBooks::get()->RightBibleBooks($name) : $this->particleCorrectedBook($name);
@@ -183,19 +189,17 @@ class CNodeWrapper {
         
 		if ($this->bibleBooks->IsSingleChapterBook($this->m_bookIndex) ) { // Учитывает одноглавные книги (Флм. 6 и Флм. 1:6)
             $isSubNodeExist = false;
-            for ($i = 0; $i < count($nodeArray); $i++)
-            {
+            for ($i = 0; $i < count($nodeArray); $i++) {
                 $tmp_node = $nodeArray[$i];
                 if($tmp_node->GetType() == SubNode) {
                     $isSubNodeExist = true;
                     break;
                 }
             }
-            if(!$isSubNodeExist)
-            {
+            if(!$isSubNodeExist) {
                 $link .= $bibleSource->getSingleChapterPart($nodeChapter->GetNumber());
             } else {
-                if ($g_BibleSource == BibleserverComSource) {
+                if ($g_BibleSource == "BibleserverComSource") {
                     $link .= $node->GetNumber(); 			// Тонкость формирования однокнижной ссылки для bibleserver.com
                 } else {
                     $link .= $bibleSource->getChapterPart($nodeChapter->GetNumber());
@@ -213,7 +217,7 @@ class CNodeWrapper {
 			}
 		}
 		
-		if ($g_BibleSource == BibleComSource) {
+		if ($g_BibleSource == "BibleComSource") {
 				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com
 			}
 		
@@ -254,10 +258,12 @@ class CNodeWrapper {
     }
 	
     public function getNodeText(&$nodeArray, &$txtLink) {
-	
-		global $doBookRepeat;
-		global $СhapterSeparatorVerseOut;
-		global $VerseSeparatorVerseOut;
+		
+		$bParams = new BibleParams;
+		$doCorrection = $bParams->doCorrection;
+		$doBookRepeat = $bParams->doBookRepeat;
+		$ChapterSeparatorVerseOut = $bParams->ChapterSeparatorVerseOut;
+		$VerseSeparatorVerseOut = $bParams->VerseSeparatorVerseOut;	
 	
 		$node = $nodeArray[count($nodeArray)-1];
 		switch ($node->GetType()) {
@@ -265,11 +271,13 @@ class CNodeWrapper {
 				$txtLink .= "&ndash;";
 				break;
 			case SubNode:
-				$txtLink .= $СhapterSeparatorVerseOut;
+				$txtLink .= $ChapterSeparatorVerseOut;
 				break;
 			case RootNode:
-				$txtLink .= ($doBookRepeat) ? BibleBooks::get()->RightBibleBooks($this->m_modifiedName)."&nbsp;" : "";
+				$txtLink .= ($doBookRepeat) ? (($doCorrection) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName)))."&nbsp;" : "";
 				break;
+				//$txtLink .= ($doBookRepeat) ? (($doCorrection) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName)))."&nbsp;" : "";
+				//$txtLink = ($doCorrection) ? BibleBooks::get()->RightBibleBooks($name) : $this->particleCorrectedBook($name);
 			case SingleNode:
 				$txtLink .= $VerseSeparatorVerseOut;
 				break;
@@ -321,9 +329,10 @@ class CNodeWrapper {
 	}
 	
     public function Parse_(&$node, &$pos) {
-
-		global $СhapterSeparatorVerseIn;
-		global $VerseSeparatorVerseIn;
+		
+		$bParams = new BibleParams;
+		$ChapterSeparatorVerseIn = $bParams->ChapterSeparatorVerseIn;
+		$VerseSeparatorVerseIn = $bParams->VerseSeparatorVerseIn;
 	
 		$oldPos = $pos;
         $pos = $this->TrimStr($pos);
@@ -333,13 +342,16 @@ class CNodeWrapper {
             return false;
         }
         switch ($this->m_str[$pos-1]) {
-			case $СhapterSeparatorVerseIn:
+			case $ChapterSeparatorVerseIn:
                 $node->SetType(SubNode);
 				if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);
 				}
                 break;
 			case '-':
+				if ($this->m_str[$pos-1] == '-' && $this->m_str[$pos] == '-' ){ // убирает двойной дефис ("--")
+					$pos += 1;
+				}
                 $node->SetType(EndNode);
                 if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);
@@ -355,15 +367,34 @@ class CNodeWrapper {
 				$node->SetType(RootNode);
 				break;
 			default:
-				// поиск среднего и длинного тире в UTF-8, &ndash; и &mdash;
+				// поиск среднего и длинного тире в UTF-8 и &ndash; &mdash; &minus; &#8208; &#8209; &#8210; &#8211; &#8212; &#8722;
 				if (ord($this->m_str[$pos-1]) == 226 && ord($this->m_str[$pos]) == 128 
 					&& (ord($this->m_str[$pos+1]) == 147 || ord($this->m_str[$pos+1]) == 148)) {
 					$pos += 2;
 					$node->SetType(EndNode);
 					break;
-				} elseif ($this->m_str[$pos-1] == '&' && ($this->m_str[$pos] == 'n' || $this->m_str[$pos] == 'm')
+				} elseif (
+					($this->m_str[$pos-1] == '&' && ($this->m_str[$pos] == 'n' || $this->m_str[$pos] == 'm')
 					&& $this->m_str[$pos+1] == 'd' && $this->m_str[$pos+2] == 'a' && $this->m_str[$pos+3] == 's' 
-					&& $this->m_str[$pos+4] == 'h' && $this->m_str[$pos+5] == ';') {
+					&& $this->m_str[$pos+4] == 'h' && $this->m_str[$pos+5] == ';')
+					||
+					($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == 'm' && $this->m_str[$pos+1] == 'i' 
+					&& $this->m_str[$pos+2] == 'n' && $this->m_str[$pos+3] == 'u' && $this->m_str[$pos+4] == 's' 
+					&& $this->m_str[$pos+5] == ';')
+					||
+					($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
+					&& $this->m_str[$pos+2] == '2' && $this->m_str[$pos+3] == '0' 
+					&& ($this->m_str[$pos+4] == '8' || $this->m_str[$pos+4] == '9') && $this->m_str[$pos+5] == ';')
+					||
+					($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
+					&& $this->m_str[$pos+2] == '2' && $this->m_str[$pos+3] == '1'
+					&& ($this->m_str[$pos+4] == '0' || $this->m_str[$pos+4] == '1' || $this->m_str[$pos+4] == '2')
+					&& $this->m_str[$pos+5] == ';')
+					||
+					($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
+					&& $this->m_str[$pos+2] == '7' && $this->m_str[$pos+3] == '2' && $this->m_str[$pos+4] == '2' 
+					&& $this->m_str[$pos+5] == ';')
+					) {
 					$pos += 6;
 					$node->SetType(EndNode);
 					break;
@@ -391,6 +422,11 @@ class CNodeWrapper {
 		$currentSize = strlen($str);
 		if ($trimChar == ".") {
 			$str = ltrim($str, $trimChar);
+		} elseif ($trimChar == ",") {
+			$str = ltrim($str, $trimChar);
+		} elseif ($trimChar == "гл") {
+			$str = ltrim($str, "г");
+			$str = ltrim($str, "л");
 		} else {
 			$str = preg_replace('/^(&nbsp;| )+/', '', $str);
 		}
@@ -464,9 +500,10 @@ class CLinkCreator {
 	public function FindBook(&$contentLower, &$posofbook, &$bookname) {
 		$currentpos = mb_strlen($contentLower);
 		while($this->FindDigitRight($contentLower, $currentpos)) {
-			$maxSymbolsInlink = 60; // Максимальная длина ссылки
-			while ($currentpos && $maxSymbolsInlink) {
-				$maxSymbolsInlink -= 1;
+			$maxSymbolsInBookName = 30; // Максимальная длина имени книги
+			$maxSymbolsCount = $maxSymbolsInBookName;
+			while ($currentpos && $maxSymbolsCount) {
+				$maxSymbolsCount -= 1;
 				$bookname = $this->CheckForBook($contentLower, $currentpos); // проверка
 				if ($bookname) {
                     $previouscharacter_position = $currentpos - mb_strlen($bookname) - 1;
@@ -484,6 +521,8 @@ class CLinkCreator {
 			}
 			if(!$currentpos)
 			    break;
+			
+			$currentpos += $maxSymbolsInBookName - 1;
 		}
 		return false;
 	}
@@ -521,6 +560,5 @@ function SearchBibleLinks($str) {
 	return $lc->SearchBibleLinks($str);
 }
 
-add_filter('the_content', 'SearchBibleLinks');
-
+//add_filter('the_content', 'SearchBibleLinks'); // Раскомментировать для wordpress и тестового скрипта
 ?>

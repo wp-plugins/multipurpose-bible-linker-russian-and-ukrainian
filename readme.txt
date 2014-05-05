@@ -1,10 +1,11 @@
 === Plugin Name ===
 Plugin Name: Multipurpose Bible Linker (Russian and Ukrainian)
+Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 Contributors: Gadfly_svy
 Tags: bible, widget, scripture, verse, passage, biblia, russian, ukrainian
 Requires at least: 3.5.0
-Tested up to: 3.8.1
-Stable tag: 1.5.1
+Tested up to: 3.9.0
+Stable tag: 1.5.3
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 License: GPLv2 or later

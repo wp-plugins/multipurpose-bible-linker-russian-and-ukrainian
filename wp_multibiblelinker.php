@@ -1,8 +1,9 @@
 <?php
 /*
 	Plugin Name: Multipurpose Bible Linker (Russian and Ukrainian)
+	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to Russian Bible. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses. Russian only.
-	Version: 1.5.1
+	Version: 1.5.3
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -23,16 +24,8 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-include 'multibiblelinker.php';
-include 'config.inc.php';
-
-// Опции по умолчанию
-
-add_option('g_BibleSource', 'AllbibleInfoSource');
-add_option('language', 'ru');
-add_option('isRoman', true);
-add_option('doCorrection', true);
-add_option('doBookRepeat', false);
+include 'scripts/multibiblelinker.php';
+include 'wp_config.inc.php';
 
 function multibiblelinker_add_option_pages() {
 	if (function_exists('add_options_page')) {
@@ -79,10 +72,10 @@ function get_multibiblelinker_form() {
 	<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<input type="hidden" name="multibiblelinker_update" id="multibiblelinker_update" value="true" />
 
-	<h3>Источники данных</h3>
+	<h3>Источники переводов</h3>
 	
 	<div style="padding: 0 0 0 30px;">
-		<p>Плагин позволяет устанавливать адресацию библейских ссылок на разные онлайн источники: <a href='http://allbible.info/' target='blank'>http://allbible.info/</a> (по умолчанию), <a href='http://bible.com.ua/' target='blank'>http://bible.com.ua/</a>, <a href='http://biblezoom.ru/' target='blank'>http://biblezoom.ru/</a>, <a href='http://bibleonline.ru/' target='blank'>http://bibleonline.ru/</a>, <a href='http://bible-center.ru/' target='blank'>http://bible-center.ru/</a>, <a href='http://bibleserver.com/' target='blank'>http://bibleserver.com/</a>, <a href='http://bible.com/' target='blank'>http://bible.com/</a> или <a href='http://bible.us/' target='blank'>http://bible.us/</a>.</p>
+		<p>Плагин позволяет устанавливать адресацию библейских ссылок на разные онлайн источники: <a href='http://allbible.info/' target='blank'>http://allbible.info/</a> (по умолчанию), <a href='http://bible.com.ua/' target='blank'>http://bible.com.ua/</a>, <a href='http://biblezoom.ru/' target='blank'>http://biblezoom.ru/</a>, <a href='http://bibleonline.ru/' target='blank'>http://bibleonline.ru/</a>, <a href='http://bible-center.ru/' target='blank'>http://bible-center.ru/</a>, <a href='http://bibleserver.com/' target='blank'>http://bibleserver.com/</a>, <a href='http://bible.com/' target='blank'>http://bible.com/</a> (<a href='http://bible.us/' target='blank'>http://bible.us/</a>) или <a href='http://bible-desktop.com/' target='blank'>bible-desktop.com</a> (<a href='http://bibledesktop.ru/' target='blank'>bibledesktop.ru</a>).</p>
 		
 		<select name="g_BibleSource">
 			<option <?php if (get_option('g_BibleSource') == "AllbibleInfoSource") echo "selected"; ?> value="AllbibleInfoSource">allbible.info (рус., укр. или англ.)</option>
@@ -92,10 +85,11 @@ function get_multibiblelinker_form() {
 			<option <?php if (get_option('g_BibleSource') == "BibleCenterRuSource") echo "selected"; ?> value="BibleCenterRuSource">bible-center.ru (рус., англ., греч. и лат.)</option>
 			<option <?php if (get_option('g_BibleSource') == "BibleserverComSource") echo "selected"; ?> value="BibleserverComSource">bibleserver.com (рус., болг., англ., греч., ивр. и лат.)</option>
 			<option <?php if (get_option('g_BibleSource') == "BibleComSource") echo "selected"; ?> value="BibleComSource">bible.com или bible.us (рус., укр., болг., англ.)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleDesktopComSource") echo "selected"; ?> value="BibleDesktopComSource">bible-desktop.com или bibledesktop.ru (рус., укр., бел. англ.)</option>
 		</select>
 	</div>
 	
-	<h3>Языки</h3>
+	<h3>Язык</h3>
 	
 	<div style="padding: 0 0 0 30px;">
 		<p>Язык входящего текста. В данном случае ссылки ищутся по словарю и по желанию заменяются на стандартное написание. По умолчанию скрипт ссылается на Синодальный перевод для русского языка и перевод Огеенка для украинского (не все источники поддерживают укрианский перевод, в таком случае ссылка по умолчанию ведет на Синодальный).</p>
@@ -129,5 +123,6 @@ function get_multibiblelinker_form() {
 <?php
 }
 
+add_filter('the_content', 'SearchBibleLinks');
 add_action('admin_menu', 'multibiblelinker_add_option_pages');
 ?>

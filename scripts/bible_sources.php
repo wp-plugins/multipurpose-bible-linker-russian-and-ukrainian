@@ -2,20 +2,27 @@
 
 abstract class BibleSource {
 	protected $m_bookIndex ="";
+	
 	function __construct($bookIndex) {
 		$this->m_bookIndex = $bookIndex;
+		
+		$bParams = new BibleParams;
+		$this->languageIn = $bParams->languageIn;
 	}
 	
 	public static function get($bookIndex) {
-		global $g_BibleSource;
-		if (null != $g_BibleSource) {
-			switch($g_BibleSource) {
+		
+		$bParams = new BibleParams;
+		
+		if (null != $bParams->g_BibleSource) {
+			switch($bParams->g_BibleSource) {
 				case BibleComUaSource: 		return new BibleComUa($bookIndex);
 				case BiblezoomRuSource: 	return new BiblezoomRu($bookIndex);
 				case BibleonlineRuSource: 	return new BibleonlineRu($bookIndex);
 				case BibleCenterRuSource: 	return new BibleCenterRu($bookIndex);
 				case BibleserverComSource: 	return new BibleserverCom($bookIndex);
 				case BibleComSource: 		return new BibleCom($bookIndex);
+				case BibleDesktopComSource: return new BibleDesktopCom($bookIndex);
 				default: 					return new AllbibleInfo($bookIndex);
 			}
 		}
@@ -27,7 +34,7 @@ abstract class BibleSource {
 	abstract public function getChapterPart($chapter);
 	abstract public function getVersePart($verse);
 	abstract public function checkForTranslationExist($translation);
-};
+}
 
 class AllbibleInfo extends BibleSource {
 	function __construct($bookIndex) {
@@ -39,9 +46,6 @@ class AllbibleInfo extends BibleSource {
 	}
 
 	public function GetTranslationPrefix($translation) {
-		
-		global $languageIn;
-		
 		switch($translation) {
 			case RSTTranslation: return 'sinodal/';
 			case MDRTranslation: return 'modern/';
@@ -50,7 +54,7 @@ class AllbibleInfo extends BibleSource {
 			case KJVTranslation: return 'kingjames/';
 			case ASVTranslation: return 'standart/';
 			default: 
-				switch($languageIn) {
+				switch($this->languageIn) {
 					case ru: return 'sinodal/';
 					case ua: return 'ogienko/';
 				}
@@ -65,7 +69,7 @@ class AllbibleInfo extends BibleSource {
 		return '/' . $chapter;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '#' . $verse;
 	}
 	
@@ -153,13 +157,13 @@ class AllbibleInfo extends BibleSource {
 					);
 		return $indexes[$bookIndex];
 	}
-};
+}
 
 class BibleComUa extends AllbibleInfo {
 	public function getLink($translation = "") {
 		return 'http://bible.com.ua/bible/r/' . $this->m_bookIndex;
 	}
-};
+}
 
 class BiblezoomRu extends AllbibleInfo {
 	public function getLink($translation = "") {
@@ -174,7 +178,7 @@ class BiblezoomRu extends AllbibleInfo {
 		return '-' . $chapter;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '-' . $verse;
 	}
 	
@@ -249,7 +253,7 @@ class BiblezoomRu extends AllbibleInfo {
 						);
 		return $indexes[$bookIndex];
 	}
-};
+}
 
 class BibleonlineRu extends AllbibleInfo {
 
@@ -267,7 +271,7 @@ class BibleonlineRu extends AllbibleInfo {
 			case KJVTranslation: return 'eng/';
 			case BBSTranslation: return 'bel/';
 			default:
-				switch($languageIn) {
+				switch($this->languageIn) {
 					case ru: return 'rus/';
 					case ua: return 'ukr/';
 				}
@@ -277,7 +281,7 @@ class BibleonlineRu extends AllbibleInfo {
 		return '/1/#' . $chapter;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '/#' . $verse;
 	}
 	
@@ -401,7 +405,7 @@ class BibleCenterRu extends AllbibleInfo {
 		return '/' . $chapter ;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '#' . $this->GetIndexName($this->m_bookIndex) . $this->m_chapter . '_' . $verse;
 	}
 	
@@ -421,7 +425,7 @@ class BibleCenterRu extends AllbibleInfo {
 		}
 		return false;
 	}
-};
+}
 
 class BibleServerCom extends AllbibleInfo {
 	
@@ -458,7 +462,7 @@ class BibleServerCom extends AllbibleInfo {
 		return $chapter;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '.' . $verse;
 	}
 	
@@ -552,7 +556,7 @@ class BibleServerCom extends AllbibleInfo {
 						);
 		return $indexes[$bookIndex];
 	}
-};
+}
 
 class BibleCom extends AllbibleInfo {
 	function __construct($bookIndex) {
@@ -564,6 +568,7 @@ class BibleCom extends AllbibleInfo {
 	}
 
 	public function GetTranslationPrefixFirst($translation) {
+	
 		switch($translation) {
 			case RSTTranslation: return '400/';
 			case CASTranslation: return '480/';
@@ -584,7 +589,7 @@ class BibleCom extends AllbibleInfo {
 			case ESVTranslation: return '59/';
 			case NIRVTranslation: return '110/'; 
 			default: 
-				switch($languageIn) {
+				switch($this->languageIn) {
 					case ru: return '400/';
 					case ua: return '186/';
 				}
@@ -612,7 +617,7 @@ class BibleCom extends AllbibleInfo {
 			case ESVTranslation: return '.esv';
 			case NIRVTranslation: return '.nirv'; 
 			default:
-				switch($languageIn) {
+				switch($this->languageIn) {
 					case ru: return '.syno';
 					case ua: return '.ubio';
 				}
@@ -627,7 +632,7 @@ class BibleCom extends AllbibleInfo {
 		return '.' . $chapter;
 	}
 	
-	public function getVersePart($verse) {
+	public function getVersePart($verse, $translation = "") {
 		return '.' . $verse;// . $this->GetTranslationPrefixLast($translation);
 	}
 	
@@ -727,5 +732,142 @@ class BibleCom extends AllbibleInfo {
 					);
 		return $indexes[$bookIndex];
 	}
-};
+}
+
+class BibleDesktopCom extends AllbibleInfo {
+	function __construct($bookIndex) {
+		parent::__construct($bookIndex);
+	}
+	
+	public function getLink($translation = "") {
+		return 'http://bible-desktop.com/bq/' . $this->GetIndexName($this->m_bookIndex);
+	}
+
+	public function GetTranslationPrefixLast($translation) {
+		switch($translation) {
+			case RSTTranslation: return '/RST';
+			case MDRTranslation: return '/MDR'; // НЗ
+			case CASTranslation: return '/CAS'; // НЗ
+			case ISBTranslation: return '/New Russian Translation';
+			case UCSTranslation: return '/SLR';
+			case UBIOTranslation: return '/UKR';
+			case UKRKTranslation: return '/Bible_UA_Kulish';
+			case UKHTranslation: return '/UKH';
+			case UBTTranslation: return '/UBT';
+			case WBTCTranslation: return '/UK_WBTC'; // НЗ
+			case BBSTranslation: return '/BBS';
+			case KJVTranslation: return '/KJV';
+			case VULTranslation: return '/VL_78';
+			default:
+				switch($this->languageIn) {
+					case ru: return '/RST';
+					case ua: return '/UKR';
+				}
+		}
+	}
+	
+	public function getSingleChapterPart($chapter) {
+		return '/1_' . $chapter;// . $this->GetTranslationPrefixLast($translation);
+	}
+	
+	public function getChapterPart($chapter) {
+		return '/' . $chapter;
+	}
+	
+	public function getVersePart($verse) {
+		return '_' . $verse;// . $this->GetTranslationPrefixLast($translation);
+	}
+	
+	public function checkForTranslationExist($translation) {
+		$LastBookOfOldTestament = 39;
+		switch($translation) {
+			case RSTTranslation: return true;
+			case MDRTranslation: return true;
+			case CASTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
+			case ISBTranslation: return true;
+			case UCSTranslation: return true;
+			case UBIOTranslation: return true;
+			case UKRKTranslation: return true;
+			case UKHTranslation: return true;
+			case UBTTranslation: return true;
+			case WBTCTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
+			case BBSTranslation: return true;
+			case KJVTranslation: return true;
+			case VULTranslation: return true;
+		}
+		return false;
+	}
+	
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+					'1' => 'genesis',
+					'2' => 'exodus',
+					'3' => 'leviticus',
+					'4' => 'numbers',
+					'5' => 'deuteronomy',
+					'6' => 'joshua',
+					'7' => 'judges',
+					'8' => 'ruth',
+					'9' => '1samuel',
+					'10' => '2samuel',
+					'11' => '1kings',
+					'12' => '2kings',
+					'13' => '1chron',
+					'14' => '2chron',
+					'15' => 'ezra',
+					'16' => 'nehemiah',
+					'17' => 'esther',
+					'18' => 'job',
+					'19' => 'psalms',
+					'20' => 'proverbs',
+					'21' => 'ecclesia',
+					'22' => 'songs',
+					'23' => 'isaiah',
+					'24' => 'jeremiah',
+					'25' => 'lamentations',
+					'26' => 'ezekiel',
+					'27' => 'daniel',
+					'28' => 'hosea',
+					'29' => 'joel',
+					'30' => 'amos',
+					'31' => 'obadiah',
+					'32' => 'jonah',
+					'33' => 'micah',
+					'34' => 'nahum',
+					'35' => 'habakkuk',
+					'36' => 'zephaniah',
+					'37' => 'haggai',
+					'38' => 'zechariah',
+					'39' => 'malachi',
+					'40' => 'matthew',
+					'41' => 'mark',
+					'42' => 'luke',
+					'43' => 'john',
+					'44' => 'acts',
+					'59' => 'james',
+					'60' => '1peter',
+					'61' => '2peter',
+					'62' => '1john',
+					'63' => '2john',
+					'64' => '3john',
+					'65' => 'jude',
+					'45' => 'romans',
+					'46' => '1corinthians',
+					'47' => '2corinthians',
+					'48' => 'galatians',
+					'49' => 'ephesians',
+					'50' => 'philippians',
+					'51' => 'colossians',
+					'52' => '1thessalonians',
+					'53' => '2thessalonians',
+					'54' => '1timothy',
+					'55' => '2timothy',
+					'56' => 'titus',
+					'57' => 'philemon',
+					'58' => 'hebrews',
+					'66' => 'revelations',
+					);
+		return $indexes[$bookIndex];
+	}
+}
 ?>

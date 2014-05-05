@@ -34,8 +34,7 @@ class BibleBooks {
 	// Определение номера книги по названию
 	public function GetBibleBooks($type, $lastLetter = null) {
 
-		global $isRoman;
-		global $languageIn;
+		$bParams = new BibleParams;
 		
 		if ($lastLetter) {
 			if (array_key_exists($lastLetter, $this->sortedBooks))
@@ -44,7 +43,7 @@ class BibleBooks {
 				return Array();
 		}
 
-		if ($languageIn == 'ua') {
+		if ($bParams->languageIn == 'ua') {
 			$BookByNameFull = array(
 						'буття' 							=> '1',
 						'книга буття' 						=> '1',
@@ -888,9 +887,6 @@ class BibleBooks {
 						'i сам' 				=> '9',
 						'i&nbsp;сам' 			=> '9',
 						'iсам' 					=> '9',
-						'i самуїла' 			=> '9',
-						'i&nbsp;самуїла' 		=> '9',
-						'iсамуїла' 				=> '9',
 						
 						'ii сам' 				=> '10',
 						'ii&nbsp;сам' 			=> '10',
@@ -2163,19 +2159,19 @@ class BibleBooks {
 				$BookByNameOut = $BookByNameFull;
 				break;
 			case 'short':
-				if ($isRoman)
+				if ($bParams->isRoman)
 					$BookByNameOut = $BookByNameShort + $BookByNameShortPoint + $BookByNameRoman + $BookByNameRomanPoint;
 				else
 					$BookByNameOut = $BookByNameShort + $BookByNameShortPoint;
 				break;
 			case 'shortpoint': // точка после кратного написания
-				if ($isRoman) 
+				if ($bParams->isRoman) 
 					$BookByNameOut = $BookByNameShortPoint + $BookByNameRomanPoint;
 				else
 					$BookByNameOut = $BookByNameShortPoint;
 				break;			
 			case 'all':
-				if ($isRoman)
+				if ($bParams->isRoman)
 					$BookByNameOut = $BookByNameShort + $BookByNameShortPoint + $BookByNameRoman + $BookByNameRomanPoint + $BookByNameFull;
 				else
 					$BookByNameOut = $BookByNameShort + $BookByNameShortPoint + $BookByNameFull;
@@ -2190,8 +2186,9 @@ class BibleBooks {
 
 	// Исправление названий книг по стандарту (отдельно полных и кратких)
 	public function RightBibleBooks($name) {
-
-		global $languageOut;
+		
+		$bParams = new BibleParams;
+		$languageOut = $bParams->languageOut;
 
 		if ($languageOut == 'ua') {
 			$BookByNameFullRight = array(
@@ -2481,7 +2478,7 @@ class BibleBooks {
 		}
 		
 		$name = str_replace(" ", "&nbsp;", $name);
-
+	
 		return $name;
 	}
 
@@ -2599,6 +2596,18 @@ class BibleBooks {
 					"UMT"			=> UMTTranslation,
 					",UMT"			=> UMTTranslation,
 					"(UMT)"			=> UMTTranslation,
+					"ISB"			=> ISBTranslation,
+					",ISB"			=> ISBTranslation,
+					"(ISB)"			=> ISBTranslation,
+					"UKH"			=> UKHTranslation,
+					",UKH"			=> UKHTranslation,
+					"(UKH)"			=> UKHTranslation,
+					"UBT"			=> UBTTranslation,
+					",UBT"			=> UBTTranslation,
+					"(UBT)"			=> UBTTranslation,
+					"WBTC"			=> WBTCTranslation,
+					",WBTC"			=> WBTCTranslation,
+					"(WBTC)"		=> WBTCTranslation,
 					);
 	}
 	
