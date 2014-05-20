@@ -1,10 +1,10 @@
 === Plugin Name ===
-Plugin Name: Multipurpose Bible Linker (En, Ru and Ua)
+Plugin Name: Multipurpose Bible Linker
 Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 Contributors: Gadfly_svy
 Tags: bible, widget, scripture, verse, passage, biblia, russian, ukrainian
 Requires at least: 3.5.0
-Tested up to: 3.9.0
+Tested up to: 3.9.1
 Stable tag: 1.6.1
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
@@ -15,8 +15,8 @@ Find and replace Bible verses with direct links to the Bible.
 
 == Description ==
 
-This plugin is designed to help people referring to Russian or Ukrainian Bible. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actual biblical chapter and verses. Russian and Ukrainian only.
-You have the option of changing the settings for the Roman numerals in the titles of books and automatically bring names to the standard form in the file config.inc.php. Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/).
+This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actual biblical chapter and verses.
+Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/).
 Plugin is based on Simlpe Bible Linker Russian, but has significantly greater functional.
 
 == Installation ==
