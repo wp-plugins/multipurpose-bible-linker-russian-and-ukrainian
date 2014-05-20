@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Multipurpose Bible Linker 1.6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-21 01:00+0300\n"
+"PO-Revision-Date: 2014-05-21 01:44+0200\n"
+"Last-Translator: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: wp_multibiblelinker.php:64
+msgid "Loaded with the default options."
+msgstr "Загружены опции по умолчанию."
+
+#: wp_multibiblelinker.php:78
+msgid "Configuration updated."
+msgstr "Конфигурация обновлена."
+
+#: wp_multibiblelinker.php:84
+msgid "Multipurpose Bible Linker"
+msgstr "Multipurpose Bible Linker"
+
+#: wp_multibiblelinker.php:87
+msgid ""
+"The plugin is designed to highlight the reference to the place of the Bible "
+"in Russian, Ukrainian and English."
+msgstr ""
+"Плагин предназначен для подсвечивания ссылок на места из Библии на русском, "
+"украинском или английском языках."
+
+#: wp_multibiblelinker.php:93
+msgid "Translation sources"
+msgstr "Источники переводов"
+
+#: wp_multibiblelinker.php:96
+msgid ""
+"The plugin allows you to set the addressing biblical references to various "
+"online sources:"
+msgstr ""
+"Плагин позволяет устанавливать адресацию библейских ссылок на разные онлайн "
+"источники:"
+
+#: wp_multibiblelinker.php:96
+msgid "by default"
+msgstr "по умолчанию"
+
+#: wp_multibiblelinker.php:100
+msgid "simultaneously"
+msgstr "одновременно"
+
+#: wp_multibiblelinker.php:110
+msgid "Language"
+msgstr "Язык"
+
+#: wp_multibiblelinker.php:113
+msgid ""
+"Language incoming text. In this case, the links are searched in the "
+"dictionary, and optionally replaced by a standard spelling. By default, the "
+"script refers to the standard translation of the Russian language, Ogeenka — "
+"for Ukrainian and King James — for English (not all sources of support "
+"Ukrainian and English translations, in which case the default link leads to "
+"the King James)."
+msgstr ""
+"Язык входящего текста. В данном случае ссылки ищутся по словарю и по желанию "
+"заменяются на стандартное написание. По умолчанию скрипт ссылается на "
+"Синодальный перевод для русского языка, Огеенка — для украинского и короля "
+"Якова — для английского (не все источники поддерживают украинский и "
+"английский переводы, в таком случае ссылка по умолчанию ведет на "
+"Синодальный)."
+
+#: wp_multibiblelinker.php:121
+msgid ""
+"Standard writing links: east (Matt. 3:4-6,8) and western (Matt. 3,4-6.8)."
+msgstr ""
+"Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мф. 3,4–6.8)."
+
+#: wp_multibiblelinker.php:124
+msgid "eastern"
+msgstr "восточный"
+
+#: wp_multibiblelinker.php:125
+msgid "western"
+msgstr "западный"
+
+#: wp_multibiblelinker.php:129
+msgid "Processing options"
+msgstr "Опции обработки"
+
+#: wp_multibiblelinker.php:133
+msgid "Numbers of the books may be Roman numerals"
+msgstr "Номера книг могут быть римскими цифрами"
+
+#: wp_multibiblelinker.php:136
+msgid "Correct titles on standard"
+msgstr "Исправлять названия книг на стандартные"
+
+#: wp_multibiblelinker.php:139
+msgid "Repeat the name of the book before each chapter, if a few heads"
+msgstr "Повторять название книги каждый раз перед главой, если глав несколько"
+
+#: wp_multibiblelinker.php:143
+msgid "Restore defaults"
+msgstr "Восстановить по умолчанию"
+
+#: wp_multibiblelinker.php:144
+msgid "Save"
+msgstr "Сохранить"
