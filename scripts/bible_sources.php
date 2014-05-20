@@ -1,5 +1,4 @@
 <?php
-
 abstract class BibleSource {
 	protected $m_bookIndex ="";
 	
@@ -57,6 +56,7 @@ class AllbibleInfo extends BibleSource {
 				switch($this->languageIn) {
 					case ru: return 'sinodal/';
 					case ua: return 'ogienko/';
+					case en: return 'kingjames/';
 				}
 		}
 	}
@@ -274,6 +274,7 @@ class BibleonlineRu extends AllbibleInfo {
 				switch($this->languageIn) {
 					case ru: return 'rus/';
 					case ua: return 'ukr/';
+					case en: return 'eng/';
 				}
 		}
 	}
@@ -390,7 +391,12 @@ class BibleCenterRu extends AllbibleInfo {
 			case NIVTranslation: return 'niv_eng/';
 			case NVTranslation: return 'nv_lat/';
 			case LXXTranslation: return 'sept_gr/';
-			default: return 'synnew_ru/'; // Украинский отсутствует
+			default:
+				switch($this->languageIn) {
+					case ru: return 'synnew_ru/';
+					case ua: return 'synnew_ru/'; // Украинский отсутствует
+					case en: return 'kjv_eng/';
+				}
 		}
 	}
 	
@@ -447,7 +453,12 @@ class BibleServerCom extends AllbibleInfo {
 			case LXXTranslation: return 'LXX/';
 			case OTTranslation: return 'OT/';
 			case VULTranslation: return 'VUL/';
-			default: return 'RSZ/'; // Новый перевод на русский язык (рус.), украинский отсутствует
+			default:
+				switch($this->languageIn) {
+					case ru: return 'RSZ/';		// Новый перевод на русский язык (рус.)
+					case ua: return 'RSZ/'; 	// Украинский отсутствует
+					case en: return 'KJV/';
+				}
 		}
 	}
 	
@@ -592,6 +603,7 @@ class BibleCom extends AllbibleInfo {
 				switch($this->languageIn) {
 					case ru: return '400/';
 					case ua: return '186/';
+					case en: return '1/';
 				}
 		}
 	}
@@ -620,6 +632,7 @@ class BibleCom extends AllbibleInfo {
 				switch($this->languageIn) {
 					case ru: return '.syno';
 					case ua: return '.ubio';
+					case en: return '.kjv';
 				}
 		}
 	}
@@ -762,6 +775,7 @@ class BibleDesktopCom extends AllbibleInfo {
 				switch($this->languageIn) {
 					case ru: return '/RST';
 					case ua: return '/UKR';
+					case en: return '/KJV';
 				}
 		}
 	}

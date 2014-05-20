@@ -6,6 +6,7 @@ class BibleParams {
 	public $doBookRepeat = false;
 	public $languageIn = 'ru';
 	public $languageOut = 'ru';
+	public $linkStandart = 'east';
 	public $g_BibleSource = 'AllbibleInfoSource';
 	public $ChapterSeparatorVerseIn = ',';
 	public $VerseSeparatorVerseIn = '.';
@@ -18,8 +19,9 @@ class BibleParams {
 		$this->isRoman = get_option('isRoman');				// Номера книг могут быть римскими цифрами
 		$this->doCorrection = get_option('doCorrection');	// Исправлять названия книг на стандартные
 		$this->doBookRepeat = get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
-		$this->languageIn = get_option('language');			// Язык анализируемых ссылок (ru, ua)
-		$this->languageOut = get_option('language');		// Язык вывода (ru, ua)
+		$this->languageIn = 'ru';							// Язык анализируемых ссылок (ru, ua, en)
+		$this->languageOut = 'ru';							// Язык вывода (ru, ua, en)
+		$this->linkStandart = 'east';						// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 		
 		// Выбор источника онлайн Библии
 		//$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
@@ -30,32 +32,34 @@ class BibleParams {
 		//$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 				(рус., болг., англ., греч., ивр. и лат.)
 		//$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
 		//$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. англ.)
-		
 			
 		$this->g_BibleSource = get_option('g_BibleSource');
 		
 		// Проверка на правильность установки языка
-		if ($this->languageIn != 'ru' && $this->languageIn != 'ua') {
+		if ($this->languageIn != 'ru' && $this->languageIn != 'ua' && $this->languageIn != 'en') {
 			$this->languageIn = 'ru';
 		}
-		if ($this->languageOut != 'ru' && $this->languageOut != 'ua') {
+		if ($this->languageOut != 'ru' && $this->languageOut != 'ua' && $this->languageOut != 'en') {
 			$this->languageOut = 'ru';
 		}
 		
-		// Разделители между главами и стихами (рус. Мф. 3:4–6,8 и укр. Мт. 3,4–6.8)
-		if ($this->languageIn == 'ua') {
-			$this->ChapterSeparatorVerseIn = ',';
-			$this->VerseSeparatorVerseIn = '.';
-		} else {
-			$this->ChapterSeparatorVerseIn = ':';
-			$this->VerseSeparatorVerseIn = ',';
-		}
-		if ($this->languageOut == 'ua') {
-			$this->ChapterSeparatorVerseOut = ',';
-			$this->VerseSeparatorVerseOut = '.';
-		} else {
-			$this->ChapterSeparatorVerseOut = ':';
-			$this->VerseSeparatorVerseOut = ',';
+		// Разделители между главами и стихами в зависимости от стандарта
+		switch($this->linkStandart) {
+			case east:
+				$this->ChapterSeparatorVerseIn = ':';
+				$this->VerseSeparatorVerseIn = ',';
+				$this->ChapterSeparatorVerseOut = ':';
+				$this->VerseSeparatorVerseOut = ',';
+			case west:
+				$this->ChapterSeparatorVerseIn = ',';
+				$this->VerseSeparatorVerseIn = '.';
+				$this->ChapterSeparatorVerseOut = ',';
+				$this->VerseSeparatorVerseOut = '.';
+			default:
+				$this->ChapterSeparatorVerseIn = ':';
+				$this->VerseSeparatorVerseIn = ',';
+				$this->ChapterSeparatorVerseOut = ':';
+				$this->VerseSeparatorVerseOut = ',';
 		}
 	}
 }
