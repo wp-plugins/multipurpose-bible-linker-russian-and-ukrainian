@@ -17,7 +17,7 @@ $_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт напи
 //$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
 //$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. англ.)
 			
-$this->g_BibleSource = get_option('g_BibleSource');
+$_ENV["g_BibleSource"] = get_option('g_BibleSource');
 		
 // Проверка на правильность установки языка
 if ($_ENV["languageIn"] != 'ru' && $_ENV["languageIn"] != 'ua' && $_ENV["languageIn"] != 'en') {
