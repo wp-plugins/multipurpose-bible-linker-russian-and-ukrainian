@@ -300,7 +300,7 @@ class CNodeWrapper {
         $this->GetInt($intPos, $n); // get position after number
 		$onesymbollens = strlen('а');
 		$additionalSymbol = substr($this->m_str, $intPos, $onesymbollens);
-		$symbols = array('а', 'б', 'с', 'н'); // первая и вторая половина стихов, следующие стихи на рус. и укр.
+		$symbols = array('а', 'б', 'с', 'н', 'a', 'b', 'n'); // первая и вторая половина стихов, следующие стихи на рус., укр., англ.
 		if(in_array($additionalSymbol, $symbols)) {
 			return true;
 		}
