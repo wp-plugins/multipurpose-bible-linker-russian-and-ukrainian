@@ -34,7 +34,6 @@ class BibleBooks {
 	// Определение номера книги по названию
 	public function GetBibleBooks($type, $lastLetter = null) {
 
-		$bParams = new BibleParams;
 		$bBooks = new BibleLinksArraysIn;
 		
 		if ($lastLetter) {
@@ -49,19 +48,19 @@ class BibleBooks {
 				$BookByNameOut = $bBooks->BookByNameFull;
 				break;
 			case 'short':
-				if ($bParams->isRoman)
+				if ($_ENV["isRoman"])
 					$BookByNameOut = $bBooks->BookByNameShort + $bBooks->BookByNameShortPoint + $bBooks->BookByNameRoman + $bBooks->BookByNameRomanPoint;
 				else
 					$BookByNameOut = $bBooks->BookByNameShort + $bBooks->BookByNameShortPoint;
 				break;
 			case 'shortpoint': // точка после кратного написания
-				if ($bParams->isRoman) 
+				if ($_ENV["isRoman"]) 
 					$BookByNameOut = $bBooks->BookByNameShortPoint + $bBooks->BookByNameRomanPoint;
 				else
 					$BookByNameOut = $bBooks->BookByNameShortPoint;
 				break;			
 			case 'all':
-				if ($bParams->isRoman)
+				if ($_ENV["isRoman"])
 					$BookByNameOut = $bBooks->BookByNameShort + $bBooks->BookByNameShortPoint + $bBooks->BookByNameRoman + $bBooks->BookByNameRomanPoint + $bBooks->BookByNameFull;
 				else
 					$BookByNameOut = $bBooks->BookByNameShort + $bBooks->BookByNameShortPoint + $bBooks->BookByNameFull;

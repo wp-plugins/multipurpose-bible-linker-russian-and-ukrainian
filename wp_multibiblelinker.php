@@ -3,7 +3,7 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.6.1
+	Version: 1.6.2
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -34,10 +34,8 @@ add_action( 'plugins_loaded', 'init_textdomain' );
 include 'scripts/multibiblelinker.php';
 include 'wp_config.inc.php';
 
-$bParams = new BibleParams;
-
-$fileLanguageIn = "local/bible_links_arrays_".$bParams->languageIn."_in.php";
-$fileLanguageOut = "local/bible_links_arrays_".$bParams->languageOut."_out.php";
+$fileLanguageIn = "local/bible_links_arrays_".$_ENV["languageIn"]."_in.php";
+$fileLanguageOut = "local/bible_links_arrays_".$_ENV["languageOut"]."_out.php";
 
 is_file($fileLanguageIn) ? (include $fileLanguageIn) : (include 'local/bible_links_arrays_ru_in.php');
 is_file($fileLanguageOut) ? (include $fileLanguageOut) : (include 'local/bible_links_arrays_ru_out.php');

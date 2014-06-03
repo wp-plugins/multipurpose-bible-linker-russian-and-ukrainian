@@ -5,7 +5,7 @@ Contributors: Gadfly_svy
 Tags: bible, widget, scripture, verse, passage, biblia, russian, ukrainian
 Requires at least: 3.5.0
 Tested up to: 3.9.1
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 License: GPLv2 or later

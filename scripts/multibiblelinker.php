@@ -145,10 +145,6 @@ class CNodeWrapper {
 		
 	public function constructLink($name, &$nodeList) {
 
-		$bParams = new BibleParams;
-		$doCorrection = $bParams->doCorrection;
-		$g_BibleSource = $bParams->g_BibleSource;
-
 		// Формируем ссылку в зависимости от сайта
 		// Адрес									перевод		книга				глава	стих	перевод
 		// http://allbible.info/bible/				sinodal/	phm					/1#		5
@@ -172,7 +168,7 @@ class CNodeWrapper {
 		$node = $nodeArray[count($nodeArray)-1];
 
 		if ($nodeList[0][0]->GetType() == NamedNode) {
-			$txtLink = ($doCorrection) ? BibleBooks::get()->RightBibleBooks($name) : $this->particleCorrectedBook($name);
+			$txtLink = ($_ENV["doCorrection"]) ? BibleBooks::get()->RightBibleBooks($name) : $this->particleCorrectedBook($name);
 		}
 		
 		for ($i = 0; $i < count($nodeList); $i++) {
@@ -196,7 +192,7 @@ class CNodeWrapper {
             if (!$isSubNodeExist) {
                 $link .= $bibleSource->getSingleChapterPart($nodeChapter->GetNumber());
             } else {
-                if ($g_BibleSource == "BibleserverComSource") {
+                if ($_ENV["g_BibleSource"] == "BibleserverComSource") {
                     $link .= $node->GetNumber(); 			// Тонкость формирования однокнижной ссылки для bibleserver.com
                 } else {
                     $link .= $bibleSource->getChapterPart($nodeChapter->GetNumber());
@@ -214,7 +210,7 @@ class CNodeWrapper {
 			}
 		}
 		
-		if ($g_BibleSource == "BibleComSource") {
+		if ($_ENV["g_BibleSource"] == "BibleComSource") {
 				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com
 			}
 		
@@ -271,12 +267,6 @@ class CNodeWrapper {
     }
 	
     public function getNodeText(&$nodeArray, &$txtLink) {
-		
-		$bParams = new BibleParams;
-		$doCorrection = $bParams->doCorrection;
-		$doBookRepeat = $bParams->doBookRepeat;
-		$ChapterSeparatorVerseOut = $bParams->ChapterSeparatorVerseOut;
-		$VerseSeparatorVerseOut = $bParams->VerseSeparatorVerseOut;	
 	
 		$node = $nodeArray[count($nodeArray)-1];
 		switch ($node->GetType()) {
@@ -284,13 +274,13 @@ class CNodeWrapper {
 				$txtLink .= "&ndash;";
 				break;
 			case SubNode:
-				$txtLink .= $ChapterSeparatorVerseOut;
+				$txtLink .= $_ENV["ChapterSeparatorVerseOut"];
 				break;
 			case RootNode:
-				$txtLink .= ($doBookRepeat) ? (($doCorrection) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName)))."&nbsp;" : "";
+				$txtLink .= ($_ENV["doBookRepeat"]) ? (($_ENV["doCorrection"]) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName)))."&nbsp;" : "";
 				break;
 			case SingleNode:
-				$txtLink .= $VerseSeparatorVerseOut;
+				$txtLink .= $_ENV["VerseSeparatorVerseOut"];
 				break;
 			case NamedNode:
 				$txtLink .= "&nbsp;";
@@ -340,10 +330,6 @@ class CNodeWrapper {
 	}
 	
     public function Parse_(&$node, &$pos) {
-		
-		$bParams = new BibleParams;
-		$ChapterSeparatorVerseIn = $bParams->ChapterSeparatorVerseIn;
-		$VerseSeparatorVerseIn = $bParams->VerseSeparatorVerseIn;
 	
 		$oldPos = $pos;
         $pos = $this->TrimStr($pos);
@@ -353,7 +339,7 @@ class CNodeWrapper {
             return false;
         }
         switch ($this->m_str[$pos-1]) {
-			case $ChapterSeparatorVerseIn:
+			case $_ENV["ChapterSeparatorVerseIn"]:
                 $node->SetType(SubNode);
 				if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);
@@ -368,7 +354,7 @@ class CNodeWrapper {
 					$node->SetAdditionalSymbol($additionalSymbol);
 				}
                 break;
-			case $VerseSeparatorVerseIn:
+			case $_ENV["VerseSeparatorVerseIn"]:
 				$node->SetType(SingleNode);
 				if ($this->CheckForAdditionalPart($pos, $additionalSymbol)) {
 					$node->SetAdditionalSymbol($additionalSymbol);

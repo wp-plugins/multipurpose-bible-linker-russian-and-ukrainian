@@ -1,67 +1,52 @@
 <?php
-
-class BibleParams {
-	public $isRoman = true;
-	public $doCorrection = true;
-	public $doBookRepeat = false;
-	public $languageIn = 'ru';
-	public $languageOut = 'ru';
-	public $linkStandart = 'east';
-	public $g_BibleSource = 'AllbibleInfoSource';
-	public $ChapterSeparatorVerseIn = ',';
-	public $VerseSeparatorVerseIn = '.';
-	public $ChapterSeparatorVerseOut = ',';
-	public $VerseSeparatorVerseOut = '.';
-	
-	public function __construct() {
+//Настройки скрипта 
+$_ENV["isRoman"] = get_option('isRoman');			// Номера книг могут быть римскими цифрами
+$_ENV["doCorrection"] = get_option('doCorrection');	// Исправлять названия книг на стандартные
+$_ENV["doBookRepeat"] = get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
+$_ENV["languageIn"] = get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
+$_ENV["languageOut"] = get_option('language');		// Язык вывода (ru, ua, en)
+$_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 		
-		//Настройки скрипта 
-		$this->isRoman = get_option('isRoman');				// Номера книг могут быть римскими цифрами
-		$this->doCorrection = get_option('doCorrection');	// Исправлять названия книг на стандартные
-		$this->doBookRepeat = get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
-		$this->languageIn = 'ru';							// Язык анализируемых ссылок (ru, ua, en)
-		$this->languageOut = 'ru';							// Язык вывода (ru, ua, en)
-		$this->linkStandart = 'east';						// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
-		
-		// Выбор источника онлайн Библии
-		//$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
-		//$g_BibleSource = BibleComUaSource;		// http://bible.com.ua/ 					(рус., укр. и англ. одновременно)
-		//$g_BibleSource = BiblezoomRuSource;		// http://biblezoom.ru/ 					(греч. с подстрочником)
-		//$g_BibleSource = BibleonlineRuSource;		// http://bibleonline.ru/ 					(рус., укр., бел. или англ.)
-		//$g_BibleSource = BibleCenterRuSource;		// http://bible-center.ru/ 					(рус., англ., греч. и лат.)
-		//$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 				(рус., болг., англ., греч., ивр. и лат.)
-		//$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
-		//$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. англ.)
+// Выбор источника онлайн Библии
+//$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
+//$g_BibleSource = BibleComUaSource;		// http://bible.com.ua/ 					(рус., укр. и англ. одновременно)
+//$g_BibleSource = BiblezoomRuSource;		// http://biblezoom.ru/ 					(греч. с подстрочником)
+//$g_BibleSource = BibleonlineRuSource;		// http://bibleonline.ru/ 					(рус., укр., бел. или англ.)
+//$g_BibleSource = BibleCenterRuSource;		// http://bible-center.ru/ 					(рус., англ., греч. и лат.)
+//$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 				(рус., болг., англ., греч., ивр. и лат.)
+//$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
+//$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. англ.)
 			
-		$this->g_BibleSource = get_option('g_BibleSource');
+$this->g_BibleSource = get_option('g_BibleSource');
 		
-		// Проверка на правильность установки языка
-		if ($this->languageIn != 'ru' && $this->languageIn != 'ua' && $this->languageIn != 'en') {
-			$this->languageIn = 'ru';
-		}
-		if ($this->languageOut != 'ru' && $this->languageOut != 'ua' && $this->languageOut != 'en') {
-			$this->languageOut = 'ru';
-		}
+// Проверка на правильность установки языка
+if ($_ENV["languageIn"] != 'ru' && $_ENV["languageIn"] != 'ua' && $_ENV["languageIn"] != 'en') {
+	$_ENV["languageIn"] = 'ru';
+}
+if ($_ENV["languageOut"] != 'ru' && $_ENV["languageOut"] != 'ua' && $_ENV["languageOut"] != 'en') {
+	$_ENV["languageOut"] = 'ru';
+}
 		
-		// Разделители между главами и стихами в зависимости от стандарта
-		switch($this->linkStandart) {
-			case east:
-				$this->ChapterSeparatorVerseIn = ':';
-				$this->VerseSeparatorVerseIn = ',';
-				$this->ChapterSeparatorVerseOut = ':';
-				$this->VerseSeparatorVerseOut = ',';
-			case west:
-				$this->ChapterSeparatorVerseIn = ',';
-				$this->VerseSeparatorVerseIn = '.';
-				$this->ChapterSeparatorVerseOut = ',';
-				$this->VerseSeparatorVerseOut = '.';
-			default:
-				$this->ChapterSeparatorVerseIn = ':';
-				$this->VerseSeparatorVerseIn = ',';
-				$this->ChapterSeparatorVerseOut = ':';
-				$this->VerseSeparatorVerseOut = ',';
-		}
-	}
+// Разделители между главами и стихами в зависимости от стандарта
+switch($_ENV["linkStandart"]) {
+	case 'east':
+		$_ENV["ChapterSeparatorVerseIn"] = ':';
+		$_ENV["VerseSeparatorVerseIn"] = ',';
+		$_ENV["ChapterSeparatorVerseOut"] = ':';
+		$_ENV["VerseSeparatorVerseOut"] = ',';
+		break;
+	case 'west':
+		$_ENV["ChapterSeparatorVerseIn"] = ',';
+		$_ENV["VerseSeparatorVerseIn"] = '.';
+		$_ENV["ChapterSeparatorVerseOut"] = ',';
+		$_ENV["VerseSeparatorVerseOut"] = '.';
+		break;
+	default:
+		$_ENV["ChapterSeparatorVerseIn"] = ':';
+		$_ENV["VerseSeparatorVerseIn"] = ',';
+		$_ENV["ChapterSeparatorVerseOut"] = ':';
+		$_ENV["VerseSeparatorVerseOut"] = ',';
+		break;
 }
 
 // Аббревиатуры переводов:

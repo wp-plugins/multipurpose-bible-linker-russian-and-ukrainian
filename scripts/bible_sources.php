@@ -5,24 +5,22 @@ abstract class BibleSource {
 	function __construct($bookIndex) {
 		$this->m_bookIndex = $bookIndex;
 		
-		$bParams = new BibleParams;
-		$this->languageIn = $bParams->languageIn;
+		$this->languageIn = $_ENV["languageIn"];
 	}
 	
 	public static function get($bookIndex) {
 		
-		$bParams = new BibleParams;
-		
-		if (null != $bParams->g_BibleSource) {
-			switch($bParams->g_BibleSource) {
-				case BibleComUaSource: 		return new BibleComUa($bookIndex);
-				case BiblezoomRuSource: 	return new BiblezoomRu($bookIndex);
-				case BibleonlineRuSource: 	return new BibleonlineRu($bookIndex);
-				case BibleCenterRuSource: 	return new BibleCenterRu($bookIndex);
-				case BibleserverComSource: 	return new BibleserverCom($bookIndex);
-				case BibleComSource: 		return new BibleCom($bookIndex);
-				case BibleDesktopComSource: return new BibleDesktopCom($bookIndex);
-				default: 					return new AllbibleInfo($bookIndex);
+		if (null != $_ENV["g_BibleSource"]) {
+			switch($_ENV["g_BibleSource"]) {
+				case 'AllbibleInfoSource': 		return new AllbibleInfo($bookIndex);	break;
+				case 'BibleComUaSource': 		return new BibleComUa($bookIndex);		break;
+				case 'BiblezoomRuSource':		return new BiblezoomRu($bookIndex);		break;
+				case 'BibleonlineRuSource': 	return new BibleonlineRu($bookIndex);	break;
+				case 'BibleCenterRuSource': 	return new BibleCenterRu($bookIndex);	break;
+				case 'BibleserverComSource': 	return new BibleserverCom($bookIndex);	break;
+				case 'BibleComSource': 			return new BibleCom($bookIndex);		break;
+				case 'BibleDesktopComSource': 	return new BibleDesktopCom($bookIndex);	break;
+				default: 						return new AllbibleInfo($bookIndex);	break;
 			}
 		}
 		return new AllbibleInfo($bookIndex);
@@ -46,17 +44,17 @@ class AllbibleInfo extends BibleSource {
 
 	public function GetTranslationPrefix($translation) {
 		switch($translation) {
-			case RSTTranslation: return 'sinodal/';
-			case MDRTranslation: return 'modern/';
-			case RVTranslation: return 'modernrbo/';
-			case UBIOTranslation: return 'ogienko/';
-			case KJVTranslation: return 'kingjames/';
-			case ASVTranslation: return 'standart/';
+			case RSTTranslation: 	return 'sinodal/';		break;
+			case MDRTranslation: 	return 'modern/';		break;
+			case RVTranslation: 	return 'modernrbo/';	break;
+			case UBIOTranslation: 	return 'ogienko/';		break;
+			case KJVTranslation: 	return 'kingjames/';	break;
+			case ASVTranslation: 	return 'standart/';		break;
 			default: 
 				switch($this->languageIn) {
-					case ru: return 'sinodal/';
-					case ua: return 'ogienko/';
-					case en: return 'kingjames/';
+					case 'ru': return 'sinodal/';	break;
+					case 'ua': return 'ogienko/';	break;
+					case 'en': return 'kingjames/';	break;
 				}
 		}
 	}
@@ -76,12 +74,12 @@ class AllbibleInfo extends BibleSource {
 	public function checkForTranslationExist($translation) {
 		$LastBookOfOldTestament = 39;
 		switch($translation) {
-			case RSTTranslation: return true;
-			case MDRTranslation: return true;
-			case RVTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case UBIOTranslation: return true;
-			case KJVTranslation: return true;
-			case ASVTranslation: return true;
+			case RSTTranslation: 	return true;	break;
+			case MDRTranslation: 	return true;	break;
+			case RVTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case UBIOTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
 		}
 		return false;
 	}
@@ -263,18 +261,18 @@ class BibleonlineRu extends AllbibleInfo {
 
 	public function GetTranslationPrefix($translation) {
 		switch($translation) {
-			case RSTTranslation: return 'rus/';
-			case CASTranslation: return 'cas/';
-			case RVTranslation: return 'rbo/';
-			case UCSTranslation: return 'csl/';
-			case UBIOTranslation: return 'ukr/';
-			case KJVTranslation: return 'eng/';
-			case BBSTranslation: return 'bel/';
+			case RSTTranslation: 	return 'rus/';	break;
+			case CASTranslation: 	return 'cas/';	break;
+			case RVTranslation: 	return 'rbo/';	break;
+			case UCSTranslation: 	return 'csl/';	break;
+			case UBIOTranslation: 	return 'ukr/';	break;
+			case KJVTranslation: 	return 'eng/';	break;
+			case BBSTranslation: 	return 'bel/';	break;
 			default:
 				switch($this->languageIn) {
-					case ru: return 'rus/';
-					case ua: return 'ukr/';
-					case en: return 'eng/';
+					case 'ru': return 'rus/';	break;
+					case 'ua': return 'ukr/';	break;
+					case 'en': return 'eng/';	break;
 				}
 		}
 	}
@@ -289,13 +287,13 @@ class BibleonlineRu extends AllbibleInfo {
 		public function checkForTranslationExist($translation) {
 		$LastBookOfOldTestament = 39;
 		switch($translation) {
-			case RSTTranslation: return true;
-			case CASTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case RVTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case UCSTranslation: return true;
-			case UBIOTranslation: return true;
-			case KJVTranslation: return true;
-			case BBSTranslation: return true;
+			case RSTTranslation: 	return true;	break;
+			case CASTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case RVTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case UCSTranslation: 	return true;	break;
+			case UBIOTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case BBSTranslation: 	return true;	break;
 		}
 		return false;
 	}
@@ -381,21 +379,21 @@ class BibleCenterRu extends AllbibleInfo {
 
 	public function GetTranslationPrefix($translation) {
 		switch($translation) {
-			case RSTTranslation: return 'synnew_ru/';
-			case CASTranslation: return 'kassian_ru/';
-			case RVTranslation: return 'rv_ru/';
-			case NTKulTranslation: return 'kulakov_ru/';
-			case UCSTranslation: return 'cslavonic_rusl/';
-			case KJVTranslation: return 'kjv_eng/';
-			case NASBTranslation: return 'nasb_eng/';
-			case NIVTranslation: return 'niv_eng/';
-			case NVTranslation: return 'nv_lat/';
-			case LXXTranslation: return 'sept_gr/';
+			case RSTTranslation: 	return 'synnew_ru/';		break;
+			case CASTranslation: 	return 'kassian_ru/';		break;
+			case RVTranslation: 	return 'rv_ru/';			break;
+			case NTKulTranslation: 	return 'kulakov_ru/';		break;
+			case UCSTranslation: 	return 'cslavonic_rusl/';	break;
+			case KJVTranslation: 	return 'kjv_eng/';			break;
+			case NASBTranslation: 	return 'nasb_eng/';			break;
+			case NIVTranslation: 	return 'niv_eng/';			break;
+			case NVTranslation: 	return 'nv_lat/';			break;
+			case LXXTranslation: 	return 'sept_gr/';			break;
 			default:
 				switch($this->languageIn) {
-					case ru: return 'synnew_ru/';
-					case ua: return 'synnew_ru/'; // Украинский отсутствует
-					case en: return 'kjv_eng/';
+					case 'ru': return 'synnew_ru/';	break;
+					case 'ua': return 'synnew_ru/'; break; // Украинский отсутствует
+					case 'en': return 'kjv_eng/';	break;
 				}
 		}
 	}
@@ -418,16 +416,16 @@ class BibleCenterRu extends AllbibleInfo {
 	public function checkForTranslationExist($translation) {
 		$LastBookOfOldTestament = 39;
 		switch($translation) {
-			case RSTTranslation: return true;
-			case CASTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ			
-			case RVTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case NTKulTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case UCSTranslation: return true;
-			case KJVTranslation: return true;
-			case NASBTranslation: return true;
-			case NIVTranslation: return true;
-			case NVTranslation: return true;
-			case LXXTranslation: return true;
+			case RSTTranslation: 	return true;	break;
+			case CASTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ			
+			case RVTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case NTKulTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case UCSTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case NASBTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case NVTranslation: 	return true;	break;
+			case LXXTranslation: 	return true;	break;
 		}
 		return false;
 	}
@@ -441,23 +439,23 @@ class BibleServerCom extends AllbibleInfo {
 
 	public function GetTranslationPrefix($translation) {
 		switch($translation) {
-			case RSZTranslation: return 'RSZ/';
-			case CRSTranslation: return 'CRS/';
-			case BLGTranslation: return 'BLG/';
-			case ESVTranslation: return 'ESV/';
-			case NIVTranslation: return 'NIV/';
-			case TNIVTranslation: return 'TNIV/';
-			case NIRVTranslation: return 'NIRV/';
-			case KJVTranslation: return 'KJV/';
-			case KJVSTranslation: return 'KJVS/';
-			case LXXTranslation: return 'LXX/';
-			case OTTranslation: return 'OT/';
-			case VULTranslation: return 'VUL/';
+			case RSZTranslation: 	return 'RSZ/';	break;
+			case CRSTranslation: 	return 'CRS/';	break;
+			case BLGTranslation: 	return 'BLG/';	break;
+			case ESVTranslation: 	return 'ESV/';	break;
+			case NIVTranslation: 	return 'NIV/';	break;
+			case TNIVTranslation: 	return 'TNIV/';	break;
+			case NIRVTranslation: 	return 'NIRV/';	break;
+			case KJVTranslation: 	return 'KJV/';	break;
+			case KJVSTranslation: 	return 'KJVS/';	break;
+			case LXXTranslation: 	return 'LXX/';	break;
+			case OTTranslation: 	return 'OT/';	break;
+			case VULTranslation: 	return 'VUL/';	break;
 			default:
 				switch($this->languageIn) {
-					case ru: return 'RSZ/';		// Новый перевод на русский язык (рус.)
-					case ua: return 'RSZ/'; 	// Украинский отсутствует
-					case en: return 'KJV/';
+					case 'ru': return 'RSZ/';	break; // Новый перевод на русский язык (рус.)
+					case 'ua': return 'RSZ/'; 	break; // Украинский отсутствует
+					case 'en': return 'KJV/';	break;
 				}
 		}
 	}
@@ -480,18 +478,18 @@ class BibleServerCom extends AllbibleInfo {
 	public function checkForTranslationExist($translation) {
 		$FirstBookOfNewTestament = 40;
 		switch($translation) {
-			case RSZTranslation: return true;
-			case CRSTranslation: return true;
-			case BLGTranslation: return true;
-			case ESVTranslation: return true;
-			case NIVTranslation: return true;
-			case TNIVTranslation: return true;
-			case NIRVTranslation: return true;
-			case KJVTranslation: return true;
-			case KJVSTranslation: return true;
-			case LXXTranslation: return true;
-			case OTTranslation: return (integer)$this->m_bookIndex < $FirstBookOfNewTestament ? true : false; // только ВЗ
-			case VULTranslation: return true;
+			case RSZTranslation: 	return true;	break;
+			case CRSTranslation: 	return true;	break;
+			case BLGTranslation: 	return true;	break;
+			case ESVTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case TNIVTranslation: 	return true;	break;
+			case NIRVTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case KJVSTranslation: 	return true;	break;
+			case LXXTranslation: 	return true;	break;
+			case OTTranslation: 	return (integer)$this->m_bookIndex < $FirstBookOfNewTestament ? true : false; break; // только ВЗ
+			case VULTranslation: 	return true;	break;
 		}
 		return false;
 	}
@@ -579,60 +577,59 @@ class BibleCom extends AllbibleInfo {
 	}
 
 	public function GetTranslationPrefixFirst($translation) {
-	
 		switch($translation) {
-			case RSTTranslation: return '400/';
-			case CASTranslation: return '480/';
-			case NTKulTranslation: return '313/';
-			case CRSTranslation: return '385/';
-			case UCSTranslation: return '45/';
-			case RSZTranslation: return '143/';
-			case RSPTranslation: return '201/';
-			case RUVZTranslation: return '145/';
-			case BLGTranslation: return '23/';
-			case UBIOTranslation: return '186/';
-			case UKRKTranslation: return '188/';
-			case UMTTranslation: return '204/';
-			case KJVTranslation: return '1/';
-			case ASVTranslation: return '12/';
-			case NASBTranslation: return '100/';
-			case NIVTranslation: return '111/';
-			case ESVTranslation: return '59/';
-			case NIRVTranslation: return '110/'; 
+			case RSTTranslation: 	return '400/';	break;
+			case CASTranslation: 	return '480/';	break;
+			case NTKulTranslation: 	return '313/';	break;
+			case CRSTranslation: 	return '385/';	break;
+			case UCSTranslation: 	return '45/';	break;
+			case RSZTranslation: 	return '143/';	break;
+			case RSPTranslation: 	return '201/';	break;
+			case RUVZTranslation: 	return '145/';	break;
+			case BLGTranslation: 	return '23/';	break;
+			case UBIOTranslation: 	return '186/';	break;
+			case UKRKTranslation: 	return '188/';	break;
+			case UMTTranslation: 	return '204/';	break;
+			case KJVTranslation: 	return '1/';	break;
+			case ASVTranslation: 	return '12/';	break;
+			case NASBTranslation: 	return '100/';	break;
+			case NIVTranslation: 	return '111/';	break;
+			case ESVTranslation: 	return '59/';	break;
+			case NIRVTranslation: 	return '110/';	break;
 			default: 
 				switch($this->languageIn) {
-					case ru: return '400/';
-					case ua: return '186/';
-					case en: return '1/';
+					case 'ru': return '400/';	break;
+					case 'ua': return '186/';	break;
+					case 'en': return '1/';		break;
 				}
 		}
 	}
 	
 		public function GetTranslationPrefixLast($translation) {
 		switch($translation) {
-			case RSTTranslation: return '.syno';
-			case CASTranslation: return '.cass';
-			case NTKulTranslation: return '.bti';
-			case CRSTranslation: return '.cars';
-			case UCSTranslation: return '.cslav';
-			case RSZTranslation: return '.rsz';
-			case RSPTranslation: return '.rsp';
-			case RUVZTranslation: return '.ruvz';
-			case BLGTranslation: return '.bg1940';
-			case UBIOTranslation: return '.ubio';
-			case UKRKTranslation: return '.ukrk';
-			case UMTTranslation: return '.umt';
-			case KJVTranslation: return '.kjv';
-			case ASVTranslation: return '.asv';
-			case NASBTranslation: return '.nasb';
-			case NIVTranslation: return '.niv';
-			case ESVTranslation: return '.esv';
-			case NIRVTranslation: return '.nirv'; 
+			case RSTTranslation: 	return '.syno';		break;
+			case CASTranslation: 	return '.cass';		break;
+			case NTKulTranslation: 	return '.bti';		break;
+			case CRSTranslation: 	return '.cars';		break;
+			case UCSTranslation: 	return '.cslav';	break;
+			case RSZTranslation: 	return '.rsz';		break;
+			case RSPTranslation: 	return '.rsp';		break;
+			case RUVZTranslation: 	return '.ruvz';		break;
+			case BLGTranslation: 	return '.bg1940';	break;
+			case UBIOTranslation: 	return '.ubio';		break;
+			case UKRKTranslation: 	return '.ukrk';		break;
+			case UMTTranslation: 	return '.umt';		break;
+			case KJVTranslation: 	return '.kjv';		break;
+			case ASVTranslation: 	return '.asv';		break;
+			case NASBTranslation: 	return '.nasb';		break;
+			case NIVTranslation: 	return '.niv';		break;
+			case ESVTranslation: 	return '.esv';		break;
+			case NIRVTranslation: 	return '.nirv';		break;
 			default:
 				switch($this->languageIn) {
-					case ru: return '.syno';
-					case ua: return '.ubio';
-					case en: return '.kjv';
+					case 'ru': return '.syno';	break;
+					case 'ua': return '.ubio';	break;
+					case 'en': return '.kjv';	break;
 				}
 		}
 	}
@@ -652,24 +649,24 @@ class BibleCom extends AllbibleInfo {
 	public function checkForTranslationExist($translation) {
 		$LastBookOfOldTestament = 39;
 		switch($translation) {
-			case RSTTranslation: return true;
-			case CASTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case NTKulTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case CRSTranslation: return true;
-			case UCSTranslation: return true;
-			case RSZTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case RSPTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case RUVZTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case BLGTranslation: return true;
-			case UBIOTranslation: return true;
-			case UKRKTranslation: return true;
-			case UMTTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case KJVTranslation: return true;
-			case ASVTranslation: return true;
-			case NASBTranslation: return true;
-			case NIVTranslation: return true;
-			case ESVTranslation: return true;
-			case NIRVTranslation: return true;
+			case RSTTranslation: 	return true;	break;
+			case CASTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case NTKulTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case CRSTranslation: 	return true;	break;
+			case UCSTranslation: 	return true;	break;
+			case RSZTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case RSPTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case RUVZTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case BLGTranslation: 	return true;	break;
+			case UBIOTranslation: 	return true;	break;
+			case UKRKTranslation: 	return true;	break;
+			case UMTTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
+			case NASBTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case ESVTranslation: 	return true;	break;
+			case NIRVTranslation: 	return true;	break;
 		}
 		return false;
 	}
@@ -758,24 +755,24 @@ class BibleDesktopCom extends AllbibleInfo {
 
 	public function GetTranslationPrefixLast($translation) {
 		switch($translation) {
-			case RSTTranslation: return '/RST';
-			case MDRTranslation: return '/MDR'; // НЗ
-			case CASTranslation: return '/CAS'; // НЗ
-			case ISBTranslation: return '/New Russian Translation';
-			case UCSTranslation: return '/SLR';
-			case UBIOTranslation: return '/UKR';
-			case UKRKTranslation: return '/Bible_UA_Kulish';
-			case UKHTranslation: return '/UKH';
-			case UBTTranslation: return '/UBT';
-			case WBTCTranslation: return '/UK_WBTC'; // НЗ
-			case BBSTranslation: return '/BBS';
-			case KJVTranslation: return '/KJV';
-			case VULTranslation: return '/VL_78';
+			case RSTTranslation: 	return '/RST';	break;
+			case MDRTranslation: 	return '/MDR';	break; // НЗ
+			case CASTranslation: 	return '/CAS';	break; // НЗ
+			case ISBTranslation: 	return '/New Russian Translation';	break;
+			case UCSTranslation: 	return '/SLR';	break;
+			case UBIOTranslation: 	return '/UKR';	break;
+			case UKRKTranslation: 	return '/Bible_UA_Kulish';	break;
+			case UKHTranslation: 	return '/UKH';	break;
+			case UBTTranslation: 	return '/UBT';	break;
+			case WBTCTranslation: 	return '/UK_WBTC';	break; // НЗ
+			case BBSTranslation: 	return '/BBS';	break;
+			case KJVTranslation: 	return '/KJV';	break;
+			case VULTranslation: 	return '/VL_78';	break;
 			default:
 				switch($this->languageIn) {
-					case ru: return '/RST';
-					case ua: return '/UKR';
-					case en: return '/KJV';
+					case 'ru': return '/RST';	break;
+					case 'ua': return '/UKR';	break;
+					case 'en': return '/KJV';	break;
 				}
 		}
 	}
@@ -795,19 +792,19 @@ class BibleDesktopCom extends AllbibleInfo {
 	public function checkForTranslationExist($translation) {
 		$LastBookOfOldTestament = 39;
 		switch($translation) {
-			case RSTTranslation: return true;
-			case MDRTranslation: return true;
-			case CASTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case ISBTranslation: return true;
-			case UCSTranslation: return true;
-			case UBIOTranslation: return true;
-			case UKRKTranslation: return true;
-			case UKHTranslation: return true;
-			case UBTTranslation: return true;
-			case WBTCTranslation: return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; // только НЗ
-			case BBSTranslation: return true;
-			case KJVTranslation: return true;
-			case VULTranslation: return true;
+			case RSTTranslation: 	return true;	break;
+			case MDRTranslation: 	return true;	break;
+			case CASTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case ISBTranslation: 	return true;	break;
+			case UCSTranslation: 	return true;	break;
+			case UBIOTranslation: 	return true;	break;
+			case UKRKTranslation: 	return true;	break;
+			case UKHTranslation: 	return true;	break;
+			case UBTTranslation: 	return true;	break;
+			case WBTCTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case BBSTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case VULTranslation: 	return true;	break;
 		}
 		return false;
 	}
