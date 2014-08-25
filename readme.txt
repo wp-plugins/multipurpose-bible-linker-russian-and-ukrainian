@@ -26,7 +26,7 @@ Plugin is based on Simlpe Bible Linker Russian, but has significantly greater fu
 1. Em dash &ldquo;&mdash;&rdquo;, &ldquo;mdash&rdquo; and &ldquo;8212&rdquo;: 1 Cor. 5:3&mdash;5a, 1 Cor. 5:3&mdash;5a and 1 Cor. 5:3&#8212;5a<br />
 1. Various combinations of spaces: 2 Cor 5:3-5; 2 Cor.5:3-5; 2 Cor.  5:3 - 5, 6,&nbsp;7,8,9; 2 Cor.&nbsp;5:3-5; 2 Cor. &nbsp; 5:3-5; 2 Cor.&nbsp; 5:3-5; 2&nbsp;Cor.&nbsp;5:3-5 and 2&nbsp;Cor. 5:3-5<br />
 1. Non-breaking space in the form of a symbol: 1 Thess. 5:11&ndash;14 ASV; Rom. 15:14; Col. 3:16<br />
-1. Apostrophe as a symbol: %D0%A4%D0%B8%D0%BB%D0%B8%D0%BF&#039;%D1%8F%D0%BD%D0%B0%D0%BC 1,2 (Ukrainian only)<br />
+1. Apostrophe as a symbol: &#1060;&#1080;&#1083;&#1080;&#1087;&#039;&#1103;&#1085;&#1072;&#1084; 1,2 (Ukrainian only)<br />
 1. Extra spaces: Job.                 4:5,      6,      7; 8:1<br />
 1. Extra comma: Job, 4:5; Job., 4:5<br />
 1. Pointer to the chapter &ldquo;ch&rdquo; and &ldquo;ch.&rdquo;: Job ch 4; Job &nbsp;ch. 4,5; Job ch.&nbsp;4-6; Job ch.&nbsp;4<br />
