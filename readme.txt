@@ -15,7 +15,7 @@ Find and replace Bible verses with direct links to the Bible.
 
 == Description ==
 
-This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actual biblical chapter and verses.
+This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with a link to the actual Bible chapter and verses.
 Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/).
 Plugin is based on Simlpe Bible Linker Russian, but has significantly greater functional.
 
@@ -43,11 +43,13 @@ Plugin is based on Simlpe Bible Linker Russian, but has significantly greater fu
 
 == Installation ==
 
-Installing the Bible Verse plugin is very straight forward:
+Installing the Multipurpose Bible Verse plugin is very straight forward:
 
-1. Once you have downloaded and extracted multibiblelinker_ru.zip, upload the entire bibleverse FOLDER to /wp-content/plugins/.
-1. You should now have wp-content/plugins/multibiblelinker_ru/multibiblelinker_ru.php.
+1. Once you have downloaded and extracted multipurpose-bible-linker-russian-and-ukrainian.zip, upload the entire bibleverse FOLDER to /wp-content/plugins/.
+1. You should now have wp-content/plugins/multibiblelinker/ or similar.
 1. Activate it from the Plugin Panel in your Admin interface.
 1. The results should now be seen in your posts.
 
-The algorithm can be work slow with large text blocks, therefore it is recommended to use the cache (for example, using the plugin WP Super Cache).
+Or install from the WordPress repository.
+
+With large text blocks the algorithm works slowly, therefore it is recommended to use the cache (for example, using the plugin WP Super Cache).
