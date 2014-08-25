@@ -1,10 +1,10 @@
 <?php
 //Настройки скрипта 
-$_ENV["isRoman"] = get_option('isRoman');			// Номера книг могут быть римскими цифрами
+$_ENV["isRoman"] = 		get_option('isRoman');		// Номера книг могут быть римскими цифрами
 $_ENV["doCorrection"] = get_option('doCorrection');	// Исправлять названия книг на стандартные
 $_ENV["doBookRepeat"] = get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
-$_ENV["languageIn"] = get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
-$_ENV["languageOut"] = get_option('language');		// Язык вывода (ru, ua, en)
+$_ENV["languageIn"] = 	get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
+$_ENV["languageOut"] = 	get_option('language');		// Язык вывода (ru, ua, en)
 $_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 		
 // Выбор источника онлайн Библии
