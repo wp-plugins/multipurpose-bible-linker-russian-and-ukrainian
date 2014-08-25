@@ -62,7 +62,7 @@ class CNodeWrapper {
 		$pos = $this->TrimStr($pos, ".");
 		$pos = $this->TrimStr($pos, ",");
 		$pos = $this->TrimStr($pos);
-		$pos = $this->TrimStr($pos, "гл");
+		$pos = $this->TrimStr($pos, "chapter");
 		$pos = $this->TrimStr($pos, ".");
         $pos = $this->TrimStr($pos);
 		
@@ -430,9 +430,14 @@ class CNodeWrapper {
 			$str = ltrim($str, $trimChar);
 		} elseif ($trimChar == ",") {
 			$str = ltrim($str, $trimChar);
-		} elseif ($trimChar == "гл") {
-			$str = ltrim($str, "г");
-			$str = ltrim($str, "л");
+		} elseif ($trimChar == "chapter") {
+			if ($_ENV["languageIn"] == 'en') {
+				$str = ltrim($str, "c");
+				$str = ltrim($str, "h");
+			} else {
+				$str = ltrim($str, "г");
+				$str = ltrim($str, "л");
+			}
 		} else {
 			$str = preg_replace('/^(&nbsp;| )+/', '', $str);
 		}
