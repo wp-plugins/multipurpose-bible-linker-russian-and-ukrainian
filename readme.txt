@@ -19,7 +19,7 @@ This plugin is designed to help people referring to English, Russian or Ukrainia
 Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/).
 Plugin is based on Simlpe Bible Linker Russian, but has significantly greater functional.
 
-1. Support different types of separators: Matt. 3,4–6.8a (west) and Matt. 3:4–6,8a (east)<br />
+1. Support different types of separators: Matt. 3,4&#8210;6.8a (west) and Matt. 3:4&#8210;6,8a (east)<br />
 1. Fixes a hyphen “-”,“8208”, double “--” and a non-breaking “8209”: 1 Cor. 5:3-5a, 1 Cor. 5:3&#8208;5a, 1 Cor. 5:3--5a and 1 Cor. 5:3&#8209;5a<br />
 1. Numeric dash “8210”, “minus” and “8722”: 1 Cor. 5:3&#8210;5a, 1 Cor. 5:3&minus;5a and 1 Cor. 5:3&#8722;5a<br />
 
