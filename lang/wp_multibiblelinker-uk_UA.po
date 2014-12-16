@@ -1,29 +1,29 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Multipurpose Bible Linker 1.6.2\n"
+"Project-Id-Version: Multipurpose Bible Linker 1.6.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-21 01:00+0300\n"
-"PO-Revision-Date: 2014-05-21 01:43+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2014-12-16 01:00+0300\n"
+"PO-Revision-Date: 2014-12-16 17:03+0200\n"
+"Last-Translator: Vladimir Sokolov <gadfly.svy@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: wp_multibiblelinker.php:64
+#: wp_multibiblelinker.php:62
 msgid "Loaded with the default options."
 msgstr "Завантажені опції за замовчуванням."
 
-#: wp_multibiblelinker.php:78
+#: wp_multibiblelinker.php:77
 msgid "Configuration updated."
 msgstr "Конфігурація оновлена."
 
-#: wp_multibiblelinker.php:84
+#: wp_multibiblelinker.php:83
 msgid "Multipurpose Bible Linker"
 msgstr "Multipurpose Bible Linker"
 
-#: wp_multibiblelinker.php:87
+#: wp_multibiblelinker.php:86
 msgid ""
 "The plugin is designed to highlight the reference to the place of the Bible "
 "in Russian, Ukrainian and English."
@@ -31,11 +31,11 @@ msgstr ""
 "Плагін призначений для підсвічування посилань на місця з Біблії російською, "
 "українською або англійською мовами."
 
-#: wp_multibiblelinker.php:93
+#: wp_multibiblelinker.php:92
 msgid "Translation sources"
 msgstr "Джерела перекладів"
 
-#: wp_multibiblelinker.php:96
+#: wp_multibiblelinker.php:95
 msgid ""
 "The plugin allows you to set the addressing biblical references to various "
 "online sources:"
@@ -43,19 +43,19 @@ msgstr ""
 "Плагін дозволяє встановлювати адресацію біблійних посилань на різні онлайн "
 "джерела:"
 
-#: wp_multibiblelinker.php:96
+#: wp_multibiblelinker.php:95
 msgid "by default"
 msgstr "за замовчуванням"
 
-#: wp_multibiblelinker.php:100
+#: wp_multibiblelinker.php:99
 msgid "simultaneously"
 msgstr "одночасно"
 
-#: wp_multibiblelinker.php:110
+#: wp_multibiblelinker.php:109
 msgid "Language"
-msgstr "Мова"
+msgstr "Language"
 
-#: wp_multibiblelinker.php:113
+#: wp_multibiblelinker.php:112
 msgid ""
 "Language incoming text. In this case, the links are searched in the "
 "dictionary, and optionally replaced by a standard spelling. By default, the "
@@ -64,47 +64,60 @@ msgid ""
 "Ukrainian and English translations, in which case the default link leads to "
 "the King James)."
 msgstr ""
-"Мова входить тексту. У даному випадку посилання шукаються за словником і за "
+"Мова вхідного тексту. У даному випадку посилання шукаються за словником і за "
 "бажанням замінюються на стандартне написання. За замовчуванням скрипт "
 "посилається на Синодальний переклад для російської мови, Огеенка - для "
 "українського та короля Якова - для англійської (не всі джерела підтримують "
 "українська та англійська переклади, в такому випадку посилання за "
 "замовчуванням веде на Синодальний)."
 
-#: wp_multibiblelinker.php:121
+#: wp_multibiblelinker.php:120
 msgid ""
-"Standard writing links: east (Matt. 3:4-6,8) and western (Matt. 3,4-6.8)."
+"Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 msgstr ""
-"Стандарт написання посилання: східний (Мт. 3:4-6,8) і західний (Мт. 3,4-6.8)."
+"Стандарт написання посилання: східний (Мт. 3:4-6,8) або західний (Мт. "
+"3,4-6.8)."
 
-#: wp_multibiblelinker.php:124
+#: wp_multibiblelinker.php:123
 msgid "eastern"
 msgstr "східний"
 
-#: wp_multibiblelinker.php:125
+#: wp_multibiblelinker.php:124
 msgid "western"
 msgstr "західний"
 
-#: wp_multibiblelinker.php:129
+#: wp_multibiblelinker.php:127
+msgid "Type of whitespace: non-breaking or thin."
+msgstr "Тип пробілу: нерозривний або тонкий."
+
+#: wp_multibiblelinker.php:130
+msgid "non-breaking"
+msgstr "нерозривний"
+
+#: wp_multibiblelinker.php:131
+msgid "thin"
+msgstr "тонкий"
+
+#: wp_multibiblelinker.php:135
 msgid "Processing options"
 msgstr "Опції обробки"
 
-#: wp_multibiblelinker.php:133
+#: wp_multibiblelinker.php:139
 msgid "Numbers of the books may be Roman numerals"
 msgstr "Номери книг можуть бути римськими цифрами"
 
-#: wp_multibiblelinker.php:136
+#: wp_multibiblelinker.php:142
 msgid "Correct titles on standard"
 msgstr "Виправляти назви книг на стандартні"
 
-#: wp_multibiblelinker.php:139
+#: wp_multibiblelinker.php:145
 msgid "Repeat the name of the book before each chapter, if a few heads"
 msgstr "Повторювати назву книги кожен раз перед главою, якщо глав кілька"
 
-#: wp_multibiblelinker.php:143
+#: wp_multibiblelinker.php:149
 msgid "Restore defaults"
 msgstr "Відновити за замовчуванням"
 
-#: wp_multibiblelinker.php:144
+#: wp_multibiblelinker.php:150
 msgid "Save"
 msgstr "Зберегти"

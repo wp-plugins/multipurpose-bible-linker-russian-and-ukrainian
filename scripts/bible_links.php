@@ -171,7 +171,6 @@ class BibleBooks {
 		return $number;
 	}
 		
-	
 	public function GetSpecialTranslationArray() {
 		// Синтаксис => правильное название
 		return array(

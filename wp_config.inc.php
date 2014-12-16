@@ -6,6 +6,7 @@ $_ENV["doBookRepeat"] = get_option('doBookRepeat');	// Повторять наз
 $_ENV["languageIn"] = 	get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
 $_ENV["languageOut"] = 	get_option('language');		// Язык вывода (ru, ua, en)
 $_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
+$_ENV["spaceType"] = 	get_option('spaceType');	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
 		
 // Выбор источника онлайн Библии
 //$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
@@ -26,7 +27,12 @@ if ($_ENV["languageIn"] != 'ru' && $_ENV["languageIn"] != 'ua' && $_ENV["languag
 if ($_ENV["languageOut"] != 'ru' && $_ENV["languageOut"] != 'ua' && $_ENV["languageOut"] != 'en') {
 	$_ENV["languageOut"] = 'ru';
 }
-		
+
+// Проверка на правильность пробела
+if ($_ENV["spaceType"] != '&nbsp;' && $_ENV["spaceType"] != '&thinsp;') {
+	$_ENV["spaceType"] = '&nbsp;';
+}
+
 // Разделители между главами и стихами в зависимости от стандарта
 switch($_ENV["linkStandart"]) {
 	case 'east':
@@ -51,35 +57,35 @@ switch($_ENV["linkStandart"]) {
 
 // Аббревиатуры переводов:
 
-define("RSTTranslation", " RST");		// Русский синодальный текст (1876, 2010)
-define("RVTranslation", " RV");			// Радостная весть: совр. перевод НЗ на русский язык / РБО (рус., только НЗ) [Полная Библия - RBO]
-define("MDRTranslation", " MDR");		// Библия: современный перевод Библии (1993)
-define("CASTranslation", " CAS");		// Перевод еп. Кассиана (рус., только НЗ)
-define("NTKulTranslation", " NTKul");	// Перевод Кулакова (рус., только НЗ)
-define("RSZTranslation", " RSZ");		// НЗ «Слово Жизни» (1993, только НЗ)
-define("ISBTranslation", " ISB");		// Новый русский перевод (ISB)
-define("CRSTranslation", " CRS");		// Священное Писание: "восточный перевод" (рус.)
-define("RSPTranslation", " RSP");		// Новый Завет: современный перевод (2011, рус., только НЗ)
-define("RUVZTranslation", " RUVZ");		// Новый завет Журомского (рус., только НЗ)
-define("UCSTranslation", " UCS");		// Церковнославянский перевод
-define("UBIOTranslation", " UBIO");		// Біблія / пер. Огієнко (1962)
-define("UKRKTranslation", " UKRK");		// Біблія / пер. Куліша та Пулюя (1905, укр.)
-define("UMTTranslation", " UMT");		// Свята Біблія: сучасною мовою (2007, укр., только НЗ)
-define("UKHTranslation", " UKH");		// Біблія / пер. Хоменка
-define("UBTTranslation", " UBT");		// Біблія / УБО
-define("WBTCTranslation", " UK_WBTC");	// Український Новий Заповіт (укр., только НЗ)
-define("BBSTranslation", " BBS");		// Беларускі пераклад (бел.)
-define("BLGTranslation", " BLG");		// Българската Библия (болг., 1940)
-define("KJVTranslation", " KJV");		// King Jame Version (1611, 1769)
-define("ASVTranslation", " ASV"); 		// American Standard Version (1901)
-define("NASBTranslation", " NASB");		// New American Standard Bible (англ.)
-define("NIVTranslation", " NIV");		// New International Version (англ.)
-define("ESVTranslation", " ESV");		// English Standard Version (англ.)
-define("TNIVTranslation", " TNIV");		// Today's New International Version (англ.)
-define("NIRVTranslation", " NIRV");		// New International Readers Version (англ.)
-define("KJVSTranslation", " KJVS");		// King James Version with Strong's Dictionary (англ.)
-define("NVTranslation", " NV");			// Новая Вульгата (лат.)
-define("LXXTranslation", " LXX");		// Септуагинта (греч.)
-define("OTTranslation", " OT");			// Hebrew OT (ивр.)
-define("VULTranslation", " VUL");		// Vulgata (лат.)
+define("RSTTranslation",	$_ENV["spaceType"]."RST");		// Русский синодальный текст (1876, 2010)
+define("RVTranslation",		$_ENV["spaceType"]."RV");		// Радостная весть / РБО (рус., только НЗ) [Полная Библия - RBO]
+define("MDRTranslation",	$_ENV["spaceType"]."MDR");		// Библия: современный перевод Библии (1993)
+define("CASTranslation",	$_ENV["spaceType"]."CAS");		// Перевод еп. Кассиана (рус., только НЗ)
+define("NTKulTranslation",	$_ENV["spaceType"]."NTKul");	// Перевод Кулакова (рус., только НЗ)
+define("RSZTranslation",	$_ENV["spaceType"]."RSZ");		// НЗ «Слово Жизни» (1993, только НЗ)
+define("ISBTranslation",	$_ENV["spaceType"]."ISB");		// Новый русский перевод (ISB)
+define("CRSTranslation",	$_ENV["spaceType"]."CRS");		// Священное Писание: "восточный перевод" (рус.)
+define("RSPTranslation",	$_ENV["spaceType"]."RSP");		// Новый Завет: совр. перевод (2011, рус., только НЗ)
+define("RUVZTranslation",	$_ENV["spaceType"]."RUVZ");		// Новый завет Журомского (рус., только НЗ)
+define("UCSTranslation",	$_ENV["spaceType"]."UCS");		// Церковнославянский перевод
+define("UBIOTranslation",	$_ENV["spaceType"]."UBIO");		// Біблія / пер. Огієнко (1962)
+define("UKRKTranslation",	$_ENV["spaceType"]."UKRK");		// Біблія / пер. Куліша та Пулюя (1905, укр.)
+define("UMTTranslation",	$_ENV["spaceType"]."UMT");		// Свята Біблія: сучасною мовою (2007, укр., только НЗ)
+define("UKHTranslation",	$_ENV["spaceType"]."UKH");		// Біблія / пер. Хоменка
+define("UBTTranslation",	$_ENV["spaceType"]."UBT");		// Біблія / УБО
+define("WBTCTranslation",	$_ENV["spaceType"]."UK_WBTC");	// Український Новий Заповіт (укр., только НЗ)
+define("BBSTranslation",	$_ENV["spaceType"]."BBS");		// Беларускі пераклад (бел.)
+define("BLGTranslation",	$_ENV["spaceType"]."BLG");		// Българската Библия (болг., 1940)
+define("KJVTranslation",	$_ENV["spaceType"]."KJV");		// King Jame Version (1611, 1769)
+define("ASVTranslation",	$_ENV["spaceType"]."ASV"); 		// American Standard Version (1901)
+define("NASBTranslation",	$_ENV["spaceType"]."NASB");		// New American Standard Bible (англ.)
+define("NIVTranslation",	$_ENV["spaceType"]."NIV");		// New International Version (англ.)
+define("ESVTranslation",	$_ENV["spaceType"]."ESV");		// English Standard Version (англ.)
+define("TNIVTranslation",	$_ENV["spaceType"]."TNIV");		// Today's New International Version (англ.)
+define("NIRVTranslation",	$_ENV["spaceType"]."NIRV");		// New International Readers Version (англ.)
+define("KJVSTranslation",	$_ENV["spaceType"]."KJVS");		// King James Version with Strong's Dictionary (англ.)
+define("NVTranslation",		$_ENV["spaceType"]."NV");		// Новая Вульгата (лат.)
+define("LXXTranslation",	$_ENV["spaceType"]."LXX");		// Септуагинта (греч.)
+define("OTTranslation",		$_ENV["spaceType"]."OT");		// Hebrew OT (ивр.)
+define("VULTranslation",	$_ENV["spaceType"]."VUL");		// Vulgata (лат.)
 ?>

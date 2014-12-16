@@ -131,13 +131,12 @@ class CNodeWrapper {
 		
 		if (array_key_exists($name, $booksShortPoint))
 			$name .= ".";
-		
 		$name = str_replace("&nbsp;", " ", $name);
 		$name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
-		$input = array(" ", "i", "v");
-		$output = array("&nbsp;", "I", "V");
-		$name = str_replace($input, $output, $name);
-
+		$input = array("iv ", "iii ", "ii ", "i ");
+		$output = array("IV".$_ENV["spaceType"], "III".$_ENV["spaceType"], "II".$_ENV["spaceType"], "I".$_ENV["spaceType"]);
+		$name = str_ireplace($input, $output, $name);
+		$name = str_replace(" ", $_ENV["spaceType"], $name); 
 		return $name;
 	}
 		
@@ -207,25 +206,34 @@ class CNodeWrapper {
 		
 		if ($_ENV["g_BibleSource"] == "BibleComSource") {
 				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com
-			}
+		}
+		
+		switch ($_ENV["spaceType"]) {
+			case '&nbsp;':
+				$spaceType = "";
+				break;
+			case '&thinsp;':
+				$spaceType = "style='white-space: pre' ";
+				break;
+		}
 		
 		if ($this->bibleBooks->IsSingleChapterBook($this->m_bookIndex)) { // Формирование ссылки для одноглавных книг
 			if ($nodeList[0][0]->GetType() == RootNode) {
-				return "; <a href='$link' target='blank'>" . $txtLink . "</a>";
+				return "; <a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			} else {
-				return "<a href='$link' target='blank'>" . $txtLink . "</a>";
+				return "<a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else if ($nodeList[0][0]->GetType() == RootNode) { // Проверка на существование главы
 			if (BibleBooks::get()->RightChaptersNumber($name) < $nodeList[0][0]->GetNumber()) {
 				return "; " . $txtLink;
 			} else {
-				return "; <a href='$link' target='blank'>" . $txtLink . "</a>";
+				return "; <a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else if ($nodeList[0][0]->GetType() == NamedNode) { // Проверка на существование главы
 			if (BibleBooks::get()->RightChaptersNumber($name) < $nodeList[0][0]->GetNumber()) {
 				return $txtLink;
 			} else {
-				return "<a href='$link' target='blank'>" . $txtLink . "</a>";
+				return "<a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else {
 			return $txtLink;
@@ -294,13 +302,13 @@ class CNodeWrapper {
 				$txtLink .= $_ENV["ChapterSeparatorVerseOut"];
 				break;
 			case RootNode:
-				$txtLink .= ($_ENV["doBookRepeat"]) ? (($_ENV["doCorrection"]) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName)))."&nbsp;" : "";
+				$txtLink .= ($_ENV["doBookRepeat"]) ? (($_ENV["doCorrection"]) ? (BibleBooks::get()->RightBibleBooks($this->m_modifiedName)) : ($this->particleCorrectedBook($this->m_modifiedName))).$_ENV["spaceType"] : "";
 				break;
 			case SingleNode:
 				$txtLink .= $_ENV["VerseSeparatorVerseOut"];
 				break;
 			case NamedNode:
-				$txtLink .= "&nbsp;";
+				$txtLink .= $_ENV["spaceType"];
 				break;
 		}
 		$lastNode = $nodeArray[count($nodeArray)-1];
@@ -403,7 +411,7 @@ class CNodeWrapper {
 				$node->SetType(SingleNode);
 				if ($this->CheckForAdditionalPart($pos, $additionalSymbol))
 					$node->SetAdditionalSymbol($additionalSymbol);
-               break;
+				break;
 			case ';':
 				$node->SetType(RootNode);
 				break;
