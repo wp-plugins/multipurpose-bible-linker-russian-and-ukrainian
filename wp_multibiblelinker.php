@@ -55,7 +55,7 @@ function get_multibiblelinker_form() {
 		update_option('language', 		'ru');
 		update_option('isRoman', 		true);
 		update_option('linkStandart', 	'east');
-		update_option('spaceType', 		'&nbsp;');
+		update_option('spaceType', 		'nbsp');
 		update_option('doCorrection', 	true);
 		update_option('doBookRepeat', 	false);
 
@@ -127,8 +127,8 @@ function get_multibiblelinker_form() {
 		<p><?php _e('Type of whitespace: non-breaking or thin.', 'wp_multibiblelinker'); ?></p>
 		
 		<select name="spaceType">
-			<option <?php if (get_option('spaceType') == "&nbsp;") echo "selected"; ?> value="&nbsp;"><?php _e('non-breaking', 'wp_multibiblelinker'); ?></option>
-			<option <?php if (get_option('spaceType') == "&thinsp;") echo "selected"; ?> value="&thinsp;"><?php _e('thin', 'wp_multibiblelinker'); ?></option>
+			<option <?php if (get_option('spaceType') == "nbsp") echo "selected"; ?> value="nbsp"><?php _e('non-breaking', 'wp_multibiblelinker'); ?></option>
+			<option <?php if (get_option('spaceType') == "thinsp") echo "selected"; ?> value="thinsp"><?php _e('thin', 'wp_multibiblelinker'); ?></option>
 		</select>
 	</div>
 

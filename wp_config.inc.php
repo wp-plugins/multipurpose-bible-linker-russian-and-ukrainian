@@ -6,7 +6,7 @@ $_ENV["doBookRepeat"] = get_option('doBookRepeat');	// Повторять наз
 $_ENV["languageIn"] = 	get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
 $_ENV["languageOut"] = 	get_option('language');		// Язык вывода (ru, ua, en)
 $_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
-$_ENV["spaceType"] = 	get_option('spaceType');	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
+$_ENV["spaceType"] = 	"&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
 		
 // Выбор источника онлайн Библии
 //$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)

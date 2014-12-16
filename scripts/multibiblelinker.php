@@ -188,7 +188,7 @@ class CNodeWrapper {
                 $link .= $bibleSource->getSingleChapterPart($nodeChapter->GetNumber());
             } else {
                 if ($_ENV["g_BibleSource"] == "BibleserverComSource") {
-                    $link .= $node->GetNumber(); 			// Тонкость формирования однокнижной ссылки для bibleserver.com
+                    $link .= $node->GetNumber(); 	// Тонкость формирования однокнижной ссылки для bibleserver.com
                 } else {
                     $link .= $bibleSource->getChapterPart($nodeChapter->GetNumber());
                     if ($node->GetType() == SubNode) {

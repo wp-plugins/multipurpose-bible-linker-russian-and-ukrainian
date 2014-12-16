@@ -87,7 +87,7 @@ class BibleBooks {
 			$name = $bBooks->BookByNameShortRight[$bookIndex];
 		}
 		
-		$name = str_replace(" ", "&nbsp;", $name);
+		$name = str_replace(" ", $_ENV["spaceType"], $name);
 	
 		return $name;
 	}
