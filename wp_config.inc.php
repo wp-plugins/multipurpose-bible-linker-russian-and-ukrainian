@@ -22,10 +22,42 @@ $_ENV["g_BibleSource"] = get_option('g_BibleSource');
 		
 // Проверка на правильность установки языка
 if ($_ENV["languageIn"] != 'ru' && $_ENV["languageIn"] != 'ua' && $_ENV["languageIn"] != 'en') {
-	$_ENV["languageIn"] = 'ru';
+		switch (get_locale()) {
+		case "en_US":
+            $_ENV["languageIn"] = 'en';
+			update_option('language', 'en');
+            break;
+		case "ru_RU":
+			$_ENV["languageIn"] = 'ru';
+			update_option('language', 'ru');
+            break;
+		case "uk_UA":
+			$_ENV["languageIn"] = 'ua';
+			update_option('language', 'ua');
+			break;
+		default:
+			$_ENV["languageIn"] = 'ru';
+			update_option('language', 'ru');
+        }
 }
 if ($_ENV["languageOut"] != 'ru' && $_ENV["languageOut"] != 'ua' && $_ENV["languageOut"] != 'en') {
-	$_ENV["languageOut"] = 'ru';
+	switch (get_locale()) {
+		case "en_US":
+            $_ENV["languageOut"] = 'en';
+			update_option('language', 'en');
+            break;
+		case "ru_RU":
+			$_ENV["languageOut"] = 'ru';
+			update_option('language', 'ru');
+            break;
+		case "uk_UA":
+			$_ENV["languageOut"] = 'ua';
+			update_option('language', 'ua');
+			break;
+		default:
+			$_ENV["languageOut"] = 'ru';
+			update_option('language', 'ru');
+        }
 }
 
 // Проверка на правильность пробела

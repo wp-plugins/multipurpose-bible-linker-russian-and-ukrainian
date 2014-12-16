@@ -111,12 +111,10 @@ function get_multibiblelinker_form() {
 	<div style="padding: 0 0 0 30px;">
 		<p><?php _e('Language incoming text. In this case, the links are searched in the dictionary, and optionally replaced by a standard spelling. By default, the script refers to the standard translation of the Russian language, Ogeenka — for Ukrainian and King James — for English (not all sources of support Ukrainian and English translations, in which case the default link leads to the King James).', 'wp_multibiblelinker'); ?></p>
 		
-		<?php if (get_locale() == "ru_RU") update_option('language', 'ru'); ?>
-		
 		<select name="language">
-			<option <?php if (get_locale() == "en_US" or get_option('language') == "en") echo "selected"; ?> value="en">English</option>
-			<option <?php if (get_locale() == "ru_RU" or get_option('language') == "ru") echo "selected"; ?> value="ru">русский</option>
-			<option <?php if (get_locale() == "uk_UA" or get_option('language') == "ua") echo "selected"; ?> value="ua">українська</option>
+			<option <?php if (get_option('language') == "en") echo "selected"; ?> value="en">English</option>
+			<option <?php if (get_option('language') == "ru") echo "selected"; ?> value="ru">русский</option>
+			<option <?php if (get_option('language') == "ua") echo "selected"; ?> value="ua">українська</option>
 		</select>
 		
 		<p><?php _e('Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8).', 'wp_multibiblelinker'); ?></p>
@@ -129,8 +127,8 @@ function get_multibiblelinker_form() {
 		<p><?php _e('Type of whitespace: non-breaking or thin.', 'wp_multibiblelinker'); ?></p>
 		
 		<select name="spaceType">
-			<option <?php if (get_option('linkStandart') == "&nbsp;") echo "selected"; ?> value="&nbsp;"><?php _e('non-breaking', 'wp_multibiblelinker'); ?></option>
-			<option <?php if (get_option('linkStandart') == "&thinsp;") echo "selected"; ?> value="&thinsp;"><?php _e('thin', 'wp_multibiblelinker'); ?></option>
+			<option <?php if (get_option('spaceType') == "&nbsp;") echo "selected"; ?> value="&nbsp;"><?php _e('non-breaking', 'wp_multibiblelinker'); ?></option>
+			<option <?php if (get_option('spaceType') == "&thinsp;") echo "selected"; ?> value="&thinsp;"><?php _e('thin', 'wp_multibiblelinker'); ?></option>
 		</select>
 	</div>
 
