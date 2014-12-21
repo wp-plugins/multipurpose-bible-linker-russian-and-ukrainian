@@ -20,6 +20,7 @@ abstract class BibleSource {
 				case 'BibleserverComSource': 	return new BibleserverCom($bookIndex);	break;
 				case 'BibleComSource': 			return new BibleCom($bookIndex);		break;
 				case 'BibleDesktopComSource': 	return new BibleDesktopCom($bookIndex);	break;
+				case 'BiblegatewayComSource': 	return new BiblegatewayCom($bookIndex);	break;
 				default: 						return new AllbibleInfo($bookIndex);	break;
 			}
 		}
@@ -877,6 +878,141 @@ class BibleDesktopCom extends AllbibleInfo {
 					'57' => 'philemon',
 					'58' => 'hebrews',
 					'66' => 'revelations',
+					);
+		return $indexes[$bookIndex];
+	}
+}
+
+class BiblegatewayCom extends AllbibleInfo {
+	function __construct($bookIndex) {
+		parent::__construct($bookIndex);
+	}
+	
+	public function getLink($translation = "") {
+		return 'https://www.biblegateway.com/passage/?version=' . $this->GetTranslationPrefix($translation) . $this->GetIndexName($this->m_bookIndex);
+	}
+
+	public function GetTranslationPrefix($translation) {
+		switch($translation) {
+			case RSTTranslation: 	return 'RUSV&search=';		break;
+			case RSZTranslation: 	return 'SZ&search=';		break;
+			case CRSTranslation: 	return 'CARS&search=';		break;
+			case UBIOTranslation: 	return 'UKR&search=';		break;
+			case BLGTranslation: 	return 'BG1940&search=';	break;
+			case KJVTranslation: 	return 'KJV&search=';		break;
+			case ASVTranslation: 	return 'ASV&search=';		break;
+			case NASBTranslation: 	return 'NASB&search=';		break;
+			case NIVTranslation: 	return 'NIV&search=';		break;
+			case ESVTranslation: 	return 'ESV&search=';		break;
+			case NIRVTranslation: 	return 'NIRV&search=';		break;
+			case VULTranslation: 	return 'VULGATE&search=';	break;
+			default:
+				switch($this->languageIn) {
+					case 'ru': return 'RUSV&search=';	break;
+					case 'ua': return 'UKR&search=';	break;
+					case 'en': return 'KJV&search=';	break;
+				}
+		}
+	}
+	public function getSingleChapterPart($chapter) {
+		return '+1%3A' . $chapter;
+	}
+	
+	public function getChapterPart($chapter) {
+		return '+' . $chapter;
+	}
+	
+	public function getVersePart($verse, $translation = "") {
+		return '%3A' . $verse . '-';
+	}
+	
+		public function checkForTranslationExist($translation) {
+		$LastBookOfOldTestament = 39;
+		switch($translation) {
+			case RSTTranslation: 	return true;	break;
+			case RSZTranslation: 	return true;	break;
+			case CRSTranslation: 	return true;	break;
+			case UBIOTranslation: 	return true;	break;
+			case BLGTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
+			case NASBTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case ESVTranslation: 	return true;	break;
+			case NIRVTranslation: 	return true;	break;
+			case VULTranslation: 	return true;	break;
+		}
+		return false;
+	}
+	
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+					'1' => 'Genesis',
+					'2' => 'Exodus',
+					'3' => 'Leviticus',
+					'4' => 'Numbers',
+					'5' => 'Deuteronomy',
+					'6' => 'Joshua',
+					'7' => 'Judges',
+					'8' => 'Ruth',
+					'9' => '1+Samuel',
+					'10' => '2+Samuel',
+					'11' => '1+Kings',
+					'12' => '2+Kings',
+					'13' => '1+Chronicles',
+					'14' => '2+Chronicles',
+					'15' => 'Ezra',
+					'16' => 'Nehemiah',
+					'17' => 'Esther',
+					'18' => 'Job',
+					'19' => 'Psalm',
+					'20' => 'Proverbs',
+					'21' => 'Ecclesiastes',
+					'22' => 'Song+of+Songs',
+					'23' => 'Isaiah',
+					'24' => 'Jeremiah',
+					'25' => 'Lamentations',
+					'26' => 'Ezekiel',
+					'27' => 'Daniel',
+					'28' => 'Hosea',
+					'29' => 'Joel',
+					'30' => 'Amos',
+					'31' => 'Obadiah',
+					'32' => 'Jonah',
+					'33' => 'Micah',
+					'34' => 'Nahum',
+					'35' => 'Habakkuk',
+					'36' => 'Zephaniah',
+					'37' => 'Haggai',
+					'38' => 'Zechariah',
+					'39' => 'Malachi',
+					'40' => 'Matthew',
+					'41' => 'Mark',
+					'42' => 'Luke',
+					'43' => 'John',
+					'44' => 'Acts',
+					'59' => 'James',
+					'60' => '1+Peter',
+					'61' => '2+Peter',
+					'62' => '1+John',
+					'63' => '2+John',
+					'64' => '3+John',
+					'65' => 'Jude',
+					'45' => 'Romans',
+					'46' => '1+Corinthians',
+					'47' => '2+Corinthians',
+					'48' => 'Galatians',
+					'49' => 'Ephesians',
+					'50' => 'Philippians',
+					'51' => 'Colossians',
+					'52' => '1+Thessalonians',
+					'53' => '2+Thessalonians',
+					'54' => '1+Timothy',
+					'55' => '2+Timothy',
+					'56' => 'Titus',
+					'57' => 'Philemon',
+					'58' => 'Hebrews',
+					'66' => 'Revelation',
 					);
 		return $indexes[$bookIndex];
 	}

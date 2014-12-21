@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Multipurpose Bible Linker 1.6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-16 01:00+0300\n"
-"PO-Revision-Date: 2014-12-16 17:03+0200\n"
+"PO-Revision-Date: 2014-12-21 20:47+0200\n"
 "Last-Translator: Vladimir Sokolov <gadfly.svy@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,11 +51,11 @@ msgstr "за замовчуванням"
 msgid "simultaneously"
 msgstr "одночасно"
 
-#: wp_multibiblelinker.php:109
+#: wp_multibiblelinker.php:110
 msgid "Language"
 msgstr "Language"
 
-#: wp_multibiblelinker.php:112
+#: wp_multibiblelinker.php:113
 msgid ""
 "Language incoming text. In this case, the links are searched in the "
 "dictionary, and optionally replaced by a standard spelling. By default, the "
@@ -71,53 +71,53 @@ msgstr ""
 "українська та англійська переклади, в такому випадку посилання за "
 "замовчуванням веде на Синодальний)."
 
-#: wp_multibiblelinker.php:120
+#: wp_multibiblelinker.php:121
 msgid ""
 "Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 msgstr ""
 "Стандарт написання посилання: східний (Мт. 3:4-6,8) або західний (Мт. "
 "3,4-6.8)."
 
-#: wp_multibiblelinker.php:123
+#: wp_multibiblelinker.php:124
 msgid "eastern"
 msgstr "східний"
 
-#: wp_multibiblelinker.php:124
+#: wp_multibiblelinker.php:125
 msgid "western"
 msgstr "західний"
 
-#: wp_multibiblelinker.php:127
+#: wp_multibiblelinker.php:128
 msgid "Type of whitespace: non-breaking or thin."
 msgstr "Тип пробілу: нерозривний або тонкий."
 
-#: wp_multibiblelinker.php:130
+#: wp_multibiblelinker.php:131
 msgid "non-breaking"
 msgstr "нерозривний"
 
-#: wp_multibiblelinker.php:131
+#: wp_multibiblelinker.php:132
 msgid "thin"
 msgstr "тонкий"
 
-#: wp_multibiblelinker.php:135
+#: wp_multibiblelinker.php:136
 msgid "Processing options"
 msgstr "Опції обробки"
 
-#: wp_multibiblelinker.php:139
+#: wp_multibiblelinker.php:140
 msgid "Numbers of the books may be Roman numerals"
 msgstr "Номери книг можуть бути римськими цифрами"
 
-#: wp_multibiblelinker.php:142
+#: wp_multibiblelinker.php:143
 msgid "Correct titles on standard"
 msgstr "Виправляти назви книг на стандартні"
 
-#: wp_multibiblelinker.php:145
+#: wp_multibiblelinker.php:146
 msgid "Repeat the name of the book before each chapter, if a few heads"
 msgstr "Повторювати назву книги кожен раз перед главою, якщо глав кілька"
 
-#: wp_multibiblelinker.php:149
+#: wp_multibiblelinker.php:150
 msgid "Restore defaults"
 msgstr "Відновити за замовчуванням"
 
-#: wp_multibiblelinker.php:150
+#: wp_multibiblelinker.php:151
 msgid "Save"
 msgstr "Зберегти"

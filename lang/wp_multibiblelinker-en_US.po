@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Multipurpose Bible Linker 1.6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-16 01:00+0300\n"
-"PO-Revision-Date: 2014-12-16 16:44+0200\n"
+"PO-Revision-Date: 2014-12-21 20:46+0200\n"
 "Last-Translator: Vladimir Sokolov <gadfly.svy@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,11 +51,11 @@ msgstr "by default"
 msgid "simultaneously"
 msgstr "simultaneously"
 
-#: wp_multibiblelinker.php:109
+#: wp_multibiblelinker.php:110
 msgid "Language"
 msgstr "Language"
 
-#: wp_multibiblelinker.php:112
+#: wp_multibiblelinker.php:113
 msgid ""
 "Language incoming text. In this case, the links are searched in the "
 "dictionary, and optionally replaced by a standard spelling. By default, the "
@@ -71,52 +71,52 @@ msgstr ""
 "Ukrainian and English translations, in which case the default link leads to "
 "the King James)."
 
-#: wp_multibiblelinker.php:120
+#: wp_multibiblelinker.php:121
 msgid ""
 "Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 msgstr ""
 "Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 
-#: wp_multibiblelinker.php:123
+#: wp_multibiblelinker.php:124
 msgid "eastern"
 msgstr "eastern"
 
-#: wp_multibiblelinker.php:124
+#: wp_multibiblelinker.php:125
 msgid "western"
 msgstr "western"
 
-#: wp_multibiblelinker.php:127
+#: wp_multibiblelinker.php:128
 msgid "Type of whitespace: non-breaking or thin."
 msgstr "Type of whitespace: non-breaking or thin."
 
-#: wp_multibiblelinker.php:130
+#: wp_multibiblelinker.php:131
 msgid "non-breaking"
 msgstr "non-breaking"
 
-#: wp_multibiblelinker.php:131
+#: wp_multibiblelinker.php:132
 msgid "thin"
 msgstr "thin"
 
-#: wp_multibiblelinker.php:135
+#: wp_multibiblelinker.php:136
 msgid "Processing options"
 msgstr "Processing options"
 
-#: wp_multibiblelinker.php:139
+#: wp_multibiblelinker.php:140
 msgid "Numbers of the books may be Roman numerals"
 msgstr "Numbers of the books may be Roman numerals"
 
-#: wp_multibiblelinker.php:142
+#: wp_multibiblelinker.php:143
 msgid "Correct titles on standard"
 msgstr "Correct titles on standard"
 
-#: wp_multibiblelinker.php:145
+#: wp_multibiblelinker.php:146
 msgid "Repeat the name of the book before each chapter, if a few heads"
 msgstr "Repeat the name of the book before each chapter, if a few heads"
 
-#: wp_multibiblelinker.php:149
+#: wp_multibiblelinker.php:150
 msgid "Restore defaults"
 msgstr "Restore defaults"
 
-#: wp_multibiblelinker.php:150
+#: wp_multibiblelinker.php:151
 msgid "Save"
 msgstr "Save"

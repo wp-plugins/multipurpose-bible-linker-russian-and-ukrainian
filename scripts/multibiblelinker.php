@@ -5,10 +5,10 @@ include 'bible_sources.php'; 		// сайты библейский текстов
 // Например в Мф. 1:2–4,6; 7:8
 
 define("NamedNode", 4);		// самая первая цифра после названия книги (1)
-define("SubNode", 3);		// цифра после двоеточия (2, 8)
-define("EndNode", 1); 		// цифра после тире (4)
+define("SubNode", 	3);		// цифра после двоеточия (2, 8)
+define("EndNode", 	1); 	// цифра после тире (4)
 define("SingleNode", 0); 	// цифра после запятой (6)
-define("RootNode", 2); 		// цифра после точки с запятой (7)
+define("RootNode", 	2); 	// цифра после точки с запятой (7)
 
 class CNode {
 	
@@ -153,6 +153,9 @@ class CNodeWrapper {
 		// http://bibleserver.com/text/				RSZ/		Послание Римлянам 	1.		31
 		// https://bible.com/ru/bible/				400/		phm					.1.		5		.syno - вариант не используется
 		// http://bible.us/							400/		phm					.1.		5		.syno
+		// http://bible-desktop.com/bq/							philemon			/1_		5		/RST
+		// http://b-bq.eu/										philemon			/1_		5		/RST
+// https://www.biblegateway.com/passage/?version=	RUSV&search=Philemon			+1%3A	5-
 		
 		$bibleSource = BibleSource::get($this->m_bookIndex);
 

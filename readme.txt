@@ -2,10 +2,10 @@
 Plugin Name: Multipurpose Bible Linker
 Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 Contributors: Gadfly_svy
-Tags: bible, christian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
+Tags: bible, ñhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 License: GPLv2 or later
@@ -16,7 +16,7 @@ Find and replace Bible verses with direct links to the Bible.
 == Description ==
 
 This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with a link to the actual Bible chapter and verses.
-Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/).
+Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/, https://www.biblegateway.com/).
 Plugin is based on Simlpe Bible Linker Russian, but has significantly greater functional.
 
 1. Support different types of separators: Matt. 3,4&ndash;6.8a (west) and Matt. 3:4&ndash;6,8a (east)<br />

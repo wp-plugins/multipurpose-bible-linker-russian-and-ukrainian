@@ -69,7 +69,7 @@ class BibleLinksArraysOut {
 						'66' => 'The Revelation of John',
 						);
 
-	public $BookByNameShortRight = array(
+	public $BookByNameShortRight = array( // SBL Manual of Style
 						'1' => 'Gen.',
 						'2' => 'Exod.',
 						'3' => 'Lev.',
@@ -77,7 +77,7 @@ class BibleLinksArraysOut {
 						'5' => 'Deut.',
 						'6' => 'Josh.',
 						'7' => 'Judg.',
-						'8' => 'Ruth.',
+						'8' => 'Ruth',
 						'9' => '1 Sam.',
 						'10' => '2 Sam.',
 						'11' => '1 Kgs.',
@@ -117,10 +117,10 @@ class BibleLinksArraysOut {
 						'59' => 'Jas.',
 						'60' => '1 Pet.',
 						'61' => '2 Pet.',
-						'62' => '1 John.',
-						'63' => '2 John.',
-						'64' => '3 John.',
-						'65' => 'Jude.',
+						'62' => '1 John',
+						'63' => '2 John',
+						'64' => '3 John',
+						'65' => 'Jude',
 						'45' => 'Rom.',
 						'46' => '1 Cor.',
 						'47' => '2 Cor.',

@@ -6,18 +6,19 @@ $_ENV["doBookRepeat"] = get_option('doBookRepeat');	// Повторять наз
 $_ENV["languageIn"] = 	get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
 $_ENV["languageOut"] = 	get_option('language');		// Язык вывода (ru, ua, en)
 $_ENV["linkStandart"] = get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
-$_ENV["spaceType"] = 	"&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
+$_ENV["spaceType"] = "&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
 		
 // Выбор источника онлайн Библии
 //$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
 //$g_BibleSource = BibleComUaSource;		// http://bible.com.ua/ 					(рус., укр. и англ. одновременно)
 //$g_BibleSource = BiblezoomRuSource;		// http://biblezoom.ru/ 					(греч. с подстрочником)
 //$g_BibleSource = BibleonlineRuSource;		// http://bibleonline.ru/ 					(рус., укр., бел. или англ.)
-//$g_BibleSource = BibleCenterRuSource;		// http://bible-center.ru/ 					(рус., англ., греч. и лат.)
-//$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 				(рус., болг., англ., греч., ивр. и лат.)
-//$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг., англ.)
-//$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. англ.)
-			
+//$g_BibleSource = BibleCenterRuSource;		// http://bible-center.ru/ 					(рус., англ., греч. или лат.)
+//$g_BibleSource = BibleserverComSource;	// http://bibleserver.com/ 					(рус., болг., англ., греч., ивр. или лат.)
+//$g_BibleSource = BibleComSource;			// http://bible.com/ или http://bible.us/	(рус., укр., болг. или англ.)
+//$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. или англ.)
+//$g_BibleSource = BiblegatewayComSource;	// https://www.biblegateway.com/ 			(рус., укр., болг., англ. или лат.)
+
 $_ENV["g_BibleSource"] = get_option('g_BibleSource');
 		
 // Проверка на правильность установки языка
@@ -68,22 +69,22 @@ if ($_ENV["spaceType"] != '&nbsp;' && $_ENV["spaceType"] != '&thinsp;') {
 // Разделители между главами и стихами в зависимости от стандарта
 switch($_ENV["linkStandart"]) {
 	case 'east':
-		$_ENV["ChapterSeparatorVerseIn"] = ':';
-		$_ENV["VerseSeparatorVerseIn"] = ',';
+		$_ENV["ChapterSeparatorVerseIn"] = 	':';
+		$_ENV["VerseSeparatorVerseIn"] = 	',';
 		$_ENV["ChapterSeparatorVerseOut"] = ':';
-		$_ENV["VerseSeparatorVerseOut"] = ',';
+		$_ENV["VerseSeparatorVerseOut"] = 	',';
 		break;
 	case 'west':
-		$_ENV["ChapterSeparatorVerseIn"] = ',';
-		$_ENV["VerseSeparatorVerseIn"] = '.';
+		$_ENV["ChapterSeparatorVerseIn"] = 	',';
+		$_ENV["VerseSeparatorVerseIn"] = 	'.';
 		$_ENV["ChapterSeparatorVerseOut"] = ',';
-		$_ENV["VerseSeparatorVerseOut"] = '.';
+		$_ENV["VerseSeparatorVerseOut"] = 	'.';
 		break;
 	default:
-		$_ENV["ChapterSeparatorVerseIn"] = ':';
-		$_ENV["VerseSeparatorVerseIn"] = ',';
+		$_ENV["ChapterSeparatorVerseIn"] = 	':';
+		$_ENV["VerseSeparatorVerseIn"] = 	',';
 		$_ENV["ChapterSeparatorVerseOut"] = ':';
-		$_ENV["VerseSeparatorVerseOut"] = ',';
+		$_ENV["VerseSeparatorVerseOut"] = 	',';
 		break;
 }
 
