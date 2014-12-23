@@ -458,57 +458,50 @@ class CNodeWrapper {
     public function GetInt(&$pos, &$n) {
 		$str = substr($this->m_str, $pos);
 		
-		/*
-		$pattern = "/\bC{0,1}(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\b/";
-		preg_match($pattern, $this->m_str, $matches);
-		//var_dump($matches);
-		echo $matches[0].'-'.$this->m_str.'<br>';/**/
-		/*$str = 
-			$linje = 'IVM';*/
-		/*echo '||||'.$this->roman2dec($matches[0]);/**/
-		
 		$h = sscanf($str, "%d", $n);
+		if (!$n) { // Для римских цифр
+			$h_rom = sscanf($str, "%s", $n_rom);
+			$pattern = "/\bC{0,1}(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\b/";
+			preg_match($pattern, $n_rom, $matches);
+			if ($matches and $matches[0]) {
+				$n = $this->roman2dec($matches[0]);
+
+				if ($h_rom != 1)
+					return false;
+				$pos += strlen((string)$matches[0]);
+				return true;
+			}
+		}
+
 		if ($h != 1)
 			return false;
 		$pos += strlen((string)$n);
 		return true;
     }
-/*
-	private function roman2dec($linje) {
-    # Fixing variable so it follows my convention
-    $linje = strtoupper($linje);
-    
-    # Removing all not-roman letters
-    $linje = preg_replace("[^IVXLCDM]", "", $linje);
 
-    //print("\$linje    = $linje<br>");
-    
-    # Defining variables
-    $romanLettersToNumbers = array("C" => 100, "L" => 50, "X" => 10, "V" => 5, "I" => 1);
+	private function roman2dec($roman) { // конвертор из римских в арабские цифры
+		$roman = strtoupper($roman);
+		$roman = preg_replace("[^IVXLC]", "", $roman);
+		$romanLettersToNumbers = array("C" => 100, "L" => 50, "X" => 10, "V" => 5, "I" => 1);
 
-    $oldChunk = 101;
+		$oldChunk = 101;
+		$calculation = '';
 
-    # Looping through line
-    for ($start = 0; $start < strlen($linje); $start++) {
-        $chunk = substr($linje, $start, 1);
-        
-        $chunk = $romanLettersToNumbers[$chunk];
-        
-        if ($chunk <= $oldChunk) {
-            $calculation += $chunk;
-        } else {
-            $calculation += $chunk - (2 * $oldChunk);
-        }
-        
-    
-        $oldChunk = $chunk;
-    }
-    
-    # Summing it up
-    //eval("\$calculation = \"$calculation\";");
-    return $calculation;
-
-}*/
+		for($start = 0; $start < strlen($roman); $start++) {
+			$chunk = substr($roman, $start, 1);
+			
+			$chunk = $romanLettersToNumbers[$chunk];
+			
+			if ($chunk <= $oldChunk) {
+				$calculation .= " + $chunk";
+			} else {
+				$calculation .= " + " . ($chunk - (2 * $oldChunk));
+			}
+			$oldChunk = $chunk;
+		}
+		eval ("\$calculation = $calculation;");
+		return $calculation;
+	}
 	
     // read number from str and set in node
     public function FillNode(&$none, &$pos) {
