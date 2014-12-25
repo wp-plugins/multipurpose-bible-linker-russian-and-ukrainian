@@ -2,7 +2,7 @@
 Plugin Name: Multipurpose Bible Linker
 Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 Contributors: Gadfly_svy
-Tags: bible, Òhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
+Tags: bible, —Åhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
 Requires at least: 3.5.0
 Tested up to: 4.1
 Stable tag: 1.6.6
@@ -38,7 +38,7 @@ Plugin is based on Simlpe Bible Linker Russian, but has significantly greater fu
 1. Checking the absence of a translation (for Old Testament): Gen. 3:4 ASV and Matt. 3:4 ASV<br />
 1. Short and complete writing books: Gen 1:2; Gn. 1:2 and Genesis 1:2<br />
 1. Roman numbers of books: II Cor. 5:3-4; I Sam. 17:34&ndash;41; I Chronicles 14:9<br />
-1. Roman numbers of chapters and verses: 2 Cor. V:III-4; I Sam. XVII: 34ñ41; I Chronicles XIV:9; Gen. IV: 3ó4; VIII: 20; Ps. CL:2<br />
+1. Roman numbers of chapters and verses: 2 Cor. V:III-4; I Sam. XVII: 34‚Äì41; I Chronicles XIV:9; Gen. IV: 3‚Äî4; VIII: 20; Ps. CL:2<br />
 1. Number of chapters more than it actually is: Ps. 151:2; Matt. 16:1; 28:45; 29:5<br />
 1. Correction of related verses and chapters across the dash: Isa. 1-2; Isa. 1:2-3; Isa. 1:2-3:4; 1 Cor. 2:3a-4:5; Matt. 1:1,2&ndash;4,6-7,14<br />
 
