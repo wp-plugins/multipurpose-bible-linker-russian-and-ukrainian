@@ -157,7 +157,7 @@ function get_multibiblelinker_form() {
 }
 
 add_filter('the_content', 'SearchBibleLinks');
-add_filter('the_content_rss', 'SearchBibleLinks');
+//add_filter('the_content_rss', 'SearchBibleLinks');
 add_filter('comment_text','SearchBibleLinks');
 add_action('admin_menu', 'multibiblelinker_add_option_pages');
 ?>

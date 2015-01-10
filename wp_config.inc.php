@@ -121,4 +121,8 @@ define("NVTranslation",		$_ENV["spaceType"]."NV");		// Новая Вульгат
 define("LXXTranslation",	$_ENV["spaceType"]."LXX");		// Септуагинта (греч.)
 define("OTTranslation",		$_ENV["spaceType"]."OT");		// Hebrew OT (ивр.)
 define("VULTranslation",	$_ENV["spaceType"]."VUL");		// Vulgata (лат.)
+
+// Увеличение времени выполнения скрипта и просмотр результата
+//set_time_limit(60);
+//echo ini_get('max_execution_time');
 ?>

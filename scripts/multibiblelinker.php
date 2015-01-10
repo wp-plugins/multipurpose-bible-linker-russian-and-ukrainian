@@ -69,10 +69,10 @@ class CNodeWrapper {
 		$node->SetType(NamedNode);
         if ($this->CheckForAdditionalPart($pos, $additionalSymbol))
             $node->SetAdditionalSymbol($additionalSymbol);
-		if(!$this->FillNode($node, $pos))
+		if (!$this->FillNode($node, $pos))
 			return $this->m_name + " " + $this->m_str;
         $pos += strlen($node->GetAdditionalSymbol());
-        if($this->CheckForSpecialTranslation($pos, $specialTranslation, $specialTranslationText))
+        if ($this->CheckForSpecialTranslation($pos, $specialTranslation, $specialTranslationText))
             $this->SetSpecialTranslation($specialTranslation);
         $curList = array();
         $curList[] = $node;
@@ -131,6 +131,7 @@ class CNodeWrapper {
 		
 		if (array_key_exists($name, $booksShortPoint))
 			$name .= ".";
+			
 		$name = str_replace("&nbsp;", " ", $name);
 		$name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
 		$input = array("iv ", "iii ", "ii ", "i ");
@@ -517,7 +518,7 @@ class CNodeWrapper {
 }
 
 class CLinkCreator {
-
+	
 	function __construct() {
 		mb_internal_encoding('UTF-8');
 	}
@@ -585,9 +586,9 @@ class CLinkCreator {
 	}
 	
 	public function SearchBibleLinks($content) {
-		$input = array(" ", "’", "&#039;", "–", "—");
-		$output = array("&nbsp;", "&rsquo;", "&rsquo;", "&ndash;", "&mdash;");
-		$content = str_replace($input, $output, $content); // замена неразрывных пробелов и апострофов в виде символов
+		$inputSymbols = array(" ", "’", "&#039;", "–", "—");
+		$outputSymbols = array("&nbsp;", "&rsquo;", "&rsquo;", "&ndash;", "&mdash;");
+		$content = str_replace($inputSymbols, $outputSymbols, $content); // замена неразрывных пробелов и апострофов в виде символов
 		$contentLower = mb_strtolower($content);
 		$output = "";
 		while ($this->FindBook($contentLower, $posofbook, $bookname)) {
