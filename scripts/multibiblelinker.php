@@ -586,8 +586,8 @@ class CLinkCreator {
 	}
 	
 	public function SearchBibleLinks($content) {
-		$inputSymbols = array(" ", "’", "&#039;", "–", "—");
-		$outputSymbols = array("&nbsp;", "&rsquo;", "&rsquo;", "&ndash;", "&mdash;");
+		$inputSymbols = array(" ", "&emsp;", "&ensp;", "&#8196;", "&#8197;", "&#8198;", "&thinsp;", "&#8202;", "’", "&#039;", "–", "—");
+		$outputSymbols = array("&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&rsquo;", "&rsquo;", "&ndash;", "&mdash;");
 		$content = str_replace($inputSymbols, $outputSymbols, $content); // замена неразрывных пробелов и апострофов в виде символов
 		$contentLower = mb_strtolower($content);
 		$output = "";

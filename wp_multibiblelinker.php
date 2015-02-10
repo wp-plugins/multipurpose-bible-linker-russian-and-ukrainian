@@ -3,11 +3,11 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.6.6
+	Version: 1.6.7
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
-    Copyright 2013-2014 Vitaliy Bilanchuk (email: vitaly.bilanchuk@gmail.com), Vladimir Sokolov (email: gadfly.svy@gmail.com)
+    Copyright 2013-2015 Vitaliy Bilanchuk (email: vitaly.bilanchuk@gmail.com), Vladimir Sokolov (email: gadfly.svy@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,13 +32,6 @@ function init_textdomain() {
 add_action('plugins_loaded', 'init_textdomain');
 
 include 'scripts/multibiblelinker.php';
-include 'wp_config.inc.php';
-
-$fileLanguageIn  = "local/bible_links_arrays_" . $_ENV["languageIn"]  . "_in.php";
-$fileLanguageOut = "local/bible_links_arrays_" . $_ENV["languageOut"] . "_out.php";
-
-is_file($fileLanguageIn)  ? (include $fileLanguageIn)  : (include 'local/bible_links_arrays_ru_in.php');
-is_file($fileLanguageOut) ? (include $fileLanguageOut) : (include 'local/bible_links_arrays_ru_out.php');
 
 function multibiblelinker_add_option_pages() {
 	if (function_exists('add_options_page')) {
@@ -156,8 +149,16 @@ function get_multibiblelinker_form() {
 <?php
 }
 
+include 'wp_config.inc.php';
+
+$fileLanguageIn  = "local/bible_links_arrays_" . $_ENV["languageIn"]  . "_in.php";
+$fileLanguageOut = "local/bible_links_arrays_" . $_ENV["languageOut"] . "_out.php";
+
+is_file(__DIR__ . '/'. $fileLanguageIn)  ? (include $fileLanguageIn)  : (include 'local/bible_links_arrays_ru_in.php');
+is_file(__DIR__ . '/'. $fileLanguageOut) ? (include $fileLanguageOut) : (include 'local/bible_links_arrays_ru_out.php');
+
 add_filter('the_content', 'SearchBibleLinks');
-//add_filter('the_content_rss', 'SearchBibleLinks');
+add_filter('the_content_rss', 'SearchBibleLinks');
 add_filter('comment_text','SearchBibleLinks');
 add_action('admin_menu', 'multibiblelinker_add_option_pages');
 ?>

@@ -5,7 +5,7 @@ Contributors: Gadfly_svy
 Tags: bible, сhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
 Requires at least: 3.5.0
 Tested up to: 4.1
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 License: GPLv2 or later
@@ -25,6 +25,7 @@ Plugin is based on Simlpe Bible Linker Russian, but has significantly greater fu
 1. En dash &ldquo;&ndash;&rdquo;, &ldquo;ndash&rdquo; and &ldquo;8211&rdquo;: 1 Cor. 5:3&ndash;5a, 1 Cor. 5:3&Ndash;5a and 1 Cor. 5:3&#8211;5a<br />
 1. Em dash &ldquo;&mdash;&rdquo;, &ldquo;mdash&rdquo; and &ldquo;8212&rdquo;: 1 Cor. 5:3&mdash;5a, 1 Cor. 5:3&mdash;5a and 1 Cor. 5:3&#8212;5a<br />
 1. Various combinations of spaces: 2 Cor 5:3-5; 2 Cor.5:3-5; 2 Cor.  5:3 - 5, 6,&nbsp;7,8,9; 2 Cor.&nbsp;5:3-5; 2 Cor. &nbsp; 5:3-5; 2 Cor.&nbsp; 5:3-5; 2&nbsp;Cor.&nbsp;5:3-5 and 2&nbsp;Cor. 5:3-5<br />
+1. Rare types of spaces &ldquo;emsp&rdquo;, &ldquo;ensp&rdquo;, &ldquo;8196&rdquo;, &ldquo;8197&rdquo;, &ldquo;8198&rdquo;, &ldquo;thinsp&rdquo; and &ldquo;8202&rdquo;: 2&emsp;Cor.&emsp;5:3-5; 2&ensp;Cor.&ensp;5:3-5; 2&#8196;Cor.&#8196;5:3-5; 2&#8197;Cor.&#8197;5:3-5;  2&#8198;Cor.&#8198;5:3-5; 2&thinsp;Cor.&thinsp;5:3-5 and 2&#8202;Cor.&#8202;5:3-5<br />
 1. Non-breaking space in the form of a symbol: 1 Thess. 5:11&ndash;14 ASV; Rom. 15:14; Col. 3:16<br />
 1. Apostrophe as a symbol: &#1060;&#1080;&#1083;&#1080;&#1087;&#039;&#1103;&#1085;&#1072;&#1084; 1,2 (Ukrainian only)<br />
 1. Extra spaces: Job.                 4:5,      6,      7; 8:1<br />
@@ -53,4 +54,4 @@ Installing the Multipurpose Bible Verse plugin is very straight forward:
 
 Or install from the WordPress repository.
 
-With large text blocks the algorithm works slowly, therefore it is recommended to use the cache (for example, using the plugin WP Super Cache).
+With large text blocks the algorithm works slowly, therefore it is recommended to use the cache (for example, using the plugin WP Super Cache or Hyper Cache).
