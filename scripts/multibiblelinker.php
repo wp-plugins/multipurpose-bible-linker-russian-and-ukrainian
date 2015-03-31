@@ -217,7 +217,7 @@ class CNodeWrapper {
 				$spaceType = "";
 				break;
 			case '&thinsp;':
-				$spaceType = "style='white-space: pre' ";
+				$spaceType = "style='white-space: pre; word-wrap: normal;' ";
 				break;
 		}
 		
