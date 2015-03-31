@@ -3,7 +3,7 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.6.7
+	Version: 1.6.8
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -51,6 +51,7 @@ function get_multibiblelinker_form() {
 		update_option('spaceType', 		'nbsp');
 		update_option('doCorrection', 	true);
 		update_option('doBookRepeat', 	false);
+		update_option('doNotWrap', 		true);
 
 		_e('Loaded with the default options.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -66,6 +67,7 @@ function get_multibiblelinker_form() {
 		update_option('isRoman', 		(bool)$_POST["isRoman"]);
 		update_option('doCorrection', 	(bool)$_POST["doCorrection"]);
 		update_option('doBookRepeat', 	(bool)$_POST["doBookRepeat"]);
+		update_option('doNotWrap', 		(bool)$_POST["doNotWrap"]);
 
 		_e('Configuration updated.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -137,6 +139,9 @@ function get_multibiblelinker_form() {
 		<br />
 		<input type="checkbox" name="doBookRepeat" value="checkbox" <?php if (get_option('doBookRepeat')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
 		<?php _e('Repeat the name of the book before each chapter, if a few heads', 'wp_multibiblelinker'); ?>
+		<br />
+		<input type="checkbox" name="doNotWrap" value="checkbox" <?php if (get_option('doNotWrap')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
+		<?php _e('Make a link inseparable', 'wp_multibiblelinker'); ?>
 	</div>
 	
 	<div class="submit">

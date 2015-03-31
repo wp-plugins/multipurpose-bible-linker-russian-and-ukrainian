@@ -212,14 +212,7 @@ class CNodeWrapper {
 				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com
 		}
 		
-		switch ($_ENV["spaceType"]) {
-			case '&nbsp;':
-				$spaceType = "";
-				break;
-			case '&thinsp;':
-				$spaceType = "style='white-space: pre; word-wrap: normal;' ";
-				break;
-		}
+		($_ENV["doNotWrap"]) ? $spaceType = "style='white-space: pre; word-wrap: normal;' " : $spaceType = "";
 		
 		if ($this->bibleBooks->IsSingleChapterBook($this->m_bookIndex)) { // Формирование ссылки для одноглавных книг
 			if ($nodeList[0][0]->GetType() == RootNode) {

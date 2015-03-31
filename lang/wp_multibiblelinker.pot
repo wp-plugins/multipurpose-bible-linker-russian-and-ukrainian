@@ -9,90 +9,116 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wp_multibiblelinker.php:62
+#: wp_multibiblelinker.php:56
 msgid "Loaded with the default options."
 msgstr "Loaded with the default options."
 
-#: wp_multibiblelinker.php:77
+#: wp_multibiblelinker.php:72
 msgid "Configuration updated."
 msgstr "Configuration updated."
 
-#: wp_multibiblelinker.php:83
+#: wp_multibiblelinker.php:78
 msgid "Multipurpose Bible Linker"
 msgstr "Multipurpose Bible Linker"
 
-#: wp_multibiblelinker.php:86
-msgid "The plugin is designed to highlight the reference to the place of the Bible in Russian, Ukrainian and English."
-msgstr "The plugin is designed to highlight the reference to the place of the Bible in Russian, Ukrainian and English."
+#: wp_multibiblelinker.php:81
+msgid ""
+"The plugin is designed to highlight the reference to the place of the Bible "
+"in Russian, Ukrainian and English."
+msgstr ""
+"The plugin is designed to highlight the reference to the place of the Bible "
+"in Russian, Ukrainian and English."
 
-#: wp_multibiblelinker.php:92
+#: wp_multibiblelinker.php:87
 msgid "Translation sources"
 msgstr "Translation sources"
 
-#: wp_multibiblelinker.php:95
-msgid "The plugin allows you to set the addressing biblical references to various online sources:"
-msgstr "The plugin allows you to set the addressing biblical references to various online sources:"
+#: wp_multibiblelinker.php:90
+msgid ""
+"The plugin allows you to set the addressing biblical references to various "
+"online sources:"
+msgstr ""
+"The plugin allows you to set the addressing biblical references to various "
+"online sources:"
 
-#: wp_multibiblelinker.php:95
+#: wp_multibiblelinker.php:90
 msgid "by default"
 msgstr "by default"
 
-#: wp_multibiblelinker.php:99
+#: wp_multibiblelinker.php:94
 msgid "simultaneously"
 msgstr "simultaneously"
 
-#: wp_multibiblelinker.php:110
+#: wp_multibiblelinker.php:105
 msgid "Language"
 msgstr "Language"
 
-#: wp_multibiblelinker.php:113
-msgid "Language incoming text. In this case, the links are searched in the dictionary, and optionally replaced by a standard spelling. By default, the script refers to the standard translation of the Russian language, Ogeenka — for Ukrainian and King James — for English (not all sources of support Ukrainian and English translations, in which case the default link leads to the King James)."
-msgstr "Language incoming text. In this case, the links are searched in the dictionary, and optionally replaced by a standard spelling. By default, the script refers to the standard translation of the Russian language, Ogeenka — for Ukrainian and King James — for English (not all sources of support Ukrainian and English translations, in which case the default link leads to the King James)."
+#: wp_multibiblelinker.php:108
+msgid ""
+"Language incoming text. In this case, the links are searched in the "
+"dictionary, and optionally replaced by a standard spelling. By default, the "
+"script refers to the standard translation of the Russian language, Ogeenka — "
+"for Ukrainian and King James — for English (not all sources of support "
+"Ukrainian and English translations, in which case the default link leads to "
+"the King James)."
+msgstr ""
+"Language incoming text. In this case, the links are searched in the "
+"dictionary, and optionally replaced by a standard spelling. By default, the "
+"script refers to the standard translation of the Russian language, Ogeenka — "
+"for Ukrainian and King James — for English (not all sources of support "
+"Ukrainian and English translations, in which case the default link leads to "
+"the King James)."
 
-#: wp_multibiblelinker.php:121
-msgid "Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
-msgstr "Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
+#: wp_multibiblelinker.php:116
+msgid ""
+"Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
+msgstr ""
+"Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 
-#: wp_multibiblelinker.php:124
+#: wp_multibiblelinker.php:119
 msgid "eastern"
 msgstr "eastern"
 
-#: wp_multibiblelinker.php:125
+#: wp_multibiblelinker.php:120
 msgid "western"
 msgstr "western"
 
-#: wp_multibiblelinker.php:128
+#: wp_multibiblelinker.php:123
 msgid "Type of whitespace: non-breaking or thin."
 msgstr "Type of whitespace: non-breaking or thin."
 
-#: wp_multibiblelinker.php:131
+#: wp_multibiblelinker.php:126
 msgid "non-breaking"
 msgstr "non-breaking"
 
-#: wp_multibiblelinker.php:132
+#: wp_multibiblelinker.php:127
 msgid "thin"
 msgstr "thin"
 
-#: wp_multibiblelinker.php:136
+#: wp_multibiblelinker.php:131
 msgid "Processing options"
 msgstr "Processing options"
 
-#: wp_multibiblelinker.php:140
+#: wp_multibiblelinker.php:135
 msgid "Numbers of the books may be Roman numerals"
 msgstr "Numbers of the books may be Roman numerals"
 
-#: wp_multibiblelinker.php:143
+#: wp_multibiblelinker.php:138
 msgid "Correct titles on standard"
 msgstr "Correct titles on standard"
 
-#: wp_multibiblelinker.php:146
+#: wp_multibiblelinker.php:141
 msgid "Repeat the name of the book before each chapter, if a few heads"
 msgstr "Repeat the name of the book before each chapter, if a few heads"
 
-#: wp_multibiblelinker.php:150
+#: wp_multibiblelinker.php:144
+msgid "Make a link inseparable"
+msgstr "Make a link inseparable"
+
+#: wp_multibiblelinker.php:148
 msgid "Restore defaults"
 msgstr "Restore defaults"
 
-#: wp_multibiblelinker.php:151
+#: wp_multibiblelinker.php:149
 msgid "Save"
 msgstr "Save"
