@@ -26,7 +26,7 @@ Plugin is based on Simlpe Bible Linker Russian, but has significantly greater fu
 1. Em dash &ldquo;&mdash;&rdquo;, &ldquo;mdash&rdquo; and &ldquo;8212&rdquo;.<br />
 1. Various combinations of spaces.<br />
 1. Rare types of spaces &ldquo;emsp&rdquo;, &ldquo;ensp&rdquo;, &ldquo;8196&rdquo;, &ldquo;8197&rdquo;, &ldquo;8198&rdquo;, &ldquo;thinsp&rdquo; and &ldquo;8202&rdquo;.<br />
-1. Apostrophe as a symbol(Ukrainian only).<br />
+1. Apostrophe as a symbol (Ukrainian only).<br />
 1. Extra spaces.<br />
 1. Extra comma.<br />
 1. Pointer to the chapter &ldquo;ch&rdquo; and &ldquo;ch.&rdquo;.<br />

@@ -360,7 +360,7 @@ class CNodeWrapper {
         if (strlen($this->m_str) <= $pos)
             return false;
 		
-		// поиск среднего и длинного тире в UTF-8 &ndash; &mdash; &minus; &#8208; &#8209; &#8210; &#8211; &#8212; &#8722;
+		// поиск среднего и длинного тире в UTF-8 &ndash; &mdash;
 		if (ord($this->m_str[$pos-1]) == 226 && ord($this->m_str[$pos]) == 128 
 			&& (ord($this->m_str[$pos+1]) == 147 || ord($this->m_str[$pos+1]) == 148)) {
 			$pos += 2;
@@ -369,23 +369,6 @@ class CNodeWrapper {
 			($this->m_str[$pos-1] == '&' && (mb_strtolower($this->m_str[$pos]) == 'n' || mb_strtolower($this->m_str[$pos]) == 'm')
 			&& mb_strtolower($this->m_str[$pos+1]) == 'd' && mb_strtolower($this->m_str[$pos+2]) == 'a' && mb_strtolower($this->m_str[$pos+3]) == 's' 
 			&& mb_strtolower($this->m_str[$pos+4]) == 'h' && $this->m_str[$pos+5] == ';')
-			||
-			($this->m_str[$pos-1] == '&' && mb_strtolower($this->m_str[$pos]) == 'm' && mb_strtolower($this->m_str[$pos+1]) == 'i' 
-			&& mb_strtolower($this->m_str[$pos+2]) == 'n' && mb_strtolower($this->m_str[$pos+3]) == 'u' 
-			&& mb_strtolower($this->m_str[$pos+4]) == 's' && $this->m_str[$pos+5] == ';')
-			||
-			($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
-			&& $this->m_str[$pos+2] == '2' && $this->m_str[$pos+3] == '0' 
-			&& ($this->m_str[$pos+4] == '8' || $this->m_str[$pos+4] == '9') && $this->m_str[$pos+5] == ';')
-			||
-			($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
-			&& $this->m_str[$pos+2] == '2' && $this->m_str[$pos+3] == '1'
-			&& ($this->m_str[$pos+4] == '0' || $this->m_str[$pos+4] == '1' || $this->m_str[$pos+4] == '2')
-			&& $this->m_str[$pos+5] == ';')
-			||
-			($this->m_str[$pos-1] == '&' && $this->m_str[$pos] == '#' && $this->m_str[$pos+1] == '8' 
-			&& $this->m_str[$pos+2] == '7' && $this->m_str[$pos+3] == '2' && $this->m_str[$pos+4] == '2' 
-			&& $this->m_str[$pos+5] == ';')
 			) {
 			$pos += 6;
 			$this->m_str[$pos-1] = '-';
@@ -579,8 +562,17 @@ class CLinkCreator {
 	}
 	
 	public function SearchBibleLinks($content) {
-		$inputSymbols = array(" ", "&emsp;", "&ensp;", "&#8196;", "&#8197;", "&#8198;", "&thinsp;", "&#8202;", "’", "&#039;", "–", "—");
-		$outputSymbols = array("&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&rsquo;", "&rsquo;", "&ndash;", "&mdash;");
+		$content = str_replace("&amp;", "&", $content);
+		$inputSymbols = array(
+			" ", "&emsp;", " ", "&ensp;", " ", "&#8196;", " ", "&#8197;", " ", "&#8198;", " ", "&thinsp;", " ", "&#8202;", " ",
+			"’", "&#039;", "'",
+			"&#8211;", "–", "&#8208;", "‐", "&#8209;", "‑", "&#8210;", "‒", "&minus;", "&#8722;", "−", 
+			"&#8212;", "—");
+		$outputSymbols = array(
+			" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+			"&rsquo;", "&rsquo;", "&rsquo;", 
+			"&ndash;", "&ndash;", "-","-", "-", "-", "&ndash;", "&ndash;","&ndash;", "&ndash;", "&ndash;", 
+			"&mdash;", "&mdash;");
 		$content = str_replace($inputSymbols, $outputSymbols, $content); // замена неразрывных пробелов и апострофов в виде символов
 		$contentLower = mb_strtolower($content);
 		$output = "";

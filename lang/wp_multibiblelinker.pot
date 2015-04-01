@@ -71,9 +71,9 @@ msgstr ""
 
 #: wp_multibiblelinker.php:116
 msgid ""
-"Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
+"Standard writing links: eastern (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 msgstr ""
-"Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
+"Standard writing links: eastern (Matt. 3:4-6,8) or western (Matt. 3,4-6.8)."
 
 #: wp_multibiblelinker.php:119
 msgid "eastern"

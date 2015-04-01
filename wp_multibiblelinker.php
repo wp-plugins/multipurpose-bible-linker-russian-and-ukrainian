@@ -113,7 +113,7 @@ function get_multibiblelinker_form() {
 			<option <?php if (get_option('language') == "ua") echo "selected"; ?> value="ua">українська</option>
 		</select>
 		
-		<p><?php _e('Standard writing links: east (Matt. 3:4-6,8) or western (Matt. 3,4-6.8).', 'wp_multibiblelinker'); ?></p>
+		<p><?php _e('Standard writing links: eastern (Matt. 3:4-6,8) or western (Matt. 3,4-6.8).', 'wp_multibiblelinker'); ?></p>
 		
 		<select name="linkStandart">
 			<option <?php if (get_option('linkStandart') == "east") echo "selected"; ?> value="east"><?php _e('eastern', 'wp_multibiblelinker'); ?></option>

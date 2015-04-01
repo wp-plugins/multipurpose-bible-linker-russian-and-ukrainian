@@ -4,8 +4,6 @@ $_ENV["isRoman"] 		= get_option('isRoman');		// Номера книг могут
 $_ENV["doCorrection"] 	= get_option('doCorrection');	// Исправлять названия книг на стандартные
 $_ENV["doBookRepeat"] 	= get_option('doBookRepeat');	// Повторять название книги каждый раз перед главой, если глав несколько
 $_ENV["doNotWrap"] 		= get_option('doNotWrap');		// Делать ссылку неразрывной
-//$_ENV["languageIn"] 	= get_option('language');
-//$_ENV["languageOut"] 	= get_option('language');
 $_ENV["linkStandart"] 	= get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 $_ENV["spaceType"] 		= "&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
 		
@@ -24,28 +22,28 @@ $_ENV["g_BibleSource"] = get_option('g_BibleSource');
 
 // Проверка на правильность установки языка
 if (get_option('language') == 'en' || get_option('language') == 'ru' || get_option('language') == 'ua') {
-	$_ENV["languageIn"] = 	get_option('language');		// Язык анализируемых ссылок (ru, ua, en)
-	$_ENV["languageOut"] = 	get_option('language');		// Язык вывода (ru, ua, en)
+	$_ENV["languageIn"] 	= get_option('language');	// Язык анализируемых ссылок (ru, ua, en)
+	$_ENV["languageOut"] 	= get_option('language');	// Язык вывода (ru, ua, en)
 } else {
 	switch (get_locale()) {
 		case "en_US":
-            $_ENV["languageIn"] = 'en';
-            $_ENV["languageOut"] = 'en';
+            $_ENV["languageIn"] 	= 'en';
+            $_ENV["languageOut"] 	= 'en';
 			update_option('language', 'en');
             break;
 		case "ru_RU":
-			$_ENV["languageIn"] = 'ru';
-			$_ENV["languageOut"] = 'ru';
+			$_ENV["languageIn"] 	= 'ru';
+			$_ENV["languageOut"] 	= 'ru';
 			update_option('language', 'ru');
             break;
 		case "uk_UA":
-			$_ENV["languageIn"] = 'ua';
-			$_ENV["languageOut"] = 'ua';
+			$_ENV["languageIn"] 	= 'ua';
+			$_ENV["languageOut"] 	= 'ua';
 			update_option('language', 'ua');
 			break;
 		default:
-			$_ENV["languageIn"] = 'ru';
-			$_ENV["languageOut"] = 'ru';
+			$_ENV["languageIn"] 	= 'ru';
+			$_ENV["languageOut"] 	= 'ru';
 			update_option('language', 'ru');
     }
 }
@@ -58,22 +56,22 @@ if ($_ENV["spaceType"] != '&nbsp;' && $_ENV["spaceType"] != '&thinsp;') {
 // Разделители между главами и стихами в зависимости от стандарта
 switch($_ENV["linkStandart"]) {
 	case 'east':
-		$_ENV["ChapterSeparatorVerseIn"] = 	':';
-		$_ENV["VerseSeparatorVerseIn"] = 	',';
-		$_ENV["ChapterSeparatorVerseOut"] = ':';
-		$_ENV["VerseSeparatorVerseOut"] = 	',';
+		$_ENV["ChapterSeparatorVerseIn"] 	= ':';
+		$_ENV["VerseSeparatorVerseIn"] 		= ',';
+		$_ENV["ChapterSeparatorVerseOut"] 	= ':';
+		$_ENV["VerseSeparatorVerseOut"] 	= ',';
 		break;
 	case 'west':
-		$_ENV["ChapterSeparatorVerseIn"] = 	',';
-		$_ENV["VerseSeparatorVerseIn"] = 	'.';
-		$_ENV["ChapterSeparatorVerseOut"] = ',';
-		$_ENV["VerseSeparatorVerseOut"] = 	'.';
+		$_ENV["ChapterSeparatorVerseIn"] 	= ',';
+		$_ENV["VerseSeparatorVerseIn"] 		= '.';
+		$_ENV["ChapterSeparatorVerseOut"] 	= ',';
+		$_ENV["VerseSeparatorVerseOut"] 	= '.';
 		break;
 	default:
-		$_ENV["ChapterSeparatorVerseIn"] = 	':';
-		$_ENV["VerseSeparatorVerseIn"] = 	',';
-		$_ENV["ChapterSeparatorVerseOut"] = ':';
-		$_ENV["VerseSeparatorVerseOut"] = 	',';
+		$_ENV["ChapterSeparatorVerseIn"] 	= ':';
+		$_ENV["VerseSeparatorVerseIn"] 		= ',';
+		$_ENV["ChapterSeparatorVerseOut"] 	= ':';
+		$_ENV["VerseSeparatorVerseOut"] 	= ',';
 		break;
 }
 
