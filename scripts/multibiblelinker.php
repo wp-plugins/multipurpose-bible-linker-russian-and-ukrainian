@@ -157,6 +157,7 @@ class CNodeWrapper {
 		// http://bible-desktop.com/bq/							philemon			/1_		5		/RST
 		// http://b-bq.eu/										philemon			/1_		5		/RST
 // https://www.biblegateway.com/passage/?version=	RUSV&search=Philemon			+1%3A	5-
+		// http://azbyka.ru/biblia/?							Phlm				.1:		5		&r			&rus&num­­c
 		
 		$bibleSource = BibleSource::get($this->m_bookIndex);
 
@@ -208,8 +209,9 @@ class CNodeWrapper {
 			}
 		}
 		
-		if ($_ENV["g_BibleSource"] == "BibleComSource") {
-				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com
+		if ($_ENV["g_BibleSource"] == "BibleComSource" || $_ENV["g_BibleSource"] == "AzbykaRuSource") {
+				$link .= $bibleSource->GetTranslationPrefixLast($translation); 	// Тонкость формирования однокнижной ссылки для bible.com и azbyka.ru
+				
 		}
 		
 		($_ENV["doNotWrap"]) ? $spaceType = "style='white-space: pre; word-wrap: normal;' " : $spaceType = "";

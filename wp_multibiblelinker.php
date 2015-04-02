@@ -3,7 +3,7 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.6.8
+	Version: 1.6.9
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -87,18 +87,29 @@ function get_multibiblelinker_form() {
 	<h3><?php _e('Translation sources', 'wp_multibiblelinker'); ?></h3>
 	
 	<div style="padding: 0 0 0 30px;">
-		<p><?php _e('The plugin allows you to set the addressing biblical references to various online sources:', 'wp_multibiblelinker'); ?> <a href='http://allbible.info/' target='blank'>allbible.info</a> (<?php _e('by default', 'wp_multibiblelinker'); ?>), <a href='http://bible.com.ua/' target='blank'>bible.com.ua</a>, <a href='http://biblezoom.ru/' target='blank'>biblezoom.ru</a>, <a href='http://bibleonline.ru/' target='blank'>bibleonline.ru</a>, <a href='http://bible-center.ru/' target='blank'>bible-center.ru</a>, <a href='http://bibleserver.com/' target='blank'>bibleserver.com</a>, <a href='http://bible.com/' target='blank'>bible.com</a> (<a href='http://bible.us/' target='blank'>bible.us</a>), <a href='http://bible-desktop.com/' target='blank'>bible-desktop.com</a> (<a href='http://bibledesktop.ru/' target='blank'>bibledesktop.ru</a>), <a href='https://www.biblegateway.com/ ' target='blank'>biblegateway.com</a>.</p>
+		<p><?php _e('The plugin allows you to set the addressing biblical references to various online sources:', 'wp_multibiblelinker'); ?> <a href='http://allbible.info/' target='blank'>allbible.info</a> (<?php _e('by default', 'wp_multibiblelinker'); ?>), <a href='http://bible.com.ua/' target='blank'>bible.com.ua</a>, <a href='http://biblezoom.ru/' target='blank'>biblezoom.ru</a>, <a href='http://bibleonline.ru/' target='blank'>bibleonline.ru</a>, <a href='http://bible-center.ru/' target='blank'>bible-center.ru</a>, <a href='http://bibleserver.com/' target='blank'>bibleserver.com</a>, <a href='http://bible.com/' target='blank'>bible.com</a> (<a href='http://bible.us/' target='blank'>bible.us</a>), <a href='http://bible-desktop.com/' target='blank'>bible-desktop.com</a> (<a href='http://bibledesktop.ru/' target='blank'>bibledesktop.ru</a>), <a href='https://biblegateway.com/' target='blank'>biblegateway.com</a>, <a href='http://azbyka.ru/' target='blank'>azbyka.ru</a>.</p>
 		
 		<select name="g_BibleSource">
-			<option <?php if (get_option('g_BibleSource') == "AllbibleInfoSource") 		echo "selected"; ?> value="AllbibleInfoSource">allbible.info (en, ru, ua)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleComUaSource") 		echo "selected"; ?> value="BibleComUaSource">bible.com.ua (en, ru, ua <?php _e('simultaneously', 'wp_multibiblelinker'); ?>)</option>
-			<option <?php if (get_option('g_BibleSource') == "BiblezoomRuSource") 		echo "selected"; ?> value="BiblezoomRuSource">biblezoom.ru (el)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleonlineRuSource") 	echo "selected"; ?> value="BibleonlineRuSource">bibleonline.ru (en, ru, ua, be)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleCenterRuSource") 	echo "selected"; ?> value="BibleCenterRuSource">bible-center.ru (en, ru, el, lt)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleserverComSource") 	echo "selected"; ?> value="BibleserverComSource">bibleserver.com (en, ru, bg, el, he, la)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleComSource") 			echo "selected"; ?> value="BibleComSource">bible.com / bible.us (en, ru, ua, bg)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleDesktopComSource") 	echo "selected"; ?> value="BibleDesktopComSource">bible-desktop.com / bibledesktop.ru (en, ru, ua, be)</option>
-			<option <?php if (get_option('g_BibleSource') == "BiblegatewayComSource") 	echo "selected"; ?> value="BiblegatewayComSource">biblegateway.com (en, ru, ua, bg)</option>
+			<option <?php if (get_option('g_BibleSource') == "AllbibleInfoSource") 		echo "selected"; ?> 
+			value="AllbibleInfoSource">allbible.info (en, ru, ua)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleComUaSource") 		echo "selected"; ?> 
+			value="BibleComUaSource">bible.com.ua (en, ru, ua <?php _e('simultaneously', 'wp_multibiblelinker'); ?>)</option>
+			<option <?php if (get_option('g_BibleSource') == "BiblezoomRuSource") 		echo "selected"; ?> 
+			value="BiblezoomRuSource">biblezoom.ru (el)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleonlineRuSource") 	echo "selected"; ?> 
+			value="BibleonlineRuSource">bibleonline.ru (en, ru, ua, be)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleCenterRuSource") 	echo "selected"; ?> 
+			value="BibleCenterRuSource">bible-center.ru (en, ru, el, lt)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleserverComSource") 	echo "selected"; ?> 
+			value="BibleserverComSource">bibleserver.com (en, ru, bg, el, he, la)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleComSource") 			echo "selected"; ?> 
+			value="BibleComSource">bible.com / bible.us (en, ru, ua, bg)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleDesktopComSource") 	echo "selected"; ?> 
+			value="BibleDesktopComSource">bible-desktop.com / bibledesktop.ru (en, ru, ua, be)</option>
+			<option <?php if (get_option('g_BibleSource') == "BiblegatewayComSource") 	echo "selected"; ?> 
+			value="BiblegatewayComSource">biblegateway.com (en, ru, ua, bg)</option>
+			<option <?php if (get_option('g_BibleSource') == "AzbykaRuSource") 			echo "selected"; ?> 
+			value="AzbykaRuSource">azbyka.ru (ru, el, he, la)</option>
 		</select>
 	</div>
 	

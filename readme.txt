@@ -5,7 +5,7 @@ Contributors: Gadfly_svy
 Tags: bible, сhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
 Requires at least: 3.5.0
 Tested up to: 4.1.1
-Stable tag: 1.6.8
+Stable tag: 1.6.9
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 License: GPLv2 or later
@@ -16,7 +16,7 @@ Find and replace Bible verses with direct links to the Bible.
 == Description ==
 
 This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with a link to the actual Bible chapter and verses.
-Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/, https://www.biblegateway.com/).
+Supported recognition of long and short titles. It is possible to use one of seven online Bibles (http://allbible.info/, http://bible.com.ua/, http://biblezoom.ru/, http://bibleonline.ru/, http://bible-center.ru/, http://bibleserver.com/, http://bible.com/ or http://bible.us/, http://bible-desktop.com/ or http://bibledesktop.ru/, https://biblegateway.com/, http://azbyka.ru/).
 Plugin is based on Simlpe Bible Linker Russian, but has significantly greater functional.
 
 1. Support different types of separators.<br />

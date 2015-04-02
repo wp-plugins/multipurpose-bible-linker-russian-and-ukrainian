@@ -21,6 +21,7 @@ abstract class BibleSource {
 				case 'BibleComSource': 			return new BibleCom($bookIndex);		break;
 				case 'BibleDesktopComSource': 	return new BibleDesktopCom($bookIndex);	break;
 				case 'BiblegatewayComSource': 	return new BiblegatewayCom($bookIndex);	break;
+				case 'AzbykaRuSource': 			return new AzbykaRu($bookIndex);		break;
 				default: 						return new AllbibleInfo($bookIndex);	break;
 			}
 		}
@@ -1013,6 +1014,128 @@ class BiblegatewayCom extends AllbibleInfo {
 					'57' => 'Philemon',
 					'58' => 'Hebrews',
 					'66' => 'Revelation',
+					);
+		return $indexes[$bookIndex];
+	}
+}
+
+class AzbykaRu extends AllbibleInfo {
+	function __construct($bookIndex) {
+		parent::__construct($bookIndex);
+	}
+	
+	public function getLink($translation = "") {
+		return 'http://azbyka.ru/biblia/?' . $this->GetIndexName($this->m_bookIndex);
+	}
+	
+	public function GetTranslationPrefixLast($translation) {
+		switch($translation) {
+			case RSTTranslation: 	return '&r';		break;
+			case UCSTranslation: 	return '&c&rus';	break;
+			case LXXTranslation: 	return '&g';		break;
+			case OTTranslation: 	return '&i';		break;
+			case VULTranslation: 	return '&l';		break;
+			default:
+				switch($this->languageIn) {
+					case 'ru': return '&r';	break;
+					case 'ua': return '&r';	break;
+					case 'en': return '&l';	break;
+				}
+		}
+	}
+	
+	public function getSingleChapterPart($chapter) {
+		return '.1:' . $chapter;
+	}
+	
+	public function getChapterPart($chapter) {
+		return '.' . $chapter;
+	}
+	
+	public function getVersePart($verse, $translation = "") {
+		return ':' . $verse;// . $this->GetTranslationPrefixLast($translation);
+	}
+	
+	public function checkForTranslationExist($translation) {
+		$FirstBookOfNewTestament = 40;
+		switch($translation) {
+			case RSTTranslation: 	return true;	break;
+			case UCSTranslation: 	return true;	break;
+			case LXXTranslation: 	return true;	break;
+			case OTTranslation: 	return (integer)$this->m_bookIndex < $FirstBookOfNewTestament ? true : false; break; // только ВЗ
+			case VULTranslation: 	return true;	break;
+		}
+		return false;
+	}
+
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+					'1' => 'Gen',
+					'2' => 'Ex',
+					'3' => 'Lev',
+					'4' => 'Num',
+					'5' => 'Deut',
+					'6' => 'Nav',
+					'7' => 'Judg',
+					'8' => 'Rth',
+					'9' => '1Sam',
+					'10' => '2Sam',
+					'11' => '1King',
+					'12' => '2King',
+					'13' => '1Chron',
+					'14' => '2Chron',
+					'15' => 'Ezr',
+					'16' => 'Nehem',
+					'17' => 'Est',
+					'18' => 'Job',
+					'19' => 'Ps',
+					'20' => 'Prov',
+					'21' => 'Eccl',
+					'22' => 'Song',
+					'23' => 'Is',
+					'24' => 'Jer',
+					'25' => 'Lam',
+					'26' => 'Ezek',
+					'27' => 'Dan',
+					'28' => 'Hos',
+					'29' => 'Joel',
+					'30' => 'Am',
+					'31' => 'Avd',
+					'32' => 'Jona',
+					'33' => 'Mic',
+					'34' => 'Naum',
+					'35' => 'Habak',
+					'36' => 'Sofon',
+					'37' => 'Hag',
+					'38' => 'Zah',
+					'39' => 'Mal',
+					'40' => 'Mt',
+					'41' => 'Mk',
+					'42' => 'Lk',
+					'43' => 'Jn',
+					'44' => 'Act',
+					'59' => 'Jac',
+					'60' => '1Pet',
+					'61' => '2Pet',
+					'62' => '1Jn',
+					'63' => '2Jn',
+					'64' => '3Jn',
+					'65' => 'Juda',
+					'45' => 'Rom',
+					'46' => '1Cor',
+					'47' => '2Cor',
+					'48' => 'Gal',
+					'49' => 'Eph',
+					'50' => 'Phil',
+					'51' => 'Col',
+					'52' => '1Thes',
+					'53' => '2Thes',
+					'54' => '1Tim',
+					'55' => '2Tim',
+					'56' => 'Tit',
+					'57' => 'Phlm',
+					'58' => 'Hebr',
+					'66' => 'Apok',
 					);
 		return $indexes[$bookIndex];
 	}
