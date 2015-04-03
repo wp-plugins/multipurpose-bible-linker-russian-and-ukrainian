@@ -142,16 +142,16 @@ function get_multibiblelinker_form() {
 	<h3><?php _e('Processing options', 'wp_multibiblelinker'); ?></h3>
 
 	<div style="padding: 0 0 0 32px">
-		<input type="checkbox" name="isRoman" value="checkbox" <?php if (get_option('isRoman')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
+		<input type="checkbox" name="isRoman" value="checkbox" <?php if (get_option('isRoman')) echo 'checked'; ?>/>&nbsp;&nbsp;
 		<?php _e('Numbers of the books may be Roman numerals', 'wp_multibiblelinker'); ?>
 		<br />
-		<input type="checkbox" name="doCorrection" value="checkbox" <?php if (get_option('doCorrection')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
+		<input type="checkbox" name="doCorrection" value="checkbox" <?php if (get_option('doCorrection')) echo 'checked'; ?>/>&nbsp;&nbsp;
 		<?php _e('Correct titles on standard', 'wp_multibiblelinker'); ?>
 		<br />
-		<input type="checkbox" name="doBookRepeat" value="checkbox" <?php if (get_option('doBookRepeat')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
+		<input type="checkbox" name="doBookRepeat" value="checkbox" <?php if (get_option('doBookRepeat')) echo 'checked'; ?>/>&nbsp;&nbsp;
 		<?php _e('Repeat the name of the book before each chapter, if a few heads', 'wp_multibiblelinker'); ?>
 		<br />
-		<input type="checkbox" name="doNotWrap" value="checkbox" <?php if (get_option('doNotWrap')) echo "checked='checked'"; ?>/>&nbsp;&nbsp;
+		<input type="checkbox" name="doNotWrap" value="checkbox" <?php if (get_option('doNotWrap')) echo 'checked'; ?>/>&nbsp;&nbsp;
 		<?php _e('Make a link inseparable', 'wp_multibiblelinker'); ?>
 	</div>
 	
