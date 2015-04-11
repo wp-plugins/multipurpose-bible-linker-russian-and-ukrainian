@@ -54,3 +54,7 @@ Installing the Multipurpose Bible Verse plugin is very straight forward:
 Or install from the WordPress repository.
 
 With large text blocks the algorithm works slowly, therefore it is recommended to use the cache (for example, using the plugin WP Super Cache or Hyper Cache).
+
+== Screenshots ==
+
+1. Example of Russian admin page /assets/screenshot-1.png
