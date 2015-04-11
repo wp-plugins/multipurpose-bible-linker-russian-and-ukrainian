@@ -57,5 +57,4 @@ With large text blocks the algorithm works slowly, therefore it is recommended t
 
 == Screenshots ==
 
-`/assets/screenshot-1.png`
-Example of Russian admin page.
+1. Example of Russian administrator page.
