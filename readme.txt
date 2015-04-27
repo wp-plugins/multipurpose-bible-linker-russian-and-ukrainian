@@ -4,7 +4,7 @@ Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-
 Contributors: Gadfly_svy
 Tags: bible, сhristian, widget, scripture, verse, passage, biblia, English, Russian, Ukrainian
 Requires at least: 3.5.0
-Tested up to: 4.1.2
+Tested up to: 4.1.4
 Stable tag: 1.6.9
 Author: Vitaliy Bilanchuk, Vladimir Sokolov
 Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
