@@ -18,6 +18,7 @@ $_ENV["spaceType"] 		= "&".get_option('spaceType').";";	// Тип пробела
 //$g_BibleSource = BibleDesktopComSource;	// http://bible-desktop.com/ или http://bibledesktop.ru/ (рус., укр., бел. или англ.)
 //$g_BibleSource = BiblegatewayComSource;	// https://biblegateway.com/ 				(рус., укр., болг., англ. или лат.)
 //$g_BibleSource = AzbykaRuSource;			// http://azbyka.ru/						(рус., слав., греч., ивр. или лат.)
+//$g_BibleSource = BibliaComSource;			// http://biblia.com/						(рус., англ. или лат.)
 
 $_ENV["g_BibleSource"] = get_option('g_BibleSource');
 

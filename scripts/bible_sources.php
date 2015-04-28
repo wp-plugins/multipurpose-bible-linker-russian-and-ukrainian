@@ -22,6 +22,7 @@ abstract class BibleSource {
 				case 'BibleDesktopComSource': 	return new BibleDesktopCom($bookIndex);	break;
 				case 'BiblegatewayComSource': 	return new BiblegatewayCom($bookIndex);	break;
 				case 'AzbykaRuSource': 			return new AzbykaRu($bookIndex);		break;
+				case 'BibliaComSource': 		return new BibliaCom($bookIndex);		break;
 				default: 						return new AllbibleInfo($bookIndex);	break;
 			}
 		}
@@ -371,7 +372,7 @@ class BibleonlineRu extends AllbibleInfo {
 						);
 		return $indexes[$bookIndex];
 	}
-};
+}
 
 class BibleCenterRu extends AllbibleInfo {
 	
@@ -1136,6 +1137,131 @@ class AzbykaRu extends AllbibleInfo {
 					'57' => 'Phlm',
 					'58' => 'Hebr',
 					'66' => 'Apok',
+					);
+		return $indexes[$bookIndex];
+	}
+}
+
+class BibliaCom extends AllbibleInfo {
+
+	public function getLink($translation = "") {
+		return 'http://biblia.com/books/' . $this->GetTranslationPrefix($translation) . $this->GetIndexName($this->m_bookIndex);
+	}
+
+	public function GetTranslationPrefix($translation) {
+		switch($translation) {
+			case RSTTranslation: 	return 'rst/';		break;
+			case KJVTranslation: 	return 'kjv1900/';	break;
+			case ASVTranslation: 	return 'asv/';		break;
+			case NASBTranslation: 	return 'nasb95/';	break;
+			case NIVTranslation: 	return 'niv2011/';	break;
+			case ESVTranslation: 	return 'esv/';		break;
+			case NIRVTranslation: 	return 'nirv/';		break;
+			case VULTranslation: 	return 'vulgataclem/';	break;
+			default:
+				switch($this->languageIn) {
+					case 'ru': return 'rst/';	break;
+					case 'ua': return 'rst/';	break;
+					case 'en': return 'kjv1900/';	break;
+				}
+		}
+	}
+	
+	public function getSingleChapterPart($chapter) {
+		return '1.' . $chapter;
+	}
+	
+	public function getChapterPart($chapter) {
+		return $chapter;
+	}
+	
+	public function getVersePart($verse, $translation = "") {
+		return '.' . $verse;
+	}
+	
+	public function checkForTranslationExist($translation) {
+		$LastBookOfOldTestament = 39;
+		switch($translation) {
+			case RSTTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
+			case NASBTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case ESVTranslation: 	return true;	break;
+			case NIRVTranslation: 	return true;	break;
+			case VULTranslation: 	return true;	break;
+		}
+		return false;
+	}
+	
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+					'1' => 'Ge',
+					'2' => 'Ex',
+					'3' => 'Le',
+					'4' => 'Nu',
+					'5' => 'Dt',
+					'6' => 'Jos',
+					'7' => 'Jdg',
+					'8' => 'Ru',
+					'9' => '1Sa',
+					'10' => '2Sa',
+					'11' => '1Ki',
+					'12' => '2Ki',
+					'13' => '1Ch',
+					'14' => '2Ch',
+					'15' => 'Ezr',
+					'16' => 'Ne',
+					'17' => 'Es',
+					'18' => 'Job',
+					'19' => 'Ps',
+					'20' => 'Pr',
+					'21' => 'Ec',
+					'22' => 'So',
+					'23' => 'Is',
+					'24' => 'Je',
+					'25' => 'La',
+					'26' => 'Eze',
+					'27' => 'Da',
+					'28' => 'Ho',
+					'29' => 'Joe',
+					'30' => 'Am',
+					'31' => 'Ob',
+					'32' => 'Jon',
+					'33' => 'Mic',
+					'34' => 'Na',
+					'35' => 'Hab',
+					'36' => 'Zep',
+					'37' => 'Hag',
+					'38' => 'Zec',
+					'39' => 'Mal',
+					'40' => 'Mt',
+					'41' => 'Mk',
+					'42' => 'Lk',
+					'43' => 'Jn',
+					'44' => 'Ac',
+					'59' => 'Jas',
+					'60' => '1Pe',
+					'61' => '2Pe',
+					'62' => '1Jn',
+					'63' => '2Jn',
+					'64' => '3Jn',
+					'65' => 'Jud',
+					'45' => 'Ro',
+					'46' => '1Co',
+					'47' => '2Co',
+					'48' => 'Ga',
+					'49' => 'Eph',
+					'50' => 'Php',
+					'51' => 'Col',
+					'52' => '1Th',
+					'53' => '2Th',
+					'54' => '1Ti',
+					'55' => '2Ti',
+					'56' => 'Tt',
+					'57' => 'Phm',
+					'58' => 'Heb',
+					'66' => 'Re',
 					);
 		return $indexes[$bookIndex];
 	}

@@ -158,6 +158,8 @@ class CNodeWrapper {
 		// http://b-bq.eu/										philemon			/1_		5		/RST
 // https://www.biblegateway.com/passage/?version=	RUSV&search=Philemon			+1%3A	5-
 		// http://azbyka.ru/biblia/?							Phlm				.1:		5		&r			&rus&num­­c
+		// нет https://ru.wikisource.org/wiki/					Послание_к_Филимону	#1:		5
+		// http://biblia.com/books/					rst/		Phm					1.		5
 		
 		$bibleSource = BibleSource::get($this->m_bookIndex);
 

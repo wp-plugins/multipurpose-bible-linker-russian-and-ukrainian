@@ -100,8 +100,8 @@ msgid "Processing options"
 msgstr "Processing options"
 
 #: wp_multibiblelinker.php:135
-msgid "Numbers of the books may be Roman numerals"
-msgstr "Numbers of the books may be Roman numerals"
+msgid "Numbers of the books and the chapters may be Roman numerals"
+msgstr "Numbers of the books and the chapters may be Roman numerals"
 
 #: wp_multibiblelinker.php:138
 msgid "Correct titles on standard"
