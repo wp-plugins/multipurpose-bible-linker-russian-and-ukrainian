@@ -3,7 +3,7 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.6.10
+	Version: 1.7.1
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -26,10 +26,22 @@
 
 function init_textdomain() {
 	if (function_exists('load_plugin_textdomain')) {
-		load_plugin_textdomain('wp_multibiblelinker', false, basename( dirname( __FILE__ ) ) . '/lang' );
+		load_plugin_textdomain('wp_multibiblelinker', false, basename( dirname( __FILE__ ) ) . '/lang');
 	}
 }
 add_action('plugins_loaded', 'init_textdomain');
+
+function add_js() {
+	wp_register_script('verseTip', plugins_url('js/verseTip.js', __FILE__), array('jquery', 'jquery-ui-tooltip'));
+	wp_enqueue_script('verseTip');  
+}  
+add_action('wp_enqueue_scripts', 'add_js');
+
+function add_css() {  
+    wp_register_style('multibiblelinker-style', plugins_url('/css/multibiblelinker.css', __FILE__), array());  
+    wp_enqueue_style('multibiblelinker-style');  
+}
+add_action('wp_enqueue_scripts', 'add_css');
 
 include 'scripts/multibiblelinker.php';
 
@@ -52,6 +64,7 @@ function get_multibiblelinker_form() {
 		update_option('doCorrection', 	true);
 		update_option('doBookRepeat', 	false);
 		update_option('doNotWrap', 		true);
+		update_option('popupWindow', 	false);
 
 		_e('Loaded with the default options.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -68,6 +81,7 @@ function get_multibiblelinker_form() {
 		update_option('doCorrection', 	(bool)$_POST["doCorrection"]);
 		update_option('doBookRepeat', 	(bool)$_POST["doBookRepeat"]);
 		update_option('doNotWrap', 		(bool)$_POST["doNotWrap"]);
+		update_option('popupWindow', 	(bool)$_POST["popupWindow"]);
 
 		_e('Configuration updated.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -87,7 +101,7 @@ function get_multibiblelinker_form() {
 	<h3><?php _e('Translation sources', 'wp_multibiblelinker'); ?></h3>
 	
 	<div style="padding: 0 0 0 30px;">
-		<p><?php _e('The plugin allows you to set the addressing biblical references to various online sources:', 'wp_multibiblelinker'); ?> <a href='http://allbible.info/' target='blank'>allbible.info</a> (<?php _e('by default', 'wp_multibiblelinker'); ?>), <a href='http://bible.com.ua/' target='blank'>bible.com.ua</a>, <a href='http://biblezoom.ru/' target='blank'>biblezoom.ru</a>, <a href='http://bibleonline.ru/' target='blank'>bibleonline.ru</a>, <a href='http://bible-center.ru/' target='blank'>bible-center.ru</a>, <a href='http://bibleserver.com/' target='blank'>bibleserver.com</a>, <a href='http://bible.com/' target='blank'>bible.com</a> (<a href='http://bible.us/' target='blank'>bible.us</a>), <a href='http://bible-desktop.com/' target='blank'>bible-desktop.com</a> (<a href='http://bibledesktop.ru/' target='blank'>bibledesktop.ru</a>), <a href='https://biblegateway.com/' target='blank'>biblegateway.com</a>, <a href='http://azbyka.ru/' target='blank'>azbyka.ru</a>, <a href='http://biblia.com/' target='blank'>biblia.com</a>.</p>
+		<p><?php _e('The plugin allows you to set the addressing biblical references to various online sources:', 'wp_multibiblelinker'); ?> <a href='http://allbible.info/' target='blank'>allbible.info</a> (<?php _e('by default', 'wp_multibiblelinker'); ?>), <a href='http://bible.com.ua/' target='blank'>bible.com.ua</a>, <a href='http://biblezoom.ru/' target='blank'>biblezoom.ru</a>, <a href='http://bibleonline.ru/' target='blank'>bibleonline.ru</a>, <a href='http://bible-center.ru/' target='blank'>bible-center.ru</a>, <a href='http://bibleserver.com/' target='blank'>bibleserver.com</a>, <a href='http://bible.com/' target='blank'>bible.com</a> (<a href='http://bible.us/' target='blank'>bible.us</a>), <a href='http://bible-desktop.com/' target='blank'>bible-desktop.com</a> (<a href='http://bibledesktop.ru/' target='blank'>bibledesktop.ru</a>), <a href='https://biblegateway.com/' target='blank'>biblegateway.com</a>, <a href='http://azbyka.ru/' target='blank'>azbyka.ru</a>, <a href='http://biblia.com/' target='blank'>biblia.com</a>, <a href='http://bibles.org/' target='blank'>bibles.org</a>.</p>
 		
 		<select name="g_BibleSource">
 			<option <?php if (get_option('g_BibleSource') == "AllbibleInfoSource") 		echo "selected"; ?> 
@@ -112,6 +126,8 @@ function get_multibiblelinker_form() {
 			value="AzbykaRuSource">azbyka.ru (ru, el, he, la)</option>
 			<option <?php if (get_option('g_BibleSource') == "BibliaComSource") 		echo "selected"; ?> 
 			value="BibliaComSource">biblia.com (ru, en, la)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleOrgSource") 		echo "selected"; ?> 
+			value="BibleOrgSource">bibles.org (ru, bg, en, el, he)</option>
 		</select>
 	</div>
 	
@@ -155,6 +171,9 @@ function get_multibiblelinker_form() {
 		<br />
 		<input type="checkbox" name="doNotWrap" value="checkbox" <?php if (get_option('doNotWrap')) echo 'checked'; ?>/>&nbsp;&nbsp;
 		<?php _e('Make a link inseparable', 'wp_multibiblelinker'); ?>
+		<br />
+		<input type="checkbox" name="popupWindow" value="checkbox" <?php if (get_option('popupWindow')) echo 'checked'; ?>/>&nbsp;&nbsp;
+		<?php _e('Pop-up window with the verse', 'wp_multibiblelinker'); ?>
 	</div>
 	
 	<div class="submit">

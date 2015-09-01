@@ -160,10 +160,18 @@ class CNodeWrapper {
 		// http://azbyka.ru/biblia/?							Phlm				.1:		5		&r			&rus&num­­c
 		// нет https://ru.wikisource.org/wiki/					Послание_к_Филимону	#1:		5
 		// http://biblia.com/books/					rst/		Phm					1.		5
+		// http://bibles.org/						rus-SYNOD/	Phlm				/1/		5
+		
+		// data-bverse='										phm					1.		5		' data-bversion='RST'
 		
 		$bibleSource = BibleSource::get($this->m_bookIndex);
-
 		$link = $bibleSource->getLink($this->GetSpecialTranslation());
+		
+		if ($_ENV["popupWindow"]) {
+            $javaScriptData = BibleSource::getJavaScript($this->m_bookIndex);;
+			$bverse = $javaScriptData->getLink($this->GetSpecialTranslation());
+			$bversion = $javaScriptData->GetTranslationPrefix($this->GetSpecialTranslation());
+        }
 		
 		$nodeArray = $nodeList[0];
 		$nodeChapter = $nodeArray[count($nodeArray)-1];
@@ -192,22 +200,32 @@ class CNodeWrapper {
                 }
             }
             if (!$isSubNodeExist) {
-                $link .= $bibleSource->getSingleChapterPart($nodeChapter->GetNumber());
+                $link 	.= $bibleSource->getSingleChapterPart($nodeChapter->GetNumber());
+                if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getSingleChapterPart($nodeChapter->GetNumber());
             } else {
                 if ($_ENV["g_BibleSource"] == "BibleserverComSource") {
                     $link .= $node->GetNumber(); 	// Тонкость формирования однокнижной ссылки для bibleserver.com
                 } else {
-                    $link .= $bibleSource->getChapterPart($nodeChapter->GetNumber());
+                    $link 	.= $bibleSource->getChapterPart($nodeChapter->GetNumber());
+                    if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getChapterPart($nodeChapter->GetNumber());
                     if ($node->GetType() == SubNode) {
-                        $link .= $bibleSource->getVersePart($node->GetNumber());
+                        $link 	.= $bibleSource->getVersePart($node->GetNumber());
+                        if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getVersePart($node->GetNumber());
                     }
                 }
             }
 		} else {
-			$link .= $bibleSource->getChapterPart($nodeChapter->GetNumber());
+			$link 	.= $bibleSource->getChapterPart($nodeChapter->GetNumber());
+			if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getChapterPart($nodeChapter->GetNumber());
 			if (count($nodeList) > 1) {
-				if ($node->GetType() != 1 && $node->GetType() != 0)		// Учитывает интервал глав (Иов. 38–42 и Иов. 38,42)
+				if ($node->GetType() != 1 && $node->GetType() != 0) {		// Учитывает интервал глав (Иов. 38–42 и Иов. 38,42)
 					$link .= $bibleSource->getVersePart($node->GetNumber());
+					if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getVersePart($node->GetNumber());
+				} else {
+					if ($_ENV["popupWindow"]) $bverse .= ".1"; 	// Выводит в всплывающем окне только первый стих главы
+				}
+			} else {
+				if ($_ENV["popupWindow"]) $bverse .= ".1"; 		// Выводит в всплывающем окне только первый стих главы
 			}
 		}
 		
@@ -218,23 +236,25 @@ class CNodeWrapper {
 		
 		($_ENV["doNotWrap"]) ? $spaceType = "style='white-space: pre; word-wrap: normal;' " : $spaceType = "";
 		
+		($_ENV["popupWindow"]) ? $datas = "title='' data-bverse='$bverse' data-bversion='$bversion' " : $datas = "";
+		
 		if ($this->bibleBooks->IsSingleChapterBook($this->m_bookIndex)) { // Формирование ссылки для одноглавных книг
 			if ($nodeList[0][0]->GetType() == RootNode) {
-				return "; <a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
+				return "; <a href='$link' " . $datas . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			} else {
-				return "<a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
+				return "<a href='$link' " . $datas . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else if ($nodeList[0][0]->GetType() == RootNode) { // Проверка на существование главы
 			if (BibleBooks::get()->RightChaptersNumber($name) < $nodeList[0][0]->GetNumber()) {
 				return "; " . $txtLink;
 			} else {
-				return "; <a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
+				return "; <a href='$link' " . $datas . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else if ($nodeList[0][0]->GetType() == NamedNode) { // Проверка на существование главы
 			if (BibleBooks::get()->RightChaptersNumber($name) < $nodeList[0][0]->GetNumber()) {
 				return $txtLink;
 			} else {
-				return "<a href='$link' " . $spaceType . "target='blank'>" . $txtLink . "</a>";
+				return "<a href='$link' " . $datas . $spaceType . "target='blank'>" . $txtLink . "</a>";
 			}
 		} else {
 			return $txtLink;

@@ -4,12 +4,10 @@ abstract class BibleSource {
 	
 	function __construct($bookIndex) {
 		$this->m_bookIndex = $bookIndex;
-		
 		$this->languageIn = $_ENV["languageIn"];
 	}
 	
 	public static function get($bookIndex) {
-		
 		if (null != $_ENV["g_BibleSource"]) {
 			switch($_ENV["g_BibleSource"]) {
 				case 'AllbibleInfoSource': 		return new AllbibleInfo($bookIndex);	break;
@@ -23,10 +21,15 @@ abstract class BibleSource {
 				case 'BiblegatewayComSource': 	return new BiblegatewayCom($bookIndex);	break;
 				case 'AzbykaRuSource': 			return new AzbykaRu($bookIndex);		break;
 				case 'BibliaComSource': 		return new BibliaCom($bookIndex);		break;
+				case 'BibleOrgSource': 			return new BibleOrg($bookIndex);		break;
 				default: 						return new AllbibleInfo($bookIndex);	break;
 			}
 		}
 		return new AllbibleInfo($bookIndex);
+	}
+	
+	public static function getJavaScript($bookIndex) {
+		return new jsBibliaCom($bookIndex);
 	}
 	
 	abstract public function getLink($translation = "");
@@ -1150,18 +1153,18 @@ class BibliaCom extends AllbibleInfo {
 
 	public function GetTranslationPrefix($translation) {
 		switch($translation) {
-			case RSTTranslation: 	return 'rst/';		break;
-			case KJVTranslation: 	return 'kjv1900/';	break;
-			case ASVTranslation: 	return 'asv/';		break;
-			case NASBTranslation: 	return 'nasb95/';	break;
-			case NIVTranslation: 	return 'niv2011/';	break;
-			case ESVTranslation: 	return 'esv/';		break;
-			case NIRVTranslation: 	return 'nirv/';		break;
+			case RSTTranslation: 	return 'rst/';			break;
+			case KJVTranslation: 	return 'kjv1900/';		break;
+			case ASVTranslation: 	return 'asv/';			break;
+			case NASBTranslation: 	return 'nasb95/';		break;
+			case NIVTranslation: 	return 'niv2011/';		break;
+			case ESVTranslation: 	return 'esv/';			break;
+			case NIRVTranslation: 	return 'nirv/';			break;
 			case VULTranslation: 	return 'vulgataclem/';	break;
 			default:
 				switch($this->languageIn) {
-					case 'ru': return 'rst/';	break;
-					case 'ua': return 'rst/';	break;
+					case 'ru': return 'rst/';		break;
+					case 'ua': return 'rst/';		break;
 					case 'en': return 'kjv1900/';	break;
 				}
 		}
@@ -1190,6 +1193,253 @@ class BibliaCom extends AllbibleInfo {
 			case ESVTranslation: 	return true;	break;
 			case NIRVTranslation: 	return true;	break;
 			case VULTranslation: 	return true;	break;
+		}
+		return false;
+	}
+	
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+					'1' => 'Ge',
+					'2' => 'Ex',
+					'3' => 'Le',
+					'4' => 'Nu',
+					'5' => 'Dt',
+					'6' => 'Jos',
+					'7' => 'Jdg',
+					'8' => 'Ru',
+					'9' => '1Sa',
+					'10' => '2Sa',
+					'11' => '1Ki',
+					'12' => '2Ki',
+					'13' => '1Ch',
+					'14' => '2Ch',
+					'15' => 'Ezr',
+					'16' => 'Ne',
+					'17' => 'Es',
+					'18' => 'Job',
+					'19' => 'Ps',
+					'20' => 'Pr',
+					'21' => 'Ec',
+					'22' => 'So',
+					'23' => 'Is',
+					'24' => 'Je',
+					'25' => 'La',
+					'26' => 'Eze',
+					'27' => 'Da',
+					'28' => 'Ho',
+					'29' => 'Joe',
+					'30' => 'Am',
+					'31' => 'Ob',
+					'32' => 'Jon',
+					'33' => 'Mic',
+					'34' => 'Na',
+					'35' => 'Hab',
+					'36' => 'Zep',
+					'37' => 'Hag',
+					'38' => 'Zec',
+					'39' => 'Mal',
+					'40' => 'Mt',
+					'41' => 'Mk',
+					'42' => 'Lk',
+					'43' => 'Jn',
+					'44' => 'Ac',
+					'59' => 'Jas',
+					'60' => '1Pe',
+					'61' => '2Pe',
+					'62' => '1Jn',
+					'63' => '2Jn',
+					'64' => '3Jn',
+					'65' => 'Jud',
+					'45' => 'Ro',
+					'46' => '1Co',
+					'47' => '2Co',
+					'48' => 'Ga',
+					'49' => 'Eph',
+					'50' => 'Php',
+					'51' => 'Col',
+					'52' => '1Th',
+					'53' => '2Th',
+					'54' => '1Ti',
+					'55' => '2Ti',
+					'56' => 'Tt',
+					'57' => 'Phm',
+					'58' => 'Heb',
+					'66' => 'Re',
+					);
+		return $indexes[$bookIndex];
+	}
+}
+
+class BibleOrg extends AllbibleInfo {
+
+	public function getLink($translation = "") {
+		return 'http://bibles.org/' . $this->GetTranslationPrefix($translation) . $this->GetIndexName($this->m_bookIndex);
+	}
+
+	public function GetTranslationPrefix($translation) {
+		switch($translation) {
+			case RSTTranslation: 	return 'rus-SYNOD/';	break;
+			case CASTranslation: 	return 'rus-CASS/';		break;
+			case KJVTranslation: 	return 'eng-KJVA/';		break;
+			case ASVTranslation: 	return 'eng-ASV/';		break;
+			case NASBTranslation: 	return 'eng-NASB/';		break;
+			case NIVTranslation: 	return 'eng-NIV/';		break;
+			case ESVTranslation: 	return 'eng-ESV/';		break;
+			case BLGTranslation: 	return 'bul-CBT/';		break;
+			case OTTranslation: 	return 'heb-WLC/';		break;
+			case LXXTranslation: 	return 'grc-NTPT/';		break;
+			default:
+				switch($this->languageIn) {
+					case 'ru': return 'rus-SYNOD/';	break;
+					case 'ua': return 'rus-SYNOD/';	break;
+					case 'en': return 'eng-KJVA/';	break;
+				}
+		}
+	}
+	public function getSingleChapterPart($chapter) {
+		return '/1/' . $chapter;
+	}
+	
+	public function getVersePart($verse, $translation = "") {
+		return '/' . $verse;
+	}
+	
+		public function checkForTranslationExist($translation) {
+		$LastBookOfOldTestament = 39;
+		$FirstBookOfNewTestament = 40;
+		switch($translation) {
+			case RSTTranslation: 	return true;	break;
+			case CASTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
+			case NASBTranslation: 	return true;	break;
+			case NIVTranslation: 	return true;	break;
+			case ESVTranslation: 	return true;	break;
+			case BLGTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case OTTranslation: 	return (integer)$this->m_bookIndex < $FirstBookOfNewTestament ? true : false; break; // только ВЗ
+			case LXXTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+		}
+		return false;
+	}
+	
+	protected function GetIndexName($bookIndex) {
+		$indexes = array(
+						'1' => 'Gen',
+						'2' => 'Exod',
+						'3' => 'Lev',
+						'4' => 'Num',
+						'5' => 'Deut',
+						'6' => 'Josh',
+						'7' => 'Judg',
+						'8' => 'Ruth',
+						'9' => '1Sam',
+						'10' => '2Sam',
+						'11' => '1Kgs',
+						'12' => '2Kgs',
+						'13' => '1Chr',
+						'14' => '2Chr',
+						'15' => 'Ezra',
+						'16' => 'Neh',
+						'17' => 'Esth',
+						'18' => 'Job',
+						'19' => 'Ps',
+						'20' => 'Prov',
+						'21' => 'Eccl',
+						'22' => 'Song',
+						'23' => 'Isa',
+						'24' => 'Jer',
+						'25' => 'Lam',
+						'26' => 'Ezek',
+						'27' => 'Dan',
+						'28' => 'Hos',
+						'29' => 'Joel',
+						'30' => 'Amos',
+						'31' => 'Obad',
+						'32' => 'Jonah',
+						'33' => 'Mic',
+						'34' => 'Nah',
+						'35' => 'Hab',
+						'36' => 'Zeph',
+						'37' => 'Hag',
+						'38' => 'Zech',
+						'39' => 'Mal',
+						'40' => 'Matt',
+						'41' => 'Mark',
+						'42' => 'Luke',
+						'43' => 'John',
+						'44' => 'Acts',
+						'59' => 'Jas',
+						'60' => '1Pet',
+						'61' => '2Pet',
+						'62' => '1John',
+						'63' => '2John',
+						'64' => '3John',
+						'65' => 'Jude',
+						'45' => 'Rom',
+						'46' => '1Cor',
+						'47' => '2Cor',
+						'48' => 'Gal',
+						'49' => 'Eph',
+						'50' => 'Phil',
+						'51' => 'Col',
+						'52' => '1Thess',
+						'53' => '2Thess',
+						'54' => '1Tim',
+						'55' => '2Tim',
+						'56' => 'Titus',
+						'57' => 'Phlm',
+						'58' => 'Heb',
+						'66' => 'Rev',
+						);
+		return $indexes[$bookIndex];
+	}
+}
+
+class JSBibliaCom extends BibleSource {
+	function __construct($bookIndex) {
+		parent::__construct($bookIndex);
+	}
+	
+	public function getLink($translation = "") {
+		return $this->GetIndexName($this->m_bookIndex);
+	}
+
+	public function GetTranslationPrefix($translation) {
+		switch($translation) {
+			case RSTTranslation: 	return 'bb-sbb-rusbt';		break;
+			case KJVTranslation: 	return 'KJV';				break;
+			case ASVTranslation: 	return 'ASV';				break;
+			case LXXTranslation: 	return 'BYZ';				break;
+			case OTTranslation: 	return 'TANAKH';			break;
+			default: 
+				switch($this->languageIn) {
+					case 'ru': return 'bb-sbb-rusbt';	break;
+					case 'ua': return 'bb-sbb-rusbt';	break;
+					case 'en': return 'KJV';			break;
+				}
+		}
+	}
+	
+	public function getSingleChapterPart($chapter) {
+		return '1.' . $chapter;
+	}
+	
+	public function getChapterPart($chapter) {
+		return $chapter;
+	}
+	
+	public function getVersePart($verse, $translation = "") {
+		return '.' . $verse;
+	}
+	
+	public function checkForTranslationExist($translation) {
+		$LastBookOfOldTestament = 39;
+		switch($translation) {
+			case RSTTranslation: 	return true;	break;
+			case KJVTranslation: 	return true;	break;
+			case ASVTranslation: 	return true;	break;
+			case LXXTranslation: 	return (integer)$this->m_bookIndex > $LastBookOfOldTestament ? true : false; break; // только НЗ
+			case OTTranslation: 	return true;	break;
 		}
 		return false;
 	}

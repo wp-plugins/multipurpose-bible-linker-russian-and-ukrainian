@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Multipurpose Bible Linker 1.6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-16 01:00+0300\n"
-"PO-Revision-Date: 2015-04-28 03:20+0200\n"
+"PO-Revision-Date: 2015-08-30 19:01+0200\n"
 "Last-Translator: Vladimir Sokolov <gadfly.svy@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,6 +117,10 @@ msgstr "Повторювати назву книги кожен раз пере�
 #: wp_multibiblelinker.php:144
 msgid "Make a link inseparable"
 msgstr "Зробити посилання нерозривним"
+
+#: wp_multibiblelinker.php:146
+msgid "Pop-up window with the verse"
+msgstr "Включити виринаюче вікно з віршем"
 
 #: wp_multibiblelinker.php:148
 msgid "Restore defaults"

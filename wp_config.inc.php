@@ -6,7 +6,8 @@ $_ENV["doBookRepeat"] 	= get_option('doBookRepeat');	// Повторять на�
 $_ENV["doNotWrap"] 		= get_option('doNotWrap');		// Делать ссылку неразрывной
 $_ENV["linkStandart"] 	= get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 $_ENV["spaceType"] 		= "&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
-		
+$_ENV["popupWindow"] 	= get_option('popupWindow');	// Всплывающие окно
+
 // Выбор источника онлайн Библии
 //$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
 //$g_BibleSource = BibleComUaSource;		// http://bible.com.ua/ 					(рус., укр. и англ. одновременно)
@@ -19,6 +20,7 @@ $_ENV["spaceType"] 		= "&".get_option('spaceType').";";	// Тип пробела
 //$g_BibleSource = BiblegatewayComSource;	// https://biblegateway.com/ 				(рус., укр., болг., англ. или лат.)
 //$g_BibleSource = AzbykaRuSource;			// http://azbyka.ru/						(рус., слав., греч., ивр. или лат.)
 //$g_BibleSource = BibliaComSource;			// http://biblia.com/						(рус., англ. или лат.)
+//$g_BibleSource = BibleOrgSource;			// http://bibles.org/						(рус., болг., англ., греч. или ивр.)
 
 $_ENV["g_BibleSource"] = get_option('g_BibleSource');
 

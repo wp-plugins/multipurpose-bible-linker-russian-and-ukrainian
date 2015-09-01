@@ -115,6 +115,10 @@ msgstr "Repeat the name of the book before each chapter, if a few heads"
 msgid "Make a link inseparable"
 msgstr "Make a link inseparable"
 
+#: wp_multibiblelinker.php:146
+msgid "Pop-up window with the verse"
+msgstr "Pop-up window with the verse"
+
 #: wp_multibiblelinker.php:148
 msgid "Restore defaults"
 msgstr "Restore defaults"

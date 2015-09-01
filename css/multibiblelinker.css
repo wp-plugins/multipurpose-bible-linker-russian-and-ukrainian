@@ -1,0 +1,13 @@
+.bverse {
+	position: absolute;
+	z-index: 999;
+	left: -9999px;
+	padding: 12px;
+	width: 250px;
+	color: #000000;
+	background: #D1D1D1;
+	border-radius: 12px;
+}
+.ui-helper-hidden-accessible{
+	display: none;
+}
