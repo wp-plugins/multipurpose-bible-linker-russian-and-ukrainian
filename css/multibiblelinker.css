@@ -7,6 +7,7 @@
 	color: #000000;
 	background: #D1D1D1;
 	border-radius: 12px;
+	opacity: 0.9;
 }
 .ui-helper-hidden-accessible{
 	display: none;
