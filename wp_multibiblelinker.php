@@ -3,7 +3,7 @@
 	Plugin Name: Multipurpose Bible Linker
 	Plugin URI: https://wordpress.org/plugins/multipurpose-bible-linker-russian-and-ukrainian/
 	Description: This plugin is designed to help people referring to English, Russian or Ukrainian Bibles. Once activated, it will find all texts that look like references to Biblical texts and replace them with link to actually biblical chapter and verses.
-	Version: 1.7.1
+	Version: 1.7.2
 	Author: Vitaliy Bilanchuk, Vladimir Sokolov
 	Author URI: http://helpforheart.org/stati/printsipyi-redaktirovaniya/
 
@@ -34,6 +34,7 @@ add_action('plugins_loaded', 'init_textdomain');
 function add_js() {
 	wp_register_script('verseTip', plugins_url('js/verseTip.js', __FILE__), array('jquery', 'jquery-ui-tooltip'));
 	wp_enqueue_script('verseTip');  
+	wp_localize_script('verseTip', 'plugin', array('path' =>  plugins_url()));
 }  
 add_action('wp_enqueue_scripts', 'add_js');
 
@@ -65,6 +66,7 @@ function get_multibiblelinker_form() {
 		update_option('doBookRepeat', 	false);
 		update_option('doNotWrap', 		true);
 		update_option('popupWindow', 	false);
+		update_option('popupSource', 	'bibleonline');
 
 		_e('Loaded with the default options.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -82,6 +84,7 @@ function get_multibiblelinker_form() {
 		update_option('doBookRepeat', 	(bool)$_POST["doBookRepeat"]);
 		update_option('doNotWrap', 		(bool)$_POST["doNotWrap"]);
 		update_option('popupWindow', 	(bool)$_POST["popupWindow"]);
+		update_option('popupSource', 	(string)$_POST["popupSource"]);
 
 		_e('Configuration updated.', 'wp_multibiblelinker');
 		echo '</strong></p></div>';
@@ -125,9 +128,9 @@ function get_multibiblelinker_form() {
 			<option <?php if (get_option('g_BibleSource') == "AzbykaRuSource") 			echo "selected"; ?> 
 			value="AzbykaRuSource">azbyka.ru (ru, el, he, la)</option>
 			<option <?php if (get_option('g_BibleSource') == "BibliaComSource") 		echo "selected"; ?> 
-			value="BibliaComSource">biblia.com (ru, en, la)</option>
-			<option <?php if (get_option('g_BibleSource') == "BibleOrgSource") 		echo "selected"; ?> 
-			value="BibleOrgSource">bibles.org (ru, bg, en, el, he)</option>
+			value="BibliaComSource">biblia.com (en, ru, la)</option>
+			<option <?php if (get_option('g_BibleSource') == "BibleOrgSource") 			echo "selected"; ?> 
+			value="BibleOrgSource">bibles.org (en, ru, bg, el, he)</option>
 		</select>
 	</div>
 	
@@ -173,7 +176,13 @@ function get_multibiblelinker_form() {
 		<?php _e('Make a link inseparable', 'wp_multibiblelinker'); ?>
 		<br />
 		<input type="checkbox" name="popupWindow" value="checkbox" <?php if (get_option('popupWindow')) echo 'checked'; ?>/>&nbsp;&nbsp;
-		<?php _e('Pop-up window with the verse', 'wp_multibiblelinker'); ?>
+		<?php _e('Pop-up window with the verse from ', 'wp_multibiblelinker'); ?>
+		<select name="popupSource">
+			<option <?php if (get_option('popupSource') == "bibleonline")		echo "selected"; ?> value="bibleonline">bibleonline.ru (en, ru, ua, be)</option>
+			<option <?php if (get_option('popupSource') == "biblia") 			echo "selected"; ?> value="biblia">biblia.com (en, ru, la)</option>
+			<option <?php if (get_option('popupSource') == "getbible") 			echo "selected"; ?> value="getbible">getbible.net (en, ru, el, he)</option>
+			<option <?php if (get_option('popupSource') == "preachingcentral") 	echo "selected"; ?> value="preachingcentral">preachingcentral.com (en, ru, ua, el, he, la)</option>
+		</select>
 	</div>
 	
 	<div class="submit">

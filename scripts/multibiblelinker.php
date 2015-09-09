@@ -162,7 +162,10 @@ class CNodeWrapper {
 		// http://biblia.com/books/					rst/		Phm					1.		5
 		// http://bibles.org/						rus-SYNOD/	Phlm				/1/		5
 		
-		// data-bverse='										phm					1.		5		' data-bversion='RST'
+		// data-bsource='bibla'									data-bverse='phm	1.		5		' data-bversion='RST'
+		// data-bsource='bibleonline'							data-bverse='phm	+1.		5		' data-bversion='rus'
+		// data-bsource='getbible'								data-bverse='Phm	1:		5		' data-bversion='synodal'
+		// data-bsource='preachingcentral'						data-bverse='Phlm	1:		5		' data-bversion='synodal'
 		
 		$bibleSource = BibleSource::get($this->m_bookIndex);
 		$link = $bibleSource->getLink($this->GetSpecialTranslation());
@@ -222,10 +225,20 @@ class CNodeWrapper {
 					$link .= $bibleSource->getVersePart($node->GetNumber());
 					if ($_ENV["popupWindow"]) $bverse .= $javaScriptData->getVersePart($node->GetNumber());
 				} else {
-					if ($_ENV["popupWindow"]) $bverse .= ".1"; 	// Выводит в всплывающем окне только первый стих главы
+					// Выводит в всплывающем окне только первый стих главы
+					if ($_ENV["popupWindow"] && ($_ENV["popupSource"] == "getbible" || $_ENV["popupSource"] == "preachingcentral")) {
+						$bverse .= ":1"; // особенность для getbible.net и preachingcentral.com
+					} else {
+						$bverse .= ".1";
+					}
 				}
 			} else {
-				if ($_ENV["popupWindow"]) $bverse .= ".1"; 		// Выводит в всплывающем окне только первый стих главы
+				// Выводит в всплывающем окне только первый стих главы
+				if ($_ENV["popupWindow"] && ($_ENV["popupSource"] == "getbible" || $_ENV["popupSource"] == "preachingcentral")) {
+					$bverse .= ":1"; // особенность для getbible.net и preachingcentral.com
+				} else {
+					$bverse .= ".1";
+				}
 			}
 		}
 		
@@ -236,7 +249,7 @@ class CNodeWrapper {
 		
 		($_ENV["doNotWrap"]) ? $spaceType = "style='white-space: pre; word-wrap: normal;' " : $spaceType = "";
 		
-		($_ENV["popupWindow"]) ? $datas = "title='' data-bverse='$bverse' data-bversion='$bversion' " : $datas = "";
+		($_ENV["popupWindow"]) ? $datas = "title='' class='blink' data-bsource='" . $_ENV["popupSource"] . "' data-bverse='$bverse' data-bversion='$bversion' " : $datas = "";
 		
 		if ($this->bibleBooks->IsSingleChapterBook($this->m_bookIndex)) { // Формирование ссылки для одноглавных книг
 			if ($nodeList[0][0]->GetType() == RootNode) {

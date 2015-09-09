@@ -7,6 +7,7 @@ $_ENV["doNotWrap"] 		= get_option('doNotWrap');		// Делать ссылку н
 $_ENV["linkStandart"] 	= get_option('linkStandart');	// Стандарт написания ссылки: восточный (Мф. 3:4–6,8) и западный (Мт. 3,4–6.8)
 $_ENV["spaceType"] 		= "&".get_option('spaceType').";";	// Тип пробела: неразрывный (&nbsp;) и половинный (&thinsp;)
 $_ENV["popupWindow"] 	= get_option('popupWindow');	// Всплывающие окно
+$_ENV["popupSource"] 	= get_option('popupSource');	// Источник текста для всплывающего окна
 
 // Выбор источника онлайн Библии
 //$g_BibleSource = AllbibleInfoSource;		// http://allbible.info/ 					(рус., укр. или англ.)
@@ -86,6 +87,7 @@ define("RVTranslation",		$_ENV["spaceType"]."RV");		// Радостная вес
 define("MDRTranslation",	$_ENV["spaceType"]."MDR");		// Библия: современный перевод Библии (1993)
 define("CASTranslation",	$_ENV["spaceType"]."CAS");		// Перевод еп. Кассиана (рус., только НЗ)
 define("NTKulTranslation",	$_ENV["spaceType"]."NTKul");	// Перевод Кулакова (рус., только НЗ)
+define("MAKTranslation",	$_ENV["spaceType"]."MAK");		// Перевод архимандрита Макария (рус.)
 define("RSZTranslation",	$_ENV["spaceType"]."RSZ");		// НЗ «Слово Жизни» (1993, только НЗ)
 define("ISBTranslation",	$_ENV["spaceType"]."ISB");		// Новый русский перевод (ISB)
 define("CRSTranslation",	$_ENV["spaceType"]."CRS");		// Священное Писание: "восточный перевод" (рус.)

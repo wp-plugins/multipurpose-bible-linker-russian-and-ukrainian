@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Multipurpose Bible Linker 1.6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-16 01:00+0300\n"
-"PO-Revision-Date: 2015-08-30 19:00+0200\n"
+"PO-Revision-Date: 2015-09-07 19:32+0200\n"
 "Last-Translator: Vladimir Sokolov <gadfly.svy@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,8 +119,8 @@ msgid "Make a link inseparable"
 msgstr "Сделать ссылку неразрывной"
 
 #: wp_multibiblelinker.php:146
-msgid "Pop-up window with the verse"
-msgstr "Включить всплывающее окно со стихом"
+msgid "Pop-up window with the verse from "
+msgstr "Включить всплывающее окно со стихом с "
 
 #: wp_multibiblelinker.php:148
 msgid "Restore defaults"
