@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
 					case 'biblia':
 						$.get("https://api.biblia.com/v1/bible/content/" + bVersion + ".html?passage=" + bVerse + "&key=fd37d8f28e95d3be8cb4fbc37e15e18e",
 						function(bText) {
-							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$/,'&hellip;');
+							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$|\;$/,'&hellip;');
 							bText = bText.charAt(0).toUpperCase() + bText.substr(1);
 							if (bText.slice(-1) != ";" && bText.slice(-1) != "." && bText.slice(-1) != "!" && bText.slice(-1) != "?" && bText.slice(-1) != "\"" && bText.slice(-1) != ":") bText += '&hellip;';
 							callback(bText);
@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 						$.get("http://api.bibleonline.ru/ref/get/?q=" + bVerse + "&trans=" + bVersion,
 						function(bText) {
 							bText = bText.data[1].v.t;
-							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$/,'&hellip;');
+							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$|\;$/,'&hellip;');
 							bText = bText.charAt(0).toUpperCase() + bText.substr(1);
 							if (bText.slice(-1) != ";" && bText.slice(-1) != "." && bText.slice(-1) != "!" && bText.slice(-1) != "?" && bText.slice(-1) != "\"" && bText.slice(-1) != ":") bText += '&hellip;';
 							callback(bText);
@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 						$.get(plugin.path + "/multipurpose-bible-linker-russian-and-ukrainian/xmlproxy/xmlpreachingcentral.php?url=" + escape(url),						
 						function(bText) {
 							bText = bText.range.item.text;
-							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$/,'&hellip;');
+							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$|\;$/,'&hellip;');
 							bText = bText.charAt(0).toUpperCase() + bText.substr(1);
 							if (bText.slice(-1) != ";" && bText.slice(-1) != "." && bText.slice(-1) != "!" && bText.slice(-1) != "?" && bText.slice(-1) != "\"" && bText.slice(-1) != ":") bText += '&hellip;';
 							callback(bText);
@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
 						$.get("http://api.bibleonline.ru/ref/get/?q=" + bVerse + "&trans=" + bVersion,
 						function(bText) {
 							bText = bText.data[1].v.t;
-							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$/,'&hellip;');
+							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$|\;$/,'&hellip;');
 							bText = bText.charAt(0).toUpperCase() + bText.substr(1);
 							if (bText.slice(-1) != ";" && bText.slice(-1) != "." && bText.slice(-1) != "!" && bText.slice(-1) != "?" && bText.slice(-1) != "\"" && bText.slice(-1) != ":") bText += '&hellip;';
 							callback(bText);
