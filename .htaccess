@@ -1,0 +1,4 @@
+<files xmlpreachingcentral.php>
+order allow,deny
+allow from all
+</files>
