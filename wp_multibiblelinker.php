@@ -34,7 +34,7 @@ add_action('plugins_loaded', 'init_textdomain');
 function add_js() {
 	wp_register_script('verseTip', plugins_url('js/verseTip.js', __FILE__), array('jquery', 'jquery-ui-tooltip'));
 	wp_enqueue_script('verseTip');  
-	wp_localize_script('verseTip', 'plugin', array('path' =>  plugins_url()));
+	wp_localize_script('verseTip', 'plugin', array('path' =>  plugins_url() . "/multipurpose-bible-linker-russian-and-ukrainian" ));
 }  
 add_action('wp_enqueue_scripts', 'add_js');
 

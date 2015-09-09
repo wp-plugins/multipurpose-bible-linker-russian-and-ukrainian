@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 
 					case 'preachingcentral':
 						var url = "http://api.preachingcentral.com/bible.php?passage=" + bVerse + "&version=" + bVersion;
-						$.get(plugin.path + "/multipurpose-bible-linker-russian-and-ukrainian/xmlproxy/xmlpreachingcentral.php?url=" + escape(url),						
+						$.get(plugin.path + "/xmlproxy/xmlpreachingcentral.php?url=" + escape(url),						
 						function(bText) {
 							bText = bText.range.item.text;
 							bText = bText.replace(/<\/?[^>]+>/g,'').trim().replace(/\,$|\:$|\;$/,'&hellip;');
