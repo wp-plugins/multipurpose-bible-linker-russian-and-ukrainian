@@ -233,7 +233,8 @@ class BibleLinksArraysIn {
 						'1sm' 					=> '9',
 						'1 sml' 				=> '9',
 						'1&nbsp;sml' 			=> '9',
-						'1sml' 					=> '9',	'1 kgdms' 				=> '9',
+						'1sml' 					=> '9',
+						'1 kgdms' 				=> '9',
 						'1&nbsp;kgdms' 			=> '9',
 						'1kgdms' 				=> '9',
 						
@@ -828,6 +829,7 @@ class BibleLinksArraysIn {
 						'hebrews' 							=> '58',
 						
 						'revelation' 						=> '66',
+						'apocalypse' 						=> '66',
 						
 						'obadiah' 							=> '31',
 						
